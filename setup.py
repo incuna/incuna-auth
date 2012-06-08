@@ -11,6 +11,7 @@ setup(
     include_package_data=True,
     install_requires=install_requires,
     description='Provides educational modules.',
+    long_description=open('README.rst').read(),
     author='Incuna Ltd',
     author_email='admin@incuna.com',
 )
