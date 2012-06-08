@@ -20,7 +20,7 @@ Add the tables to the db::
 
     python manage.py syncdb
 
-.. warning:: An initial data fixture is include to create an admin_sso.Assignment
+.. warning:: An initial data fixture is included to create an admin_sso.Assignment
              that assigns any user with an incuna.com email to the admin user.
 
 Add the urls to your ``ROOT_URLCONF``::
@@ -30,4 +30,12 @@ Add the urls to your ``ROOT_URLCONF``::
         url('', include('auth.urls')),
         ...
     )
+
+Backend
+~~~~~~~
+TODO: Add a run down of the Backend.
+
+Middleware
+~~~~~~~~~~
+TODO: Add a run down of the Middleware.
 
