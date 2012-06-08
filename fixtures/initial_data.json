@@ -1,0 +1,73 @@
+[
+  {
+    "pk": 1, 
+    "model": "admin_sso.assignment", 
+    "fields": {
+      "username": "", 
+      "domain": "ghickman.co.uk", 
+      "copy": false, 
+      "weight": 0, 
+      "user": 1, 
+      "username_mode": 0
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "admin_sso.openiduser", 
+    "fields": {
+      "fullname": "George Hickman", 
+      "claimed_id": "https://www.google.com/accounts/o8/id?id=AItOawlNZofgbu1js7REHqbkv2t8QWefLqRq8jY", 
+      "last_login": "2012-06-04T20:28:05.279Z", 
+      "email": "george@ghickman.co.uk", 
+      "user": 1
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "admin_sso.nonce", 
+    "fields": {
+      "timestamp": 1338839201, 
+      "salt": "6vCyoDJ8uykneA", 
+      "server_url": "https://www.google.com/accounts/o8/ud"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "admin_sso.nonce", 
+    "fields": {
+      "timestamp": 1338839721, 
+      "salt": "39PzzGZePdjtJw", 
+      "server_url": "https://www.google.com/accounts/o8/ud"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "admin_sso.nonce", 
+    "fields": {
+      "timestamp": 1338840085, 
+      "salt": "u_0U-KuwZz6szg", 
+      "server_url": "https://www.google.com/accounts/o8/ud"
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "admin_sso.nonce", 
+    "fields": {
+      "timestamp": 1338841685, 
+      "salt": "qxmWzDspfeEIzg", 
+      "server_url": "https://www.google.com/accounts/o8/ud"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "admin_sso.association", 
+    "fields": {
+      "handle": "AMlYA9VpjUaxciRabmqUeCvDIFPv95D7J_lzMtDZ4rmxDgyBRGGD7P2s", 
+      "issued": 1338839191, 
+      "server_url": "https://www.google.com/accounts/o8/ud", 
+      "assoc_type": "HMAC-SHA1", 
+      "secret": "P+g1eTvrmdZ8syYrljK+WPqgpbI=\n", 
+      "lifetime": 46800
+    }
+  }
+]
