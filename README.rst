@@ -16,13 +16,6 @@ Add to your ``INSTALLED_APPS``::
         ...
     )
 
-Add the tables to the db::
-
-    python manage.py syncdb
-
-.. warning:: An initial data fixture is included to create an admin_sso.Assignment
-             that assigns any user with an incuna.com email to the admin user.
-
 Add the urls to your ``ROOT_URLCONF``::
 
     urlpatterns = patterns(''
@@ -30,6 +23,12 @@ Add the urls to your ``ROOT_URLCONF``::
         url('', include('auth.urls')),
         ...
     )
+
+Add the tables to the db::
+
+    python manage.py syncdb
+
+**Warning**: An initial data fixture is included that creates an admin_sso.Assignment to assign any user with an incuna.com email to the Admin user.
 
 Backend
 ~~~~~~~
