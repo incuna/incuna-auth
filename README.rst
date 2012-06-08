@@ -8,7 +8,7 @@ Install the package::
 
     pip install incuna-auth
 
-Add to your ``INSTALLED_APPS``::
+Add to your ``INSTALLED_APPS`` in ``settings.py``::
 
     INSTALLED_APPS = (
         ...
@@ -23,6 +23,15 @@ Add the urls to your ``ROOT_URLCONF``::
         url('', include('auth.urls')),
         ...
     )
+
+Add the auth urls in ``settings.py``::
+
+    from django.core.urlresolvers import reverse_lazy
+
+    ...
+
+    LOGIN_URL = reverse_lazy('auth_login')
+    LOGOUT_URL = reverse_lazy('auth_logout')
 
 Add the tables to the db::
 
