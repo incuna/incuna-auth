@@ -7,7 +7,7 @@ setup(
     name='incuna-auth-urls',
     version='0.1',
     url='http://github.com/incuna/incuna-auth-urls',
-    py_modules=('auth_urls',),
+    py_modules=('backends', 'middleware', 'urls'),
     include_package_data=True,
     install_requires=install_requires,
     description='Provides authentication parts.',
