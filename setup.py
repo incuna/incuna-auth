@@ -10,7 +10,7 @@ setup(
     py_modules=('auth_urls',),
     include_package_data=True,
     install_requires=install_requires,
-    description='Provides educational modules.',
+    description='Provides authentication parts.',
     long_description=open('README.rst').read(),
     author='Incuna Ltd',
     author_email='admin@incuna.com',
