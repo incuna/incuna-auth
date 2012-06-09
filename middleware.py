@@ -40,7 +40,9 @@ class LoginRequiredMiddleware:
 
         # Jump over this middleware if not a protected url.
         path = request.path_info.lstrip('/')
-        if any(m.match(path) for m in EXEMPT_URLS) or not any(m.match(path) for m in PROTECTED_URLS):
+        path_is_exempt = any(m.match(path) for m in EXEMPT_URLS)
+        path_is_protected = any(m.match(path) for m in PROTECTED_URLS)
+        if path_is_exempt or not path_is_protected:
             return
 
         # Jump over this middleware if user logged in.
