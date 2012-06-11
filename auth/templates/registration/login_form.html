@@ -1,0 +1,20 @@
+<p>Please log in using your email and password</p>
+<form class="hform" method="post" action="{% url django.contrib.auth.views.login %}">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <p class="text field-{{ form.username.auto_id }}">
+        <label for="{{ form.username.auto_id }}">Email *</label> 
+        {{ form.username }} 
+    </p>
+    {{ form.username.errors }}
+    <p class="text field-{{ form.password.auto_id }}">
+        {{ form.password.label_tag }}
+        {{ form.password }}
+    </p>
+    {{ form.password.errors }}
+<p class="auth_password_reset" ><a href="{% url django.contrib.auth.views.password_reset %}">Forgotten password?</a></p>
+<p class="buttons">
+<input type="submit" value="Login"/>
+<input type="hidden" name="next" value="{{ next }}" />
+</p>
+</form>

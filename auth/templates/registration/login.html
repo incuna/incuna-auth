@@ -1,0 +1,15 @@
+{% extends "registration/base.html" %}
+
+{% block bodyid %}login{% endblock %}
+
+{% block content %}
+
+	<h2>Log In</h2>
+
+	{% if form.has_errors %}
+	<p class="error">Your username and password didn't match, please try again.</p>
+	{% endif %}
+	
+    {% include "registration/login_form.html" %}
+	
+{% endblock %}
