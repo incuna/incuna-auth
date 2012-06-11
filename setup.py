@@ -1,13 +1,13 @@
-from setuptools import setup
+from setuptools import find_packages, setup
 
 
 install_requires = ('django-admin-sso',)
 
 setup(
-    name='incuna-auth-urls',
+    name='incuna-auth',
     version='0.1',
-    url='http://github.com/incuna/incuna-auth-urls',
-    py_modules=('backends', 'middleware', 'urls'),
+    url='http://github.com/incuna/incuna-auth',
+    packages=find_packages(),
     include_package_data=True,
     install_requires=install_requires,
     description='Provides authentication parts.',
