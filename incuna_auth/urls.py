@@ -11,7 +11,7 @@ class IncunaAuthenticationForm(AuthenticationForm):
 
 
 urlpatterns = patterns('django.contrib.auth.views',
-    url(r'^login/$', 'login', {'authentication_form': AuthenticationForm}, name='auth_login'),
+    url(r'^login/$', 'login', {'authentication_form': IncunaAuthenticationForm}, name='auth_login'),
     url(r'^logout/$', 'logout', {'template_name': 'registration/logout.html'}, name='auth_logout'),
     url(r'^password/confirm', 'password_reset_confirm', name='auth_password_reset_confirm'),
     url(r'^password/done', 'password_reset_done', name='auth_password_reset_done'),
