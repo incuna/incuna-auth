@@ -20,7 +20,7 @@ Add the urls to your ``ROOT_URLCONF``::
 
     urlpatterns = patterns(''
         ...
-        url('', include('auth.urls')),
+        url('', include('incuna_auth.urls')),
         ...
     )
 
