@@ -5,7 +5,7 @@ install_requires = ('django-admin-sso',)
 
 setup(
     name='incuna-auth',
-    version='0.5',
+    version='0.6',
     url='http://github.com/incuna/incuna-auth',
     packages=find_packages(),
     include_package_data=True,
@@ -15,4 +15,3 @@ setup(
     author='Incuna Ltd',
     author_email='admin@incuna.com',
 )
-
