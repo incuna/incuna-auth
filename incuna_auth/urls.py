@@ -1,17 +1,14 @@
-from django import forms
+from django.conf import settings
 from django.conf.urls.defaults import patterns, url
 from django.core.urlresolvers import reverse_lazy
-from django.contrib.auth.forms import AuthenticationForm
-from django.utils.translation import ugettext_lazy as _
 from django.views.generic import RedirectView
 
 
-class IncunaAuthenticationForm(AuthenticationForm):
-    username = forms.CharField(label=_('Email'), max_length=320)
-
+auth_form_name = settings.get('INCUNA_AUTH_LOGIN_FORM', 'incuna_auth.forms.IncunaAuthenticationForm')
+auth_form = __import__(auth_form_name)
 
 urlpatterns = patterns('django.contrib.auth.views',
-    url(r'^login/$', 'login', {'authentication_form': IncunaAuthenticationForm}, name='auth_login'),
+    url(r'^login/$', 'login', {'authentication_form': auth_form}, name='auth_login'),
     url(r'^logout/$', 'logout', {'template_name': 'registration/logout.html'}, name='auth_logout'),
     # Change password (when logged in)
     url(r'^password/change/$', 'password_change', name='auth_password_change'),
@@ -23,4 +20,3 @@ urlpatterns = patterns('django.contrib.auth.views',
     url(r'^password/reset/complete/$', 'password_reset_complete', name='auth_password_reset_complete'),
     url(r'^sso/$', RedirectView.as_view(url=reverse_lazy('admin:admin_sso_openiduser_start')), name='sso_login'),
 )
-

@@ -36,4 +36,3 @@ class TestLoginRequiredMiddleware(TestCase):
         response = self.middleware.process_request(self.request)
         assert False
         assert_equals(response, None)
-
