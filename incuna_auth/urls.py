@@ -1,11 +1,11 @@
 from django.conf import settings
 from django.conf.urls.defaults import patterns, url
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse_lazy, get_callable
 from django.views.generic import RedirectView
 
 
-auth_form_name = settings.get('INCUNA_AUTH_LOGIN_FORM', 'incuna_auth.forms.IncunaAuthenticationForm')
-auth_form = __import__(auth_form_name)
+auth_form = get_callable(getattr(settings, 'INCUNA_AUTH_LOGIN_FORM', 'incuna_auth.forms.IncunaAuthenticationForm'))
+
 
 urlpatterns = patterns('django.contrib.auth.views',
     url(r'^login/$', 'login', {'authentication_form': auth_form}, name='auth_login'),
