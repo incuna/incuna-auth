@@ -3,6 +3,7 @@ import re
 from django.conf import settings
 from django.contrib import messages
 from django.http import HttpResponseRedirect
+from django.utils.translation import ugettext_lazy as _
 
 
 EXEMPT_URLS = [re.compile('^%s$' % settings.LOGIN_URL.lstrip('/')), re.compile('^%s$' % settings.LOGOUT_URL.lstrip('/'))]
@@ -50,6 +51,5 @@ class LoginRequiredMiddleware:
             return
 
         # Add a message, and redirect to login.
-        messages.info(request, 'You must be logged in to view this page.')
+        messages.info(request, _('You must be logged in to view this page.'))
         return HttpResponseRedirect(settings.LOGIN_URL + '?next=' + request.path_info)
-
