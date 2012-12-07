@@ -1,5 +1,10 @@
 from django.contrib.auth.backends import ModelBackend
-from django.contrib.auth.models import User
+try:
+    from django.contrib.auth import get_user_model
+    User = get_user_model()
+except ImportError:
+    # Django < 1.5
+    from django.contrib.auth.models import User
 
 
 class CustomUserModelBackend(ModelBackend):
