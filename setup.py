@@ -1,7 +1,7 @@
 from setuptools import find_packages, setup
 
 
-install_requires = ('django-admin-sso',)
+install_requires = ('django-admin-sso', 'django-crispy-forms')
 
 setup(
     name='incuna-auth',
