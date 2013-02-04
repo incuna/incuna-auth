@@ -9,6 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 EXEMPT_URLS = [re.compile('^%s$' % settings.LOGIN_URL.lstrip('/')), re.compile('^%s$' % settings.LOGOUT_URL.lstrip('/'))]
 EXEMPT_URLS += [re.compile(expr) for expr in getattr(settings, 'LOGIN_EXEMPT_URLS', [])]
 PROTECTED_URLS = [re.compile(expr) for expr in getattr(settings, 'LOGIN_PROTECTED_URLS', [r'^'])]
+SEND_MESSAGE = getattr(settings, 'LOGIN_REQUIRED_SEND_MESSAGE', True)
 
 
 class LoginRequiredMiddleware:
@@ -51,5 +52,6 @@ class LoginRequiredMiddleware:
             return
 
         # Add a message, and redirect to login.
-        messages.info(request, _('You must be logged in to view this page.'))
+        if SEND_MESSAGE:
+            messages.info(request, _('You must be logged in to view this page.'))
         return HttpResponseRedirect(settings.LOGIN_URL + '?next=' + request.path_info)
