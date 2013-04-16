@@ -66,6 +66,7 @@ v0.3
 * Update the auth form
 
 v0.2
+----
 * Update url reverses
 * Add contrib.auth login/logout urls
 * Add registration templates
