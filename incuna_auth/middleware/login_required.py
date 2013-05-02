@@ -7,8 +7,8 @@ from django.utils.translation import ugettext_lazy as _
 
 
 EXEMPT_URLS = [re.compile('^%s$' % settings.LOGIN_URL.lstrip('/')), re.compile('^%s$' % settings.LOGOUT_URL.lstrip('/'))]
-EXEMPT_URLS += [re.compile(expr) for expr in getattr(settings, 'LOGIN_EXEMPT_URLS', [])]
-PROTECTED_URLS = [re.compile(expr) for expr in getattr(settings, 'LOGIN_PROTECTED_URLS', [r'^'])]
+EXEMPT_URLS += [re.compile(unicode(expr)) for expr in getattr(settings, 'LOGIN_EXEMPT_URLS', [])]
+PROTECTED_URLS = [re.compile(unicode(expr)) for expr in getattr(settings, 'LOGIN_PROTECTED_URLS', [r'^'])]
 SEND_MESSAGE = getattr(settings, 'LOGIN_REQUIRED_SEND_MESSAGE', True)
 
 
