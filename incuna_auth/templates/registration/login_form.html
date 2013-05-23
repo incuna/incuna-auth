@@ -1,8 +1,9 @@
 {% load i18n %}
+{% load url from future %}
 
 
 <p>{% trans "Please log in using your email and password" %}</p>
-<form class="hform" method="post" action="{% url auth_login %}">
+<form class="hform" method="post" action="{% url 'auth_login' %}">
     {% csrf_token %}
     {{ form.non_field_errors }}
     <p class="text field-{{ form.username.auto_id }}">
@@ -15,7 +16,7 @@
         {{ form.password }}
     </p>
     {{ form.password.errors }}
-    <p class="auth_password_reset"><a href="{% url auth_password_reset %}">{% trans "Forgotten password?" %}</a></p>
+    <p class="auth_password_reset"><a href="{% url 'auth_password_reset' %}">{% trans "Forgotten password?" %}</a></p>
     <p class="buttons">
         <input type="submit" value="{% trans "Login" %}"/>
         <input type="hidden" name="next" value="{{ next }}" />
