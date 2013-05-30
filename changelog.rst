@@ -1,6 +1,10 @@
 Changelog
 =========
 
+v0.8.5
+------
+* Support new hotness {% url 'tag' %}.
+
 v0.8.4
 ------
 * Make LOGIN_EXEMPT_URLS and LOGIN_PROTECTED_URLS translatable.
