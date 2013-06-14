@@ -3,7 +3,10 @@
 {% load i18n %}
 
 
+{% block title %}{% trans "Logged Out" %}{% endblock title %}
+
+{% block page_main_title %}{% trans "Logged Out" %}{% endblock page_main_title %}
+
 {% block content %}
-    <h2>{% trans "Logged out" %}</h2>
     <p>{% trans "You have logged out." %}</p>
 {% endblock %}

@@ -3,8 +3,11 @@
 {% load i18n %}
 
 
+{% block title %}{% trans "Log In" %}{% endblock title %}
+
+{% block page_main_title %}{% trans "Log In" %}{% endblock page_main_title %}
+
 {% block content %}
-    <h2>{% trans "Log In" %}</h2>
     {% if form.has_errors %}
     <p class="error">{% trans "Your username and password didn't match, please try again." %}</p>
     {% endif %}
