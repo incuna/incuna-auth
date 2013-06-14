@@ -1,29 +1,14 @@
+{% load crispy_forms_tags %}
 {% load i18n %}
 {% load url from future %}
 
-
-{% if form.has_errors %}
-    <p class="error">{% trans "Your username and password didn't match, please try again." %}</p>
-{% endif %}
 
 <p>{% trans "Please log in using your email and password." %}</p>
 
 <form class="" method="post" action="{% url 'auth_login' %}">
     {% csrf_token %}
 
-    {{ form.non_field_errors }}
-
-    <p class="text field-{{ form.username.auto_id }}">
-        <label for="{{ form.username.auto_id }}">{% trans "Email" %}</label>
-        {{ form.username }}
-    </p>
-    {{ form.username.errors }}
-
-    <p class="text field-{{ form.password.auto_id }}">
-        {{ form.password.label_tag }}
-        {{ form.password }}
-    </p>
-    {{ form.password.errors }}
+    {{ form|crispy }}
 
     <a href="{% url 'auth_password_reset' %}" class="forgotten-password">{% trans "Forgotten password?" %}</a>
 
