@@ -1,6 +1,13 @@
 Changelog
 =========
 
+v.0.9
+-------
+* Templates have been completely refactored.
+* All forms now use crispy forms for templating.
+* Base versions of all templates with more blocks to make overwriting templates
+  easier by targetting blocks.
+
 v0.8.5
 ------
 * Support new hotness {% url 'tag' %}.
