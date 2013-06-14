@@ -5,15 +5,19 @@
 
 <p>{% trans "Please log in using your email and password." %}</p>
 
-<form class="" method="post" action="{% url 'auth_login' %}">
+<form class="{% block form_class %}{% endblock %}" action="{% url 'auth_login' %}" method="post" >
     {% csrf_token %}
 
-    {{ form|crispy }}
+    {% block form_inner %}
+        {{ form|crispy }}
+    {% endblock %}
 
     <a href="{% url 'auth_password_reset' %}" class="forgotten-password">{% trans "Forgotten password?" %}</a>
 
     <div class="form-actions">
-        <input type="submit" class="button" value="{% trans "Login" %}">
-        <input type="hidden" name="next" value="{{ next }}">
+        {% block form_actions_inner %}
+            <input type="submit" class="button" value="{% trans "Login" %}">
+            <input type="hidden" name="next" value="{{ next }}">
+        {% endblock form_actions_inner %}
     </div>
 </form>
