@@ -8,8 +8,6 @@
 {% block page_main_title %}{% trans "Log In" %}{% endblock page_main_title %}
 
 {% block content %}
-    {% if form.has_errors %}
-    <p class="error">{% trans "Your username and password didn't match, please try again." %}</p>
-    {% endif %}
+
     {% include "registration/login_form.html" %}
 {% endblock %}
