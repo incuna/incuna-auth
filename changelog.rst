@@ -1,7 +1,7 @@
 Changelog
 =========
 
-v.0.8.6
+v.0.9
 -------
 * Templates have been completely refactored.
 * All forms now use crispy forms for templating.
