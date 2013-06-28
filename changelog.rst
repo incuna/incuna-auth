@@ -1,8 +1,12 @@
 Changelog
 =========
 
-v.0.9
--------
+v0.9.1
+------
+* Add INCUNA_PASSWORD_RESET_FORM setting.
+
+v0.9
+------
 * Templates have been completely refactored.
 * All forms now use crispy forms for templating.
 * Base versions of all templates with more blocks to make overwriting templates
