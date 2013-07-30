@@ -1,6 +1,10 @@
 Changelog
 =========
 
+v0.10.3
+--------
+* Fix error in password change done template.
+
 v0.10.2
 --------
 * Fix error in password change template.
