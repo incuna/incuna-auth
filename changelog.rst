@@ -1,6 +1,10 @@
 Changelog
 =========
 
+v0.10.2
+--------
+* Fix error in password change template.
+
 v0.10.1
 -------
 * Specify type="email" on username field
