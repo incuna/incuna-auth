@@ -1,6 +1,10 @@
 Changelog
 =========
 
+v0.10.1
+-------
+* Specify type="email" on username field
+
 v0.9.1
 ------
 * Add INCUNA_PASSWORD_RESET_FORM setting.
