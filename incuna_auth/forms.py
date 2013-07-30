@@ -16,5 +16,5 @@ class CrispyPasswordResetForm(PasswordResetForm):
 
 
 class IncunaAuthenticationForm(AuthenticationForm):
-    username = forms.CharField(label=_('Email'), max_length=320)
+    username = forms.CharField(label=_('Email'), max_length=320, widget=forms.TextInput(attrs={'type': 'email'}))
 
