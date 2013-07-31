@@ -1,6 +1,10 @@
 Changelog
 =========
 
+v0.10.4
+-------
+* Update button in the log in form to read 'Log in' rather than 'Login'
+
 v0.10.3
 --------
 * Fix error in password change done template.
