@@ -2,7 +2,7 @@ import re
 
 from django.conf import settings
 from django.contrib import messages
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -50,6 +50,10 @@ class LoginRequiredMiddleware:
         # Jump over this middleware if user logged in.
         if request.user.is_authenticated():
             return
+
+        # Raise a 403 for POST/DELETE etc.
+        if request.method != 'GET':
+            return HttpResponseForbidden()
 
         # Add a message, and redirect to login.
         if SEND_MESSAGE:
