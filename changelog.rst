@@ -3,7 +3,10 @@ Changelog
 
 v1.0.0
 -------
-* *Backwards incompatible: may break tests/expected behaviour.* LoginRequiredMiddleware now responds to stray non-GET requests with 403 instead of 302.
+*Backwards incompatible: may break tests/expected behaviour.*
+
+* LoginRequiredMiddleware now responds to stray non-GET
+requests with 403 instead of 302.
 
 v0.11.0
 -------
