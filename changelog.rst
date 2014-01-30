@@ -9,7 +9,16 @@ v2.0.0
   the url names in views. 
   If you are using Django >= 1.6 then you will need to update your views and
   templates to reverse the auth urls using the new names. Remove the `auth_`
-  prefix from all urls (e.g. `auth_login` > `login`). 
+  prefix from the following urls:
+  
+  * `auth_login` > `login`  
+  * `auth_logout` > `logout`  
+  * `auth_password_change` > `password_change`
+  * `auth_password_reset` > `password_reset`
+  * `auth_password_reset_done` > `password_reset_done`
+  * `auth_password_reset_confirm` > `password_reset_confirm`
+  * `auth_password_reset_complete` > `password_reset_complete`
+  
   If you are using Django < 1.6 then you can continue using the old auth url
   names then create and include a project specific `auth_urls` using the old
   names.
