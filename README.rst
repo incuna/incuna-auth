@@ -30,8 +30,8 @@ Add the auth urls in ``settings.py``::
 
     ...
 
-    LOGIN_URL = reverse_lazy('auth_login')
-    LOGOUT_URL = reverse_lazy('auth_logout')
+    LOGIN_URL = reverse_lazy('login')
+    LOGOUT_URL = reverse_lazy('logout')
 
 Add the tables to the db::
 
