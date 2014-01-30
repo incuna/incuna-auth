@@ -4,8 +4,7 @@ from django.core.urlresolvers import get_callable, reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import RedirectView
 
-
-auth_form = get_callable(getattr(settings, 'INCUNA_AUTH_LOGIN_FORM', 'incuna_auth.forms.IncunaAuthenticationForm'))
+auth_form = get_callable(getattr(settings, 'INCUNA_AUTH_LOGIN_FORM', 'django.contrib.auth.forms.AuthenticationForm'))
 reset_form = get_callable(getattr(settings, 'INCUNA_PASSWORD_RESET_FORM', 'incuna_auth.forms.CrispyPasswordResetForm'))
 
 

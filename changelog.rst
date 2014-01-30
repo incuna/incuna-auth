@@ -16,6 +16,12 @@ v2.0.0
 * `password_reset_confirm` view / url parameter changed from `uidb36` to
   `uidb64` e.g. `{% url 'password_reset_confirm' uidb36=uid token=token %}` must
   be changed to `{% url 'password_reset_confirm' uidb64=uid token=token %}`
+* Remove `forms.IncunaAuthenticationForm`. Django >= 1.6 provides an
+  `AuthenticationForm` with a `username` field with `max_length=254` and a label
+  based on the user model's `USERNAME_FIELD`. If you are extending 
+  `incuna_auth.forms.IncunaAuthenticationForm` in your project then you should
+  now extend `django.contrib.auth.forms.AuthenticationForm` and consider adding 
+  `username = forms.CharField(label=_('Email'), max_length=320, widget=forms.TextInput(attrs={'type': 'email'}))`
 
 v1.0.0
 -------
