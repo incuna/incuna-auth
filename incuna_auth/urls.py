@@ -18,7 +18,7 @@ urlpatterns = patterns('django.contrib.auth.views',
     # Reset password (when not logged in via unique email link)
     url(_(r'^password/reset/$'), 'password_reset', {'password_reset_form': reset_form}, name='password_reset'),
     url(_(r'^password/reset/done/$'), 'password_reset_done', name='password_reset_done'),
-    # Support old style base36 password reset links; remove in Django 1.7
+    # Support old style base36 password reset links; will be removed in Django 1.7
     url(r'^password/reset/confirm/(?P<uidb36>[0-9A-Za-z]{1,13})-(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         'password_reset_confirm_uidb36', name='password_reset_confirm'),
     url(_(r'^password/reset/confirm/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$'), 'password_reset_confirm', name='password_reset_confirm'),

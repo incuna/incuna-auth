@@ -8,8 +8,8 @@ v2.0.0
 * Django > 1.4 added names to `contrib.auth.urls`. Django >= 1.6 started using
   the url names in views. 
   If you are using Django >= 1.6 then you will need to update your views and
-  templates to reverse the auth urls using the new names (remove the `auth_`
-  prefix). 
+  templates to reverse the auth urls using the new names. Remove the `auth_`
+  prefix from all urls (e.g. `auth_login` > `login`). 
   If you are using Django < 1.6 then you can continue using the old auth url
   names then create and include a project specific `auth_urls` using the old
   names.
