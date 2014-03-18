@@ -1,24 +1,29 @@
 Changelog
 =========
 
+v2.0.1
+-------
+* Add backwards compatibility to differentiate the urls used in Django <1.6
+  and Django >= 1.6.
+
 v2.0.0
 -------
 *Backwards incompatible: urls renamed to match django >= 1.6.*
 
 * Django > 1.4 added names to `contrib.auth.urls`. Django >= 1.6 started using
-  the url names in views. 
+  the url names in views.
   If you are using Django >= 1.6 then you will need to update your views and
   templates to reverse the auth urls using the new names. Remove the `auth_`
   prefix from the following urls:
-  
-  * `auth_login` > `login`  
-  * `auth_logout` > `logout`  
+
+  * `auth_login` > `login`
+  * `auth_logout` > `logout`
   * `auth_password_change` > `password_change`
   * `auth_password_reset` > `password_reset`
   * `auth_password_reset_done` > `password_reset_done`
   * `auth_password_reset_confirm` > `password_reset_confirm`
   * `auth_password_reset_complete` > `password_reset_complete`
-  
+
   If you are using Django < 1.6 then you can continue using the old auth url
   names then create and include a project specific `auth_urls` using the old
   names.
@@ -27,9 +32,9 @@ v2.0.0
   be changed to `{% url 'password_reset_confirm' uidb64=uid token=token %}`
 * Remove `forms.IncunaAuthenticationForm`. Django >= 1.6 provides an
   `AuthenticationForm` with a `username` field with `max_length=254` and a label
-  based on the user model's `USERNAME_FIELD`. If you are extending 
+  based on the user model's `USERNAME_FIELD`. If you are extending
   `incuna_auth.forms.IncunaAuthenticationForm` in your project then you should
-  now extend `django.contrib.auth.forms.AuthenticationForm` and consider adding 
+  now extend `django.contrib.auth.forms.AuthenticationForm` and consider adding
   `username = forms.CharField(label=_('Email'), max_length=320, widget=forms.TextInput(attrs={'type': 'email'}))`
 
 v1.0.0
