@@ -1,4 +1,4 @@
-import django
+from django import get_version
 from django.conf import settings
 from django.conf.urls import patterns, url
 from django.core.urlresolvers import get_callable, reverse_lazy
@@ -7,9 +7,6 @@ from django.views.generic import RedirectView
 
 auth_form = get_callable(getattr(settings, 'INCUNA_AUTH_LOGIN_FORM', 'django.contrib.auth.forms.AuthenticationForm'))
 reset_form = get_callable(getattr(settings, 'INCUNA_PASSWORD_RESET_FORM', 'incuna_auth.forms.CrispyPasswordResetForm'))
-
-# Check the Django version is <= 1.6 (django.version returns a tuple)
-# The _uidb36 will be removed in Django 1.7 so we want to check for that too.
 
 urlpatterns = patterns('django.contrib.auth.views',
     url(_(r'^login/$'), 'login', {'authentication_form': auth_form}, name='login'),
@@ -24,12 +21,11 @@ urlpatterns = patterns('django.contrib.auth.views',
     url(_(r'^sso/$'), RedirectView.as_view(url=reverse_lazy('admin:admin_sso_openiduser_start')), name='sso_login'),
 )
 
-print urlpatterns
-
 # Support uidb36/64 compatibility across versions of Django.
-if django.VERSION[:2] >= (1, 6):
+if get_version() >= "1.6":
     # 1.6+ have password_reset_confirm for uidb64.
-    # 1.6 also has the _uidb36 version, which will be removed in Django 1.7.
+    # 1.6.x also has the _uidb36 version, which will be removed in Django 1.7.
+    # See https://github.com/incuna/incuna-auth/issues/24
     urlpatterns += patterns('django.contrib.auth.views',
         url(_(r'^password/reset/confirm/(?P<uidb36>[0-9A-Za-z]{1,13})-(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$'),
             'password_reset_confirm_uidb36', name='password_reset_confirm'),
@@ -43,6 +39,3 @@ else:
         url(_(r'^password/reset/confirm/(?P<uidb36>[0-9A-Za-z]{1,13})-(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$'),
         'password_reset_confirm', name='password_reset_confirm'),
     )
-
-
-print urlpatterns
