@@ -1,6 +1,10 @@
 Changelog
 =========
 
+v2.0.2
+------
+* Add an absolute import to the middleware module to make Python 3 projects happier.
+
 v2.0.1
 -------
 * Add backwards compatibility to differentiate the urls used in Django <1.6
