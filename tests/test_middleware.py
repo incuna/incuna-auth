@@ -1,10 +1,8 @@
 from os import environ
 from unittest import TestCase
 
-from nose.tools import assert_equals
-
 environ['DJANGO_SETTINGS_MODULE'] = 'test_settings'
-from middleware import LoginRequiredMiddleware
+from incuna_auth.middleware import LoginRequiredMiddleware
 
 
 class AuthenticatedUser(object):
@@ -29,10 +27,9 @@ class TestLoginRequiredMiddleware(TestCase):
     def test_skip_middleware_if_url_is_exempt(self):
         self.request.user = AuthenticatedUser()
         response = self.middleware.process_request(self.request)
-        assert_equals(response, None)
+        self.assertEqual(response, None)
 
     def test_skip_middleware_if_user_is_autenticated(self):
         self.request.user = AuthenticatedUser()
         response = self.middleware.process_request(self.request)
-        assert False
-        assert_equals(response, None)
+        self.assertEqual(response, None)

@@ -1,0 +1,13 @@
+language: python
+python:
+  - 3.3
+  - 2.7
+script: make test
+notifications:
+  email: false
+env:
+  - DATABASE_URL='postgres://postgres@localhost/incuna_auth'
+install:
+  - psql -c 'CREATE DATABASE incuna_auth' -U postgres;
+  - pip install -e .
+  - pip install -r requirements.txt
