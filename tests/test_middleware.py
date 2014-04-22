@@ -43,3 +43,9 @@ class TestLoginRequiredMiddleware(TestCase):
         self.request.user = AuthenticatedUser()
         response = self.middleware.process_request(self.request)
         self.assertEqual(response, None)
+
+    def test_403_result_if_non_get_request(self):
+        self.request = Request('protected-url/', 'POST')
+        self.request.user = AnonymousUser()
+        response = self.middleware.process_request(self.request)
+        self.assertEqual(response.status_code, 403)
