@@ -1,4 +1,3 @@
-#! /usr/bin/env python3
 import sys
 
 from colour_runner.django_runner import ColourRunnerMixin
