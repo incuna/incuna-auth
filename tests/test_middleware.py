@@ -16,20 +16,24 @@ class AnonymousUser(object):
 
 
 class Request(object):
-    path_info = 'test'
+
+    def __init__(self, path_info, method='GET'):
+        self.path_info = path_info
+        self.method = method
 
 
 class TestLoginRequiredMiddleware(TestCase):
     def setUp(self):
         self.middleware = LoginRequiredMiddleware()
-        self.request = Request()
 
     def test_skip_middleware_if_url_is_exempt(self):
-        self.request.user = AuthenticatedUser()
+        self.request = Request('exempt-and-protected-url/')
+        self.request.user = AnonymousUser()
         response = self.middleware.process_request(self.request)
         self.assertEqual(response, None)
 
     def test_skip_middleware_if_user_is_authenticated(self):
+        self.request = Request('protected-url/')
         self.request.user = AuthenticatedUser()
         response = self.middleware.process_request(self.request)
         self.assertEqual(response, None)

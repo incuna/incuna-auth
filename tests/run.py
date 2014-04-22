@@ -24,6 +24,16 @@ settings.configure(
         'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
         'DEFAULT_RENDERER_CLASSES': ('rest_framework.renderers.JSONRenderer',),
     },
+    LOGIN_REQUIRED_SEND_MESSAGE=False,
+    LOGIN_EXEMPT_URLS = (
+        '^exempt-url/$',
+        '^exempt-and-protected-url/$',
+    ),
+    LOGIN_PROTECTED_URLS = (
+        '^exempt-and-protected-url/$',
+        '^protected-url/$',
+    ),
+
 )
 
 
