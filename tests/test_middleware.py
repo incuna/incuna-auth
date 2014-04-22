@@ -32,6 +32,12 @@ class TestLoginRequiredMiddleware(TestCase):
         response = self.middleware.process_request(self.request)
         self.assertEqual(response, None)
 
+    def test_skip_middleware_if_url_is_not_protected(self):
+        self.request = Request('non-protected-url/')
+        self.request.user = AnonymousUser()
+        response = self.middleware.process_request(self.request)
+        self.assertEqual(response, None)
+
     def test_skip_middleware_if_user_is_authenticated(self):
         self.request = Request('protected-url/')
         self.request.user = AuthenticatedUser()
