@@ -4,7 +4,6 @@ import sys
 
 from colour_runner.django_runner import ColourRunnerMixin
 from django.conf import settings
-from django.test.runner import DiscoverRunner
 
 
 settings.configure(
@@ -29,6 +28,9 @@ settings.configure(
     },
     TEST_DISCOVER_TOP_LEVEL=path.dirname(path.dirname(__file__)),
 )
+
+
+from django.test.runner import DiscoverRunner
 
 
 class Runner(ColourRunnerMixin, DiscoverRunner):
