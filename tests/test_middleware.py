@@ -29,7 +29,7 @@ class TestLoginRequiredMiddleware(TestCase):
         response = self.middleware.process_request(self.request)
         self.assertEqual(response, None)
 
-    def test_skip_middleware_if_user_is_autenticated(self):
+    def test_skip_middleware_if_user_is_authenticated(self):
         self.request.user = AuthenticatedUser()
         response = self.middleware.process_request(self.request)
         self.assertEqual(response, None)
