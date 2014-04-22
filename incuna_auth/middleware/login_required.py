@@ -5,6 +5,12 @@ from django.contrib import messages
 from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
 
+# Python 2/3 compatibility hackery
+try:
+    unicode
+except NameError:
+    unicode = str
+
 
 EXEMPT_URLS = [re.compile('^%s$' % settings.LOGIN_URL.lstrip('/')), re.compile('^%s$' % settings.LOGOUT_URL.lstrip('/'))]
 EXEMPT_URLS += [re.compile(unicode(expr)) for expr in getattr(settings, 'LOGIN_EXEMPT_URLS', [])]
