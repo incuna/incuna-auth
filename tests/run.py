@@ -1,5 +1,4 @@
 #! /usr/bin/env python3
-from os import path
 import sys
 
 from colour_runner.django_runner import ColourRunnerMixin
@@ -26,7 +25,6 @@ settings.configure(
         'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
         'DEFAULT_RENDERER_CLASSES': ('rest_framework.renderers.JSONRenderer',),
     },
-    TEST_DISCOVER_TOP_LEVEL=path.dirname(path.dirname(__file__)),
 )
 
 
