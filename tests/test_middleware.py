@@ -1,6 +1,12 @@
+from base64 import b64encode
 from unittest import TestCase
 
 from incuna_auth.middleware import LoginRequiredMiddleware, basic_auth
+
+
+def p23_base64_encode(text):
+    """Encode a base-64 string in a way that works in Python 2 or 3."""
+    return b64encode(text.encode('utf-8')).decode('utf-8')
 
 
 class AuthenticatedUser(object):
@@ -59,8 +65,7 @@ class TestBasicAuthMiddleware(TestCase):
     class DummyRequest(object):
         def __init__(self, auth_method, username, password):
             auth = username + ':' + password
-            auth = auth.encode('base64')
-            http_auth_string = auth_method + ' ' + auth
+            http_auth_string = auth_method + ' ' + p23_base64_encode(auth)
             self.META = {'HTTP_AUTHORIZATION': http_auth_string}
 
     def setUp(self):
@@ -72,10 +77,19 @@ class TestBasicAuthMiddleware(TestCase):
         self.assertEqual(response['WWW-Authenticate'], 'Basic realm="Restricted Access"')
 
     def test_basic_authenticate_success(self):
-        pass
+        request = self.DummyRequest('basic', 'user', 'pass')
+        result = basic_auth.basic_authenticate(request.META['HTTP_AUTHORIZATION'])
+        self.assertTrue(result)
 
-    def test_basic_authenticate_failure(self):
-        pass
+    def test_basic_authenticate_failure_wrong_type(self):
+        request = self.DummyRequest('non_basic', 'user', 'pass')
+        result = basic_auth.basic_authenticate(request.META['HTTP_AUTHORIZATION'])
+        self.assertEqual(result, None)
+
+    def test_basic_authenticate_failure_wrong_credentials(self):
+        request = self.DummyRequest('basic', 'other_user', 'other_pass')
+        result = basic_auth.basic_authenticate(request.META['HTTP_AUTHORIZATION'])
+        self.assertFalse(result)
 
     def test_lack_of_www_authentication(self):
         pass

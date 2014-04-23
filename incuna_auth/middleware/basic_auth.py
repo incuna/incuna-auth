@@ -1,6 +1,13 @@
+from base64 import b64decode
+
 from django.conf import settings
 from django.http import HttpResponse
 from django.utils.translation import ugettext as _
+
+
+def p23_base64_decode(text):
+    """Decode a base-64 string in a way that works in Python 2 or 3."""
+    return b64decode(text).decode('utf-8')
 
 
 def basic_challenge(realm=None):
@@ -17,7 +24,7 @@ def basic_authenticate(authentication):
     authmeth, auth = authentication.split(' ', 1)
     if 'basic' != authmeth.lower():
         return None
-    auth = auth.strip().decode('base64')
+    auth = p23_base64_decode(auth.strip())
     username, password = auth.split(':', 1)
     AUTHENTICATION_USERNAME = settings.BASIC_WWW_AUTHENTICATION_USERNAME
     AUTHENTICATION_PASSWORD = settings.BASIC_WWW_AUTHENTICATION_PASSWORD
