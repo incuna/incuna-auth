@@ -1,6 +1,8 @@
 from base64 import b64encode
 from unittest import TestCase
 
+from django.conf import settings
+
 from incuna_auth.middleware import LoginRequiredMiddleware, basic_auth
 
 
@@ -63,7 +65,12 @@ class TestLoginRequiredMiddleware(TestCase):
 class TestBasicAuthMiddleware(TestCase):
 
     class DummyRequest(object):
-        def __init__(self, auth_method, username, password):
+        META = {}
+
+        def __init__(self, auth_method=None, username='', password=''):
+            if auth_method is None:
+                return
+
             auth = username + ':' + password
             http_auth_string = auth_method + ' ' + p23_base64_encode(auth)
             self.META = {'HTTP_AUTHORIZATION': http_auth_string}
@@ -92,9 +99,21 @@ class TestBasicAuthMiddleware(TestCase):
         self.assertFalse(result)
 
     def test_lack_of_www_authentication(self):
-        pass
+        # Ensure BASIC_WWW_AUTHENTICATION is False for this method
+        old_auth_value = getattr(settings, 'BASIC_WWW_AUTHENTICATION', True)
+        setattr(settings, 'BASIC_WWW_AUTHENTICATION', False)
+
+        request = self.DummyRequest('basic', 'other_user', 'other_pass')
+        result = self.middleware.process_request(request)
+        self.assertEqual(result, None)
+
+        # Put the old value of BASIC_WWW_AUTHENTICATION back
+        setattr(settings, 'BASIC_WWW_AUTHENTICATION', old_auth_value)
 
     def test_no_http_auth_in_meta(self):
+        pass
+
+    def test_passes_basic_authentication(self):
         pass
 
     def test_falls_through_to_basic_challenge(self):
