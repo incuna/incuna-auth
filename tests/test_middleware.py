@@ -1,7 +1,6 @@
 from os import environ
 from unittest import TestCase
 
-environ['DJANGO_SETTINGS_MODULE'] = 'test_settings'
 from incuna_auth.middleware import LoginRequiredMiddleware
 
 
@@ -15,43 +14,46 @@ class AnonymousUser(object):
         return False
 
 
-class Request(object):
-
-    def __init__(self, path_info, method='GET'):
-        self.path_info = path_info
-        self.method = method
-
-
 class TestLoginRequiredMiddleware(TestCase):
+
+    class DummyRequest(object):
+        def __init__(self, path_info, method='GET'):
+            self.path_info = path_info
+            self.method = method
+
     def setUp(self):
         self.middleware = LoginRequiredMiddleware()
 
     def test_skip_middleware_if_url_is_exempt(self):
-        self.request = Request('exempt-and-protected-url/')
+        self.request = self.DummyRequest('exempt-and-protected-url/')
         self.request.user = AnonymousUser()
         response = self.middleware.process_request(self.request)
         self.assertEqual(response, None)
 
     def test_skip_middleware_if_url_is_not_protected(self):
-        self.request = Request('non-protected-url/')
+        self.request = self.DummyRequest('non-protected-url/')
         self.request.user = AnonymousUser()
         response = self.middleware.process_request(self.request)
         self.assertEqual(response, None)
 
     def test_skip_middleware_if_user_is_authenticated(self):
-        self.request = Request('protected-url/')
+        self.request = self.DummyRequest('protected-url/')
         self.request.user = AuthenticatedUser()
         response = self.middleware.process_request(self.request)
         self.assertEqual(response, None)
 
     def test_403_result_if_non_get_request(self):
-        self.request = Request('protected-url/', 'POST')
+        self.request = self.DummyRequest('protected-url/', 'POST')
         self.request.user = AnonymousUser()
         response = self.middleware.process_request(self.request)
         self.assertEqual(response.status_code, 403)
 
     def test_redirect_if_all_is_well(self):
-        self.request = Request('protected-url/', 'GET')
+        self.request = self.DummyRequest('protected-url/', 'GET')
         self.request.user = AnonymousUser()
         response = self.middleware.process_request(self.request)
         self.assertEqual(response.status_code, 302)
+
+
+class TestBasicAuthMiddleware(TestCase):
+    pass
