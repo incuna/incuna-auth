@@ -1,7 +1,6 @@
-from os import environ
 from unittest import TestCase
 
-from incuna_auth.middleware import LoginRequiredMiddleware
+from incuna_auth.middleware import LoginRequiredMiddleware, basic_auth
 
 
 class AuthenticatedUser(object):
@@ -56,4 +55,31 @@ class TestLoginRequiredMiddleware(TestCase):
 
 
 class TestBasicAuthMiddleware(TestCase):
-    pass
+
+    class DummyRequest(object):
+        def __init__(self, auth_method, username, password):
+            auth = username + ':' + password
+            auth = auth.encode('base64')
+            http_auth_string = auth_method + ' ' + auth
+            self.META = {'HTTP_AUTHORIZATION': http_auth_string}
+
+    def setUp(self):
+        self.middleware = basic_auth.BasicAuthenticationMiddleware()
+
+    def test_basic_challenge(self):
+        pass
+
+    def test_basic_authenticate_success(self):
+        pass
+
+    def test_basic_authenticate_failure(self):
+        pass
+
+    def test_lack_of_www_authentication(self):
+        pass
+
+    def test_no_http_auth_in_meta(self):
+        pass
+
+    def test_falls_through_to_basic_challenge(self):
+        pass

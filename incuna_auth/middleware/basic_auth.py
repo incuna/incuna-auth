@@ -7,7 +7,7 @@ def basic_challenge(realm=None):
     if realm is None:
         realm = getattr(settings, 'WWW_AUTHENTICATION_REALM', _('Restricted Access'))
 
-    response = HttpResponse(mimetype='text/plain')
+    response = HttpResponse(content_type='text/plain')
     response['WWW-Authenticate'] = 'Basic realm="{0}"'.format(realm)
     response.status_code = 401
     return response

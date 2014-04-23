@@ -12,8 +12,6 @@ settings.configure(
         'django.contrib.auth',
         'django.contrib.sessions',
         'django.contrib.admin',
-        'django-admin-sso',
-        'django-crispy-forms',
 
         'incuna_auth',
     ),
