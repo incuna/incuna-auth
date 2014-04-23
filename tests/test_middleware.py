@@ -49,3 +49,9 @@ class TestLoginRequiredMiddleware(TestCase):
         self.request.user = AnonymousUser()
         response = self.middleware.process_request(self.request)
         self.assertEqual(response.status_code, 403)
+
+    def test_redirect_if_all_is_well(self):
+        self.request = Request('protected-url/', 'GET')
+        self.request.user = AnonymousUser()
+        response = self.middleware.process_request(self.request)
+        self.assertEqual(response.status_code, 302)
