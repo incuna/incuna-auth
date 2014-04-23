@@ -111,7 +111,9 @@ class TestBasicAuthMiddleware(TestCase):
         setattr(settings, 'BASIC_WWW_AUTHENTICATION', old_auth_value)
 
     def test_no_http_auth_in_meta(self):
-        pass
+        request = self.DummyRequest(None)
+        result = self.middleware.process_request(request)
+        self.assertEqual(result.status_code, basic_auth.basic_challenge().status_code)
 
     def test_passes_basic_authentication(self):
         pass
