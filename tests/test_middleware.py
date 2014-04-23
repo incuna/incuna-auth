@@ -116,7 +116,11 @@ class TestBasicAuthMiddleware(TestCase):
         self.assertEqual(result.status_code, basic_auth.basic_challenge().status_code)
 
     def test_passes_basic_authentication(self):
-        pass
+        request = self.DummyRequest('basic', 'user', 'pass')
+        result = self.middleware.process_request(request)
+        self.assertEqual(result, None)
 
     def test_falls_through_to_basic_challenge(self):
-        pass
+        request = self.DummyRequest('basic', 'other_user', 'other_pass')
+        result = self.middleware.process_request(request)
+        self.assertEqual(result.status_code, basic_auth.basic_challenge().status_code)
