@@ -5,6 +5,7 @@ from django.conf import settings
 
 
 settings.configure(
+    # Core environmental settings
     INSTALLED_APPS=(
         # Put contenttypes before auth to work around test issue.
         # See: https://code.djangoproject.com/ticket/10827#comment:12
@@ -22,6 +23,8 @@ settings.configure(
         'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
         'DEFAULT_RENDERER_CLASSES': ('rest_framework.renderers.JSONRenderer',),
     },
+
+    # LoginRequiredMiddleware data
     LOGIN_REQUIRED_SEND_MESSAGE=False,
     LOGIN_EXEMPT_URLS = (
         '^exempt-url/$',
@@ -32,6 +35,10 @@ settings.configure(
         '^protected-url/$',
     ),
 
+    # BasicAuthenticationMiddleware data
+    BASIC_WWW_AUTHENTICATION_USERNAME = 'user',
+    BASIC_WWW_AUTHENTICATION_PASSWORD = 'pass',
+    BASIC_WWW_AUTHENTICATION = True,
 )
 
 
