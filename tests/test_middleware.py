@@ -67,7 +67,9 @@ class TestBasicAuthMiddleware(TestCase):
         self.middleware = basic_auth.BasicAuthenticationMiddleware()
 
     def test_basic_challenge(self):
-        pass
+        response = basic_auth.basic_challenge()
+        self.assertEqual(response.status_code, 401)
+        self.assertEqual(response['WWW-Authenticate'], 'Basic realm="Restricted Access"')
 
     def test_basic_authenticate_success(self):
         pass
