@@ -2,6 +2,7 @@ from unittest import TestCase
 
 from django.contrib.auth import views
 from django.core.urlresolvers import resolve, reverse
+from django.views.generic import RedirectView
 
 
 class URLsMixin(object):
@@ -26,7 +27,7 @@ class URLsMixin(object):
         # Look for a method rather than a class here
         # (just because of what we're testing)
         resolved_view_method = resolve(expected_url).func
-        self.assertEqual(resolved_view_method, view_method)
+        self.assertEqual(resolved_view_method.__name__, view_method.__name__)
 
 
 class TestURLs(URLsMixin, TestCase):
@@ -78,4 +79,11 @@ class TestURLs(URLsMixin, TestCase):
             views.password_reset_complete,
             '/password/reset/complete/',
             'password_reset_complete',
+        )
+
+    def test_sso(self):
+        self.check_url(
+            RedirectView.as_view(),
+            '/sso/',
+            'sso_login',
         )
