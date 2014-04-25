@@ -17,7 +17,6 @@ settings.configure(
         'django.contrib.auth',
         'django.contrib.sessions',
         'django.contrib.admin',
-        'discover_runner',
 
         'incuna_auth',
     ),
