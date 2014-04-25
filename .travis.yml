@@ -6,9 +6,16 @@ script: make test
 notifications:
   email: false
 env:
-  - DJANGO_VERSION=1.6.3 DATABASE_URL='postgres://postgres@localhost/incuna_auth'
-  - DJANGO_VERSION=1.5.4 DATABASE_URL='postgres://postgres@localhost/incuna_auth'
-  - DJANGO_VERSION=1.4 DATABASE_URL='postgres://postgres@localhost/incuna_auth'
+  global:
+    - DATABASE_URL='postgres://postgres@localhost/incuna_auth'
+  matrix:
+    - DJANGO_VERSION=1.6.3 
+    - DJANGO_VERSION=1.5.4
+    - DJANGO_VERSION=1.4
+matrix:
+  exclude:
+     - env: DJANGO_VERSION=1.4
+       python: 3.3 
 install:
   - psql -c 'CREATE DATABASE incuna_auth' -U postgres;
   - pip install -q Django==$DJANGO_VERSION

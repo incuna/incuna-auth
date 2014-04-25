@@ -17,6 +17,7 @@ settings.configure(
         'django.contrib.auth',
         'django.contrib.sessions',
         'django.contrib.admin',
+        'discover_runner',
 
         'incuna_auth',
     ),
@@ -45,7 +46,11 @@ settings.configure(
 )
 
 
-from django.test.runner import DiscoverRunner
+try:
+    from django.test.runner import DiscoverRunner
+except ImportError:
+    # Django < 1.6
+    from discover_runner import DiscoverRunner
 
 
 class Runner(ColourRunnerMixin, DiscoverRunner):
