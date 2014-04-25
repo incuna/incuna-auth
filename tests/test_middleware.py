@@ -1,12 +1,12 @@
 from base64 import b64encode
 from unittest import TestCase
 
-from django.conf import settings
+from django.test.utils import override_settings
 
 from incuna_auth.middleware import LoginRequiredMiddleware, basic_auth
 
 
-def p23_base64_encode(text):
+def base64_encode_for_py2or3(text):
     """Encode a base-64 string in a way that works in Python 2 or 3."""
     return b64encode(text.encode('utf-8')).decode('utf-8')
 
@@ -72,7 +72,7 @@ class TestBasicAuthMiddleware(TestCase):
                 return
 
             auth = username + ':' + password
-            http_auth_string = auth_method + ' ' + p23_base64_encode(auth)
+            http_auth_string = auth_method + ' ' + base64_encode_for_py2or3(auth)
             self.META = {'HTTP_AUTHORIZATION': http_auth_string}
 
     def setUp(self):
@@ -98,17 +98,11 @@ class TestBasicAuthMiddleware(TestCase):
         result = basic_auth.basic_authenticate(request.META['HTTP_AUTHORIZATION'])
         self.assertFalse(result)
 
+    @override_settings(BASIC_WWW_AUTHENTICATION=False)
     def test_lack_of_www_authentication(self):
-        # Ensure BASIC_WWW_AUTHENTICATION is False for this method
-        old_auth_value = getattr(settings, 'BASIC_WWW_AUTHENTICATION', True)
-        setattr(settings, 'BASIC_WWW_AUTHENTICATION', False)
-
         request = self.DummyRequest('basic', 'other_user', 'other_pass')
         result = self.middleware.process_request(request)
         self.assertEqual(result, None)
-
-        # Put the old value of BASIC_WWW_AUTHENTICATION back
-        setattr(settings, 'BASIC_WWW_AUTHENTICATION', old_auth_value)
 
     def test_no_http_auth_in_meta(self):
         request = self.DummyRequest(None)
