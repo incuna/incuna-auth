@@ -2,10 +2,14 @@ import sys
 
 from colour_runner.django_runner import ColourRunnerMixin
 from django.conf import settings
+import dj_database_url
 
 
 settings.configure(
     # Core environmental settings
+    DATABASES={
+        'default': dj_database_url.config(default='postgres://localhost/incuna_auth'),
+    },
     INSTALLED_APPS=(
         # Put contenttypes before auth to work around test issue.
         # See: https://code.djangoproject.com/ticket/10827#comment:12
@@ -17,7 +21,6 @@ settings.configure(
         'incuna_auth',
     ),
     PASSWORD_HASHERS = ('django.contrib.auth.hashers.MD5PasswordHasher',),
-    AUTH_USER_MODEL='tests.User',
     ROOT_URLCONF='incuna_auth.urls',
     REST_FRAMEWORK={
         'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
