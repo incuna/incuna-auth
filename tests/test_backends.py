@@ -1,7 +1,7 @@
 from unittest import TestCase
 
 from incuna_auth.backends import CustomUserModelBackend
-from factories import UserFactory
+from tests.factories import UserFactory
 
 
 class TestCustomUserModelBackend(TestCase):
