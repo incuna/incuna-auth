@@ -1,13 +1,20 @@
-language: python
+#language: python
 python:
   - 3.3
   - 2.7
+django:
+  - 1.6.3
+  - 1.5.4
+  - 1.4.1
 script: make test
 notifications:
   email: false
 env:
-  - DATABASE_URL='postgres://postgres@localhost/incuna_auth'
+  - [DJANGO_VERSION=1.6.3, DATABASE_URL='postgres://postgres@localhost/incuna_auth']
+  - [DJANGO_VERSION=1.5.4, DATABASE_URL='postgres://postgres@localhost/incuna_auth']
+  - [DJANGO_VERSION=1.4, DATABASE_URL='postgres://postgres@localhost/incuna_auth']
 install:
   - psql -c 'CREATE DATABASE incuna_auth' -U postgres;
+  - pip install -q Django==$DJANGO_VERSION
   - pip install -e .
   - pip install -r requirements.txt
