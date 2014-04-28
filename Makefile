@@ -5,7 +5,7 @@ coverage:
 	@coverage report --show-missing
 
 release:
-	python setup.py register sdist upload
+	python setup.py register sdist bdist_wheel upload
 
 test:
 	python -Wall tests/run.py
