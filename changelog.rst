@@ -1,6 +1,11 @@
 Changelog
 =========
 
+v2.1.0
+------
+* Support Python 3.  (Note that Django < 1.5 and Python 3 don't support each other.)
+* Add a battery of unit tests.
+
 v2.0.2
 ------
 * Add an absolute import to the middleware module to make Python 3 projects happier.
