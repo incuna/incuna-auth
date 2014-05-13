@@ -153,7 +153,7 @@ v0.4
 v0.3
 ----
 * Include fixture in the package.
-* License this bitch upside the face
+* Add license.
 * Update the auth form
 
 v0.2
