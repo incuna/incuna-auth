@@ -22,6 +22,7 @@ settings.configure(
     ),
     PASSWORD_HASHERS = ('django.contrib.auth.hashers.MD5PasswordHasher',),
     ROOT_URLCONF='incuna_auth.urls',
+    MIDDLEWARE_CLASSES=(),
     REST_FRAMEWORK={
         'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
         'DEFAULT_RENDERER_CLASSES': ('rest_framework.renderers.JSONRenderer',),
@@ -37,6 +38,7 @@ settings.configure(
         '^exempt-and-protected-url/$',
         '^protected-url/$',
     ),
+
 
     # BasicAuthenticationMiddleware data
     BASIC_WWW_AUTHENTICATION_USERNAME = 'user',
