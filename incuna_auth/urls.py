@@ -34,5 +34,5 @@ if _version >= '1.6':
 if _version < '1.7':
     urlpatterns += patterns('django.contrib.auth.views',
         url(_(r'^password/reset/confirm/(?P<uidb36>[0-9A-Za-z]{1,13})-(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$'),
-        'password_reset_confirm', name='password_reset_confirm'),
+            'password_reset_confirm', name='password_reset_confirm'),
     )
