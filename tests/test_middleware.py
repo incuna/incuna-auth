@@ -72,7 +72,7 @@ class TestLoginRequiredMiddleware(TestCase):
         expected = '/login/?next=protected-url/'
         self.assertEqual(response['Location'], expected)
 
-    @skipIf(django.VERSION < (1, 5), 'Django 1.4 does not support named url.')
+    @skipIf(django.VERSION < (1, 5), 'Django 1.4 does not support named LOGIN_URL.')
     @override_settings(LOGIN_URL='login')
     def test_login_named_url(self):
         self.request = self.DummyRequest('protected-url/', 'GET')
