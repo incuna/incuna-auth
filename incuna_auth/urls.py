@@ -1,12 +1,10 @@
-from django import get_version
+import django
 from django.conf import settings
 from django.conf.urls import patterns, url
 from django.core.urlresolvers import get_callable, reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import RedirectView
 
-
-_version = get_version()
 
 auth_form = get_callable(getattr(settings, 'INCUNA_AUTH_LOGIN_FORM', 'django.contrib.auth.forms.AuthenticationForm'))
 reset_form = get_callable(getattr(settings, 'INCUNA_PASSWORD_RESET_FORM', 'incuna_auth.forms.CrispyPasswordResetForm'))
@@ -25,13 +23,13 @@ urlpatterns = patterns('django.contrib.auth.views',
     url(_(r'^sso/$'), RedirectView.as_view(url=reverse_lazy('admin:admin_sso_openiduser_start')), name='sso_login'),
 )
 
-if _version >= '1.6':
+if django.VERSION >= (1, 6):
     urlpatterns += patterns('django.contrib.auth.views',
         url(_(r'^password/reset/confirm/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$'),
             'password_reset_confirm', name='password_reset_confirm'),
     )
 
-if _version < '1.7':
+if django.VERSION < (1, 7):
     urlpatterns += patterns('django.contrib.auth.views',
         url(_(r'^password/reset/confirm/(?P<uidb36>[0-9A-Za-z]{1,13})-(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$'),
             'password_reset_confirm', name='password_reset_confirm'),

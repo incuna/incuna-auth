@@ -1,6 +1,6 @@
 from unittest import skipIf, skipUnless, TestCase
 
-from django import get_version
+import django
 from django.contrib.auth import views
 from django.core.urlresolvers import resolve, reverse
 from django.views.generic import RedirectView
@@ -89,7 +89,7 @@ class TestURLs(URLsMixin, TestCase):
             'sso_login',
         )
 
-    @skipIf(get_version() < '1.6', 'This test is for a different Django version')
+    @skipIf(django.VERSION < (1, 6), 'This test is for a different Django version')
     def test_password_reset_confirm_uidb64(self):
         uidb64 = '09_AZ-az'
         token = '09AZaz-09AZaz'
@@ -101,7 +101,7 @@ class TestURLs(URLsMixin, TestCase):
                         'token': token, },
         )
 
-    @skipUnless('1.6' > get_version() > '1.7', 'This test is for a different Django version')
+    @skipUnless((1, 6) >= django.VERSION > (1, 7), 'This test is for a different Django version')
     def test_password_reset_confirm_uidb36(self):
         uidb36 = '09AZaz'
         token = '09AZaz-09AZaz'
@@ -113,7 +113,7 @@ class TestURLs(URLsMixin, TestCase):
                         'token': token, },
         )
 
-    @skipIf(get_version() >= '1.6', 'This test is for a different Django version')
+    @skipIf(django.VERSION >= (1, 6), 'This test is for a different Django version')
     def test_password_reset_confirm_dj1_5(self):
         uidb36 = '09AZaz'
         token = '09AZaz-09AZaz'
