@@ -61,6 +61,25 @@ class TestLoginRequiredMiddleware(TestCase):
         response = self.middleware.process_request(self.request)
         self.assertEqual(response.status_code, 302)
 
+    @override_settings(LOGIN_URL='/login/')
+    def test_login_url(self):
+        self.request = self.DummyRequest('protected-url/', 'GET')
+        self.request.user = AnonymousUser()
+        response = self.middleware.process_request(self.request)
+        self.assertEqual(response.status_code, 302)
+
+        expected = '/login/?next=protected-url/'
+        self.assertEqual(response['Location'], expected)
+
+    @override_settings(LOGIN_URL='login')
+    def test_login_named_url(self):
+        self.request = self.DummyRequest('protected-url/', 'GET')
+        self.request.user = AnonymousUser()
+        response = self.middleware.process_request(self.request)
+        self.assertEqual(response.status_code, 302)
+
+        expected = '/login/?next=protected-url/'
+        self.assertEqual(response['Location'], expected)
 
 class TestBasicAuthMiddleware(TestCase):
 
