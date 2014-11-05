@@ -1,9 +1,11 @@
 import re
 
+import django
 from django.conf import settings
 from django.contrib import messages
-from django.http import HttpResponseForbidden, HttpResponseRedirect
-from django.shortcuts import resolve_url
+from django.contrib.auth.views import redirect_to_login
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseForbidden
 from django.utils.translation import ugettext_lazy as _
 
 # Python 2/3 compatibility hackery
@@ -66,8 +68,9 @@ class LoginRequiredMiddleware:
         if SEND_MESSAGE:
             messages.info(request, _('You must be logged in to view this page.'))
 
-        redirect_url = '{}?next={}'.format(
-            resolve_url(settings.LOGIN_URL),
-            request.path_info,
-        )
-        return HttpResponseRedirect(redirect_url)
+        request_path = request.path_info
+
+        if django.VERSION < (1, 5):
+            return redirect_to_login(request_path, reverse(settings.LOGIN_URL))
+
+        return redirect_to_login(request_path)
