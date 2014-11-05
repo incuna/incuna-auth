@@ -30,15 +30,6 @@ settings.configure(
 
     # LoginRequiredMiddleware data
     LOGIN_REQUIRED_SEND_MESSAGE=False,
-    LOGIN_EXEMPT_URLS = (
-        '^exempt-url/$',
-        '^exempt-and-protected-url/$',
-    ),
-    LOGIN_PROTECTED_URLS = (
-        '^exempt-and-protected-url/$',
-        '^protected-url/$',
-    ),
-
 
     # BasicAuthenticationMiddleware data
     BASIC_WWW_AUTHENTICATION_USERNAME = 'user',
