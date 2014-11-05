@@ -3,7 +3,8 @@ Changelog
 
 Upcoming
 --------
-* `settings.LOGIN_URL` accepts named url in `LoginRequiredMiddleware`.
+* `settings.LOGIN_URL` accepts named url in `LoginRequiredMiddleware`. (Excluding
+  django < 1.5.)
 
 v2.1.0
 ------
