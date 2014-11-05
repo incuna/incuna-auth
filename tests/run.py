@@ -11,17 +11,18 @@ settings.configure(
         'default': dj_database_url.config(default='postgres://localhost/incuna_auth'),
     },
     INSTALLED_APPS=(
+        'incuna_auth',
+
         # Put contenttypes before auth to work around test issue.
         # See: https://code.djangoproject.com/ticket/10827#comment:12
         'django.contrib.contenttypes',
         'django.contrib.auth',
         'django.contrib.sessions',
         'django.contrib.admin',
-
-        'incuna_auth',
     ),
     PASSWORD_HASHERS = ('django.contrib.auth.hashers.MD5PasswordHasher',),
     ROOT_URLCONF='incuna_auth.urls',
+    MIDDLEWARE_CLASSES=(),
     REST_FRAMEWORK={
         'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
         'DEFAULT_RENDERER_CLASSES': ('rest_framework.renderers.JSONRenderer',),
@@ -38,12 +39,17 @@ settings.configure(
         '^protected-url/$',
     ),
 
+
     # BasicAuthenticationMiddleware data
     BASIC_WWW_AUTHENTICATION_USERNAME = 'user',
     BASIC_WWW_AUTHENTICATION_PASSWORD = 'pass',
     BASIC_WWW_AUTHENTICATION = True,
 )
 
+
+import django
+if django.VERSION >= (1, 7):
+    django.setup()
 
 try:
     from django.test.runner import DiscoverRunner
