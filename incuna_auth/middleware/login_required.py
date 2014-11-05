@@ -1,10 +1,8 @@
 import re
 
-import django
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.views import redirect_to_login
-from django.core import urlresolvers
 from django.http import HttpResponseForbidden
 from django.utils.translation import ugettext_lazy as _
 
@@ -69,14 +67,4 @@ class LoginRequiredMiddleware:
             messages.info(request, _('You must be logged in to view this page.'))
 
         request_path = request.path_info
-
-        # Django < 1.5 does not expose a way to return a URL depending on the
-        # argument (URL or named URL).
-        if django.VERSION < (1, 5):
-            try:
-                url = urlresolvers.reverse(settings.LOGIN_URL)
-            except urlresolvers.NoReverseMatch:
-                url = settings.LOGIN_URL
-            return redirect_to_login(request_path, url)
-
         return redirect_to_login(request_path)

@@ -1,6 +1,7 @@
 from base64 import b64encode
-from unittest import TestCase
+from unittest import skipIf, TestCase
 
+import django
 from django.test.utils import override_settings
 
 from incuna_auth.middleware import LoginRequiredMiddleware, basic_auth
@@ -71,6 +72,7 @@ class TestLoginRequiredMiddleware(TestCase):
         expected = '/login/?next=protected-url/'
         self.assertEqual(response['Location'], expected)
 
+    @skipIf(django.VERSION < (1, 5), 'Django 1.4 does not support named url.')
     @override_settings(LOGIN_URL='login')
     def test_login_named_url(self):
         self.request = self.DummyRequest('protected-url/', 'GET')
@@ -80,6 +82,7 @@ class TestLoginRequiredMiddleware(TestCase):
 
         expected = '/login/?next=protected-url/'
         self.assertEqual(response['Location'], expected)
+
 
 class TestBasicAuthMiddleware(TestCase):
 
