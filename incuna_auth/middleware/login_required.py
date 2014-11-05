@@ -74,11 +74,9 @@ class LoginRequiredMiddleware:
         # argument (URL or named URL).
         if django.VERSION < (1, 5):
             try:
-                return redirect_to_login(
-                    request_path,
-                    urlresolvers.reverse(settings.LOGIN_URL),
-                )
+                url = urlresolvers.reverse(settings.LOGIN_URL)
             except urlresolvers.NoReverseMatch:
-                return redirect_to_login(request_path, settings.LOGIN_URL)
+                url = settings.LOGIN_URL
+            return redirect_to_login(request_path, url)
 
         return redirect_to_login(request_path)
