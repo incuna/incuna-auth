@@ -66,5 +66,4 @@ class LoginRequiredMiddleware:
         if SEND_MESSAGE:
             messages.info(request, _('You must be logged in to view this page.'))
 
-        request_path = request.path_info
-        return redirect_to_login(request_path)
+        return redirect_to_login(request.path_info)
