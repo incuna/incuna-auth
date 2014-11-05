@@ -1,6 +1,10 @@
 Changelog
 =========
 
+Upcoming
+--------
+* `settings.LOGIN_URL` accepts named url in `LoginRequiredMiddleware`.
+
 v2.1.0
 ------
 * Support Python 3.  (Note that Django < 1.5 and Python 3 don't support each other.)
