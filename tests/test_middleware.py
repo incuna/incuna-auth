@@ -3,8 +3,8 @@ import re
 from unittest import skipIf, TestCase
 
 import django
-import mock
 from django.test.utils import override_settings
+import mock
 
 from incuna_auth.middleware import LoginRequiredMiddleware, basic_auth
 
@@ -25,13 +25,16 @@ class AnonymousUser(object):
 
 
 class TestLoginRequiredMiddleware(TestCase):
-    url = 'url/'
-    url_pattern = [re.compile('^url/$')]
-    url_pattern_other = [re.compile(r'^other_url/$')]
+    URL = 'url/'
+    EXEMPT_URLS = [re.compile('^url/$')]
+    PROTECTED_URLS = [re.compile(r'^other_url/$')]
+
+    EXEMPT_URLS_PATH = 'incuna_auth.middleware.login_required.EXEMPT_URLS'
+    PROTECTED_URLS_PATH = 'incuna_auth.middleware.login_required.PROTECTED_URLS'
 
     def create_request(self, method='GET', user=AnonymousUser()):
         request = mock.Mock()
-        request.path_info = self.url
+        request.path_info = self.URL
         request.method = method
         request.user = user
         return request
@@ -42,7 +45,7 @@ class TestLoginRequiredMiddleware(TestCase):
     def setUp(self):
         self.middleware = LoginRequiredMiddleware()
 
-    @mock.patch('incuna_auth.middleware.login_required.EXEMPT_URLS', url_pattern)
+    @mock.patch(EXEMPT_URLS_PATH, EXEMPT_URLS)
     def test_skip_middleware_if_url_is_exempt(self):
         """Assert url is not protected when it is defined in EXEMPT_URLS."""
         request = self.create_request()
@@ -50,9 +53,9 @@ class TestLoginRequiredMiddleware(TestCase):
 
         self.assertEqual(response, None)
 
-    @mock.patch('incuna_auth.middleware.login_required.PROTECTED_URLS', url_pattern_other)
+    @mock.patch(PROTECTED_URLS_PATH, PROTECTED_URLS)
     def test_skip_middleware_if_url_is_not_protected(self):
-        """Assert url is not protected when it is not in LOGIN_PROTECTED_URLS."""
+        """Assert 'url' is not protected when it is not in LOGIN_PROTECTED_URLS."""
         request = self.create_request()
         response = self.middleware.process_request(request)
         self.assertEqual(response, None)
@@ -77,7 +80,7 @@ class TestLoginRequiredMiddleware(TestCase):
 
     @override_settings(LOGIN_URL='/login/')
     def test_login_url(self):
-        """Assert redirect accept LOGIN_URL as string."""
+        """Assert redirect accepts LOGIN_URL as string."""
         request = self.create_request()
         response = self.middleware.process_request(request)
         self.assert_redirect_url(response, '/login/?next=url/')
@@ -85,7 +88,7 @@ class TestLoginRequiredMiddleware(TestCase):
     @skipIf(django.VERSION < (1, 5), 'Django 1.4 does not support named LOGIN_URL.')
     @override_settings(LOGIN_URL='login')
     def test_login_named_url(self):
-        """Assert redirect accept LOGIN_URL as named url."""
+        """Assert redirect accepts LOGIN_URL as named url."""
         request = self.create_request()
         response = self.middleware.process_request(request)
         self.assert_redirect_url(response, '/login/?next=url/')
