@@ -1,7 +1,10 @@
 from base64 import b64encode
-from unittest import TestCase
+import re
+from unittest import skipIf, TestCase
 
+import django
 from django.test.utils import override_settings
+import mock
 
 from incuna_auth.middleware import LoginRequiredMiddleware, basic_auth
 
@@ -22,44 +25,73 @@ class AnonymousUser(object):
 
 
 class TestLoginRequiredMiddleware(TestCase):
+    URL = 'url/'
+    EXEMPT_URLS = [re.compile('^url/$')]
+    PROTECTED_URLS = [re.compile(r'^other_url/$')]
 
-    class DummyRequest(object):
-        def __init__(self, path_info, method='GET'):
-            self.path_info = path_info
-            self.method = method
+    EXEMPT_URLS_PATH = 'incuna_auth.middleware.login_required.EXEMPT_URLS'
+    PROTECTED_URLS_PATH = 'incuna_auth.middleware.login_required.PROTECTED_URLS'
+
+    def create_request(self, method='GET', user=AnonymousUser()):
+        request = mock.Mock()
+        request.path_info = self.URL
+        request.method = method
+        request.user = user
+        return request
+
+    def assert_redirect_url(self, response, expected):
+        self.assertEqual(response['Location'], expected)
 
     def setUp(self):
         self.middleware = LoginRequiredMiddleware()
 
+    @mock.patch(EXEMPT_URLS_PATH, EXEMPT_URLS)
     def test_skip_middleware_if_url_is_exempt(self):
-        self.request = self.DummyRequest('exempt-and-protected-url/')
-        self.request.user = AnonymousUser()
-        response = self.middleware.process_request(self.request)
+        """Assert url is not protected when it is defined in EXEMPT_URLS."""
+        request = self.create_request()
+        response = self.middleware.process_request(request)
+
         self.assertEqual(response, None)
 
+    @mock.patch(PROTECTED_URLS_PATH, PROTECTED_URLS)
     def test_skip_middleware_if_url_is_not_protected(self):
-        self.request = self.DummyRequest('non-protected-url/')
-        self.request.user = AnonymousUser()
-        response = self.middleware.process_request(self.request)
+        """Assert 'url' is not protected when it is not in LOGIN_PROTECTED_URLS."""
+        request = self.create_request()
+        response = self.middleware.process_request(request)
         self.assertEqual(response, None)
 
     def test_skip_middleware_if_user_is_authenticated(self):
-        self.request = self.DummyRequest('protected-url/')
-        self.request.user = AuthenticatedUser()
-        response = self.middleware.process_request(self.request)
+        """Assert middleware does not redirect if user is authenticated."""
+        request = self.create_request(user=AuthenticatedUser())
+        response = self.middleware.process_request(request)
         self.assertEqual(response, None)
 
     def test_403_result_if_non_get_request(self):
-        self.request = self.DummyRequest('protected-url/', 'POST')
-        self.request.user = AnonymousUser()
-        response = self.middleware.process_request(self.request)
+        """Assert other methods than GET are not allowed when user is not logged in."""
+        request = self.create_request(method='POST')
+        response = self.middleware.process_request(request)
         self.assertEqual(response.status_code, 403)
 
     def test_redirect_if_all_is_well(self):
-        self.request = self.DummyRequest('protected-url/', 'GET')
-        self.request.user = AnonymousUser()
-        response = self.middleware.process_request(self.request)
+        """Assert user is redirected to the login page when urls are protected."""
+        request = self.create_request()
+        response = self.middleware.process_request(request)
         self.assertEqual(response.status_code, 302)
+
+    @override_settings(LOGIN_URL='/login/')
+    def test_login_url(self):
+        """Assert redirect accepts LOGIN_URL as string."""
+        request = self.create_request()
+        response = self.middleware.process_request(request)
+        self.assert_redirect_url(response, '/login/?next=url/')
+
+    @skipIf(django.VERSION < (1, 5), 'Django 1.4 does not support named LOGIN_URL.')
+    @override_settings(LOGIN_URL='login')
+    def test_login_named_url(self):
+        """Assert redirect accepts LOGIN_URL as named url."""
+        request = self.create_request()
+        response = self.middleware.process_request(request)
+        self.assert_redirect_url(response, '/login/?next=url/')
 
 
 class TestBasicAuthMiddleware(TestCase):
