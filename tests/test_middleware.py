@@ -1,12 +1,12 @@
-from base64 import b64encode
 import re
+from base64 import b64encode
 from unittest import skipIf, TestCase
 
 import django
-from django.test.utils import override_settings
 import mock
+from django.test.utils import override_settings
 
-from incuna_auth.middleware import LoginRequiredMiddleware, basic_auth
+from incuna_auth.middleware import basic_auth, LoginRequiredMiddleware
 
 
 def base64_encode_for_py2or3(text):

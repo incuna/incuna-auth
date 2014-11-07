@@ -13,9 +13,15 @@ except NameError:
     unicode = str
 
 
-EXEMPT_URLS = [re.compile('^%s$' % settings.LOGIN_URL.lstrip('/')), re.compile('^%s$' % settings.LOGOUT_URL.lstrip('/'))]
-EXEMPT_URLS += [re.compile(unicode(expr)) for expr in getattr(settings, 'LOGIN_EXEMPT_URLS', [])]
-PROTECTED_URLS = [re.compile(unicode(expr)) for expr in getattr(settings, 'LOGIN_PROTECTED_URLS', [r'^'])]
+LOGIN_EXEMPT_URLS = getattr(settings, 'LOGIN_EXEMPT_URLS', [])
+LOGIN_PROTECTED_URLS = getattr(settings, 'LOGIN_PROTECTED_URLS', [r'^'])
+
+EXEMPT_URLS = [
+    re.compile('^%s$' % settings.LOGIN_URL.lstrip('/')),
+    re.compile('^%s$' % settings.LOGOUT_URL.lstrip('/')),
+]
+EXEMPT_URLS += [re.compile(unicode(expr)) for expr in LOGIN_EXEMPT_URLS]
+PROTECTED_URLS = [re.compile(unicode(expr)) for expr in LOGIN_PROTECTED_URLS]
 SEND_MESSAGE = getattr(settings, 'LOGIN_REQUIRED_SEND_MESSAGE', True)
 
 
@@ -40,12 +46,14 @@ class LoginRequiredMiddleware:
     password protect instead of protecting everything under /.
     '''
     def process_request(self, request):
-        assert hasattr(request, 'user'), ("The Login Required middleware "
-            "requires authentication middleware to be installed. Edit your "
-            "MIDDLEWARE_CLASSES setting to insert "
-            "django.contrib.auth.middlware.AuthenticationMiddleware"
-            "If that doesn't work, ensure your TEMPLATE_CONTEXT_PROCESSORS "
-            "setting includes 'django.core.context_processors.auth'.")
+        assert hasattr(request, 'user'), (
+            "The 'LoginRequiredMiddleware' "
+            + "requires authentication middleware to be installed. Edit your "
+            + "'MIDDLEWARE_CLASSES' setting to insert "
+            + "'django.contrib.auth.middlware.AuthenticationMiddleware'. "
+            + "If that doesn't work, ensure your 'TEMPLATE_CONTEXT_PROCESSORS' "
+            + "setting includes 'django.core.context_processors.auth'."
+        )
 
         # Jump over this middleware if not a protected url.
         path = request.path_info.lstrip('/')

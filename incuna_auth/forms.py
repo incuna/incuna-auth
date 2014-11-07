@@ -1,5 +1,10 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Div, Field, Layout, Submit
+from crispy_forms.layout import (
+    Div,
+    Field,
+    Layout,
+    Submit,
+)
 from django.contrib.auth.forms import PasswordResetForm
 
 

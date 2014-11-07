@@ -1,8 +1,9 @@
 import sys
 
+import dj_database_url
+import django
 from colour_runner.django_runner import ColourRunnerMixin
 from django.conf import settings
-import dj_database_url
 
 
 settings.configure(
@@ -38,7 +39,6 @@ settings.configure(
 )
 
 
-import django
 if django.VERSION >= (1, 7):
     django.setup()
 

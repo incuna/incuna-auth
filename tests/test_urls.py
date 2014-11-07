@@ -101,7 +101,10 @@ class TestURLs(URLsMixin, TestCase):
                         'token': token, },
         )
 
-    @skipUnless((1, 6) >= django.VERSION > (1, 7), 'This test is for a different Django version')
+    @skipUnless(
+        (1, 6) >= django.VERSION > (1, 7),
+        'This test is for a different Django version',
+    )
     def test_password_reset_confirm_uidb36(self):
         uidb36 = '09AZaz'
         token = '09AZaz-09AZaz'
