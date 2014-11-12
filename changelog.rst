@@ -1,7 +1,7 @@
 Changelog
 =========
 
-Upcoming
+v2.2.0
 --------
 * `settings.LOGIN_URL` accepts named url in `LoginRequiredMiddleware`. (Excluding
   django < 1.5.)
