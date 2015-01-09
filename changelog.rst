@@ -1,6 +1,11 @@
 Changelog
 =========
 
+Upcoming
+--------
+* Add `AccessStateExtensionMixin` to add an `access_state` field to FeinCMS objects,
+  making it easier to control access to them with middleware.
+
 v2.2.0
 --------
 * `settings.LOGIN_URL` accepts named url in `LoginRequiredMiddleware`. (Excluding
