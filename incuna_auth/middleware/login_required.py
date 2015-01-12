@@ -11,8 +11,6 @@ try:
 except NameError:
     unicode = str
 
-SEND_MESSAGE = getattr(settings, 'LOGIN_REQUIRED_SEND_MESSAGE', True)
-
 
 def compile_url(url):
     clean_url = unicode(url).lstrip('/')
@@ -50,6 +48,8 @@ class LoginRequiredMiddleware(MiddlewareMixin):
     EXEMPT_URLS += compile_urls(login_exempt_urls)
     PROTECTED_URLS = compile_urls(login_protected_urls)
 
+    SEND_MESSAGE = getattr(settings, 'LOGIN_REQUIRED_SEND_MESSAGE', True)
+
     def process_request(self, request):
         self.assert_request_has_user(request)
 
@@ -65,6 +65,6 @@ class LoginRequiredMiddleware(MiddlewareMixin):
         # Deny access if the user is not logged in.
         if request.user.is_anonymous():
             error = ''
-            if SEND_MESSAGE:
+            if self.SEND_MESSAGE:
                 error = 'You must be logged in to view this page.'
             return self.deny_access(request, error)

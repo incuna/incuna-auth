@@ -16,6 +16,7 @@ ALL_URLS = [re.compile(r'^')]
 class LoginPaths:
     EXEMPT_URLS = 'incuna_auth.middleware.LoginRequiredMiddleware.EXEMPT_URLS'
     PROTECTED_URLS = 'incuna_auth.middleware.LoginRequiredMiddleware.PROTECTED_URLS'
+    SEND_MESSAGE = 'incuna_auth.middleware.LoginRequiredMiddleware.SEND_MESSAGE'
 
 
 def base64_encode_for_py2or3(text):
@@ -67,11 +68,14 @@ class TestLoginRequiredMiddleware(RequestTestCase):
 
     @mock.patch(LoginPaths.EXEMPT_URLS, NO_URLS)
     @mock.patch(LoginPaths.PROTECTED_URLS, ALL_URLS)
+    @mock.patch(LoginPaths.SEND_MESSAGE, True)
     def test_non_auth_get(self):
         request = self.make_request(False)
         response = self.middleware.process_request(request)
+        message_text = 'You must be logged in to view this page.'
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response['location'], '/')
+        self.assertEqual(request._messages.store, [message_text])
 
     @mock.patch(LoginPaths.EXEMPT_URLS, NO_URLS)
     @mock.patch(LoginPaths.PROTECTED_URLS, ALL_URLS)
