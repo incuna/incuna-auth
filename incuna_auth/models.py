@@ -31,17 +31,20 @@ class AccessStateExtensionMixin:
 
     The access states will include:
     - visible to all users
+    - visible only to logged-in users
     - visible to everyone who can see the page's parent, or all users if no parents exist
     - any CUSTOM_STATES added by the class/application extending this mixin
     """
     model = None
     CUSTOM_STATES = ()
 
-    STATE_INHERIT = 'base_inherit'
     STATE_ALL_ALLOWED = 'base_all'
+    STATE_AUTH_ONLY = 'base_auth'
+    STATE_INHERIT = 'base_inherit'
     BASE_ACCESS_STATES = (
-        (STATE_INHERIT, 'Inherit from parent (allow all users if no parent exists)'),
         (STATE_ALL_ALLOWED, 'All users'),
+        (STATE_AUTH_ONLY, 'Authenticated users only'),
+        (STATE_INHERIT, 'Inherit from parent (allow all users if no parent exists)'),
     )
 
     ACCESS_STATES = CUSTOM_STATES + BASE_ACCESS_STATES

@@ -12,8 +12,9 @@ INHERIT_STATE = (
     'Inherit from parent (allow all users if no parent exists)',
 )
 BASE_STATES = (
-    INHERIT_STATE,
     ('base_all', 'All users'),
+    ('base_auth', 'Authenticated users only'),
+    INHERIT_STATE,
 )
 
 
