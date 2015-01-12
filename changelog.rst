@@ -5,6 +5,9 @@ Upcoming
 --------
 * Add `AccessStateExtensionMixin` to add an `access_state` field to FeinCMS objects,
   making it easier to control access to them with middleware.
+* Add `MiddlewareMixin` utility class that makes extending the `incuna_auth` middleware
+  functionality much easier. No more copying and pasting!
+* Update `LoginRequiredMiddleware` to be based on `MiddlewareMixin`.
 
 v2.2.0
 --------
