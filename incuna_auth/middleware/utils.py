@@ -79,6 +79,7 @@ class MiddlewareMixin:
 
         # Add a message, and redirect to a location specified in the unauthorised_redirect
         # attribute, if it exists, or / if not.
-        messages.info(request, _(message))
+        if message:
+            messages.info(request, _(message))
         redirect = getattr(self, 'unauthorised_redirect', '/')
         return HttpResponseRedirect(redirect)
