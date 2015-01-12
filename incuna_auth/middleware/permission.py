@@ -15,19 +15,15 @@ class BasePermissionMiddleware:
     - process_request: the method called on incoming request.
     - deny_access: provides standard "you're not allowed" responses.
 
-    Contains the following hook methods, implemented as stubs:
+    Contains the following hook methods:
     - is_url_protected: Returns True if and only if the middleware should be protecting
       the page or endpoint the request is trying to access.
-    - get_url_protected_kwargs: Returns a dictionary of kwargs to pass to
-      is_url_protected.
     - deny_access_condition: Returns True if and only if the request should be disallowed
       from accessing the protected URL/page/endpoint.
-    - get_deny_condition_kwargs: Returns a dictionary of kwargs to pass to
-      deny_access_condition.
-
-    Will pick up the following attributes defined on a subclass if they exist:
-    - unauthorised_redirect: the URL to redirect a denied GET request to (defaults to /).
-    - access_denied_message: the message to display when that happens (defaults to '').
+    - get_unauthorised_redirect_url: Returns the URL to redirect a denied GET request to
+      (default implementation returns /).
+    - get_access_denied_message: Returns the message to display when that happens
+      (default implementation returns '').
     """
     def is_url_protected(self, request, **kwargs):
         """
@@ -36,20 +32,12 @@ class BasePermissionMiddleware:
         """
         return False
 
-    def get_url_protected_kwargs(self):
-        """Returns a dictionary of kwargs to pass to is_url_protected."""
-        return {}
-
     def deny_access_condition(self, request, **kwargs):
         """
         Hook. Returns True if and only if the request should be disallowed
         from accessing the protected URL/page/endpoint.
         """
         return False
-
-    def get_deny_condition_kwargs(self):
-        """Returns a dictionary of kwargs to pass to deny_access_condition."""
-        return {}
 
     def get_unauthorised_redirect_url(self):
         return '/'
@@ -89,10 +77,8 @@ class BasePermissionMiddleware:
         to see if the user should be denied access via the denied_access_condition method,
         and calls deny_access (which implements failure behaviour) if so.
         """
-        url_protected_kwargs = self.get_url_protected_kwargs()
-        if not self.is_url_protected(request, **url_protected_kwargs):
+        if not self.is_url_protected(request):
             return
 
-        deny_condition_kwargs = self.get_deny_condition_kwargs()
-        if self.deny_access_condition(request, **deny_condition_kwargs):
+        if self.deny_access_condition(request):
             return self.deny_access(request)
