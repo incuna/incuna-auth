@@ -159,3 +159,15 @@ class TestMiddlewareMixin(RequestTestCase):
         """Assert that a POST request results in a HTTP 403 (Forbidden) error."""
         response = self.middleware.deny_access(self.make_request('post'))
         self.assertEqual(response.status_code, 403)
+
+    def test_deny_access_message(self):
+        """Assert that a non-blank `message` parameter results in a Django message."""
+        request = self.make_request()
+        self.middleware.deny_access(request, message='A message')
+        self.assertEqual(request._messages.store[0], 'A message')
+
+    def test_deny_access_no_message(self):
+        """Assert that a blank `message` parameter results in no Django message."""
+        request = self.make_request()
+        self.middleware.deny_access(request, message='')
+        self.assertEqual(request._messages.store, [])
