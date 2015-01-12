@@ -164,7 +164,7 @@ class TestMiddlewareMixin(RequestTestCase):
         """Assert that a non-blank `message` parameter results in a Django message."""
         request = self.make_request()
         self.middleware.deny_access(request, message='A message')
-        self.assertEqual(request._messages.store[0], 'A message')
+        self.assertEqual(request._messages.store, ['A message'])
 
     def test_deny_access_no_message(self):
         """Assert that a blank `message` parameter results in no Django message."""
