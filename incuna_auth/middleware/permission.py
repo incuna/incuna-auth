@@ -89,6 +89,21 @@ class BasePermissionMiddleware:
             return self.deny_access(request)
 
 
+class LoginPermissionMiddlewareMixin:
+    """
+    Provides implementations of deny_access_condition and get_access_denied_message that
+    enforce that a user is authenticated.
+    """
+    def deny_access_condition(self, request, **kwargs):
+        """
+        Returns true if and only if the user isn't authenticated.
+        """
+        return request.user.is_anonymous()
+
+    def get_access_denied_message(self):
+        return 'You must be logged in to view this page.'
+
+
 class UrlPermissionMiddleware(BasePermissionMiddleware):
     """
     Middleware that allows or denies access based on the resource's URL.
@@ -145,11 +160,4 @@ class UrlPermissionMiddleware(BasePermissionMiddleware):
 
         return False
 
-    def deny_access_condition(self, request, **kwargs):
-        """
-        Returns true if and only if the user isn't authenticated.
-        """
-        return request.user.is_anonymous()
 
-    def get_access_denied_message(self):
-        return 'You must be logged in to view this page.'

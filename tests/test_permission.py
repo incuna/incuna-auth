@@ -29,6 +29,15 @@ class TestBasePermissionMiddleware(RequestTestCase):
         self.middleware.deny_access(request)
         self.assertEqual(request._messages.store, [])
 
+    def test_deny_access_message(self):
+        """Assert that a non-blank `message` parameter results in a Django message."""
+        request = self.create_request()
+        method = self.middleware_path.format('get_access_denied_message')
+        message = 'I am a message'
+        with mock.patch(method, return_value=message):
+            self.middleware.deny_access(request)
+            self.assertEqual(request._messages.store, [message])
+
     def test_process_request_default(self):
         """Assert that the default process_request implementation does nothing."""
         response = self.middleware.process_request(self.create_request())
@@ -67,6 +76,30 @@ class TestBasePermissionMiddleware(RequestTestCase):
         Assert the default implementation of get_access_denied_message returns ''.
         """
         self.assertEqual('', self.middleware.get_access_denied_message())
+
+
+class TestLoginMiddlewareMixin(RequestTestCase):
+    middleware_class = permission.LoginPermissionMiddlewareMixin
+
+    def setUp(self):
+        # We don't need to mix this into anything because we're only calling the methods
+        # it implements.
+        self.middleware = self.middleware_class()
+
+    def test_deny_access_condition(self):
+        """Assert that deny_access_condition disallows an anonymous user."""
+        request = self.create_request(auth=False)
+        self.assertTrue(self.middleware.deny_access_condition(request))
+
+    def test_deny_access_condition_allow(self):
+        """Assert that deny_access_condition allows an authenticated user."""
+        request = self.create_request(auth=True)
+        self.assertFalse(self.middleware.deny_access_condition(request))
+
+    def test_access_denied_message(self):
+        """Assert the message returned by get_access_denied_message."""
+        expected_message = 'You must be logged in to view this page.'
+        self.assertEqual(expected_message, self.middleware.get_access_denied_message())
 
 
 class TestUrlPermissionMiddleware(RequestTestCase):
@@ -110,20 +143,3 @@ class TestUrlPermissionMiddleware(RequestTestCase):
         method = self.middleware_path.format('get_protected_url_patterns')
         with mock.patch(method, return_value=[]):
             self.assertFalse(self.middleware.is_resource_protected(request))
-
-    def test_deny_access_condition(self):
-        """Assert that deny_access_condition disallows an anonymous user."""
-        request = self.make_request(auth=False)
-        self.assertTrue(self.middleware.deny_access_condition(request))
-
-    def test_deny_access_condition_allow(self):
-        """Assert that deny_access_condition allows an authenticated user."""
-        request = self.make_request(auth=True)
-        self.assertFalse(self.middleware.deny_access_condition(request))
-
-    def test_deny_access_message(self):
-        """Assert that a non-blank `message` parameter results in a Django message."""
-        request = self.make_request()
-        self.middleware.deny_access(request)
-        expected_message = 'You must be logged in to view this page.'
-        self.assertEqual(request._messages.store, [expected_message])
