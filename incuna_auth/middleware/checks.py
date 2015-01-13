@@ -4,6 +4,10 @@ from django.core.checks import Error, register, Tags
 
 @register(Tags.compatibility)
 def check_request_has_user(app_configs=None, **kwargs):
+    """
+    Check that LoginRequiredMiddleware isn't being used without its dependency,
+    django.contrib.auth.middleware.AuthenticationMiddleware.
+    """
     middlewares = settings.MIDDLEWARE_CLASSES
 
     if 'incuna_auth.middleware.LoginRequiredMiddleware' not in middlewares:
@@ -28,6 +32,10 @@ def check_request_has_user(app_configs=None, **kwargs):
 
 @register(Tags.compatibility)
 def check_feincms_page(app_configs=None, **kwargs):
+    """
+    Check that FeinCMSLoginRequiredMiddleware isn't being used without its dependency,
+    feincms.context_processors.add_page_if_missing.
+    """
     middlewares = settings.MIDDLEWARE_CLASSES
     processors = settings.TEMPLATE_CONTEXT_PROCESSORS
 
