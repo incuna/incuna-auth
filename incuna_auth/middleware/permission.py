@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 class BasePermissionMiddleware:
     """
-    Base class for middleware that allows or denies access to a URL.
+    Base class for middleware that allows or denies access to a resource.
 
     This is a generic, fairly useless base class. It protects no pages and allows all
     users through, although if by some miracle it does deny access to a user, it'll be
@@ -16,16 +16,16 @@ class BasePermissionMiddleware:
     - deny_access: provides standard "you're not allowed" responses.
 
     Contains the following hook methods:
-    - is_url_protected: Returns True if and only if the middleware should be protecting
-      the page or endpoint the request is trying to access.
+    - is_resource_protected: Returns True if and only if the middleware should be
+      protecting the resource the request is trying to access.
     - deny_access_condition: Returns True if and only if the request should be disallowed
-      from accessing the protected URL/page/endpoint.
+      from accessing the protected resource.
     - get_unauthorised_redirect_url: Returns the URL to redirect a denied GET request to
       (default implementation returns /).
     - get_access_denied_message: Returns the message to display when that happens
       (default implementation returns '').
     """
-    def is_url_protected(self, request, **kwargs):
+    def is_resource_protected(self, request, **kwargs):
         """
         Hook. Returns True if and only if the middleware should be protecting
         the page or endpoint the request is trying to access.
@@ -73,11 +73,11 @@ class BasePermissionMiddleware:
         The actual middleware method, called on all incoming requests.
 
         This default implementation will ignore the middleware (return None) if the
-        conditions specified in is_url_protected aren't met. If they are, it then tests
+        conditions specified in is_resource_protected aren't met. If they are, it then tests
         to see if the user should be denied access via the denied_access_condition method,
         and calls deny_access (which implements failure behaviour) if so.
         """
-        if not self.is_url_protected(request):
+        if not self.is_resource_protected(request):
             return
 
         if self.deny_access_condition(request):
