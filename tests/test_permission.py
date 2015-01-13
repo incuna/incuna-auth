@@ -1,9 +1,12 @@
+import mock
+
 from incuna_auth.middleware import permission
 from .utils import RequestTestCase
 
 
 class TestBasePermissionMiddleware(RequestTestCase):
     middleware_class = permission.BasePermissionMiddleware
+    middleware_path = 'incuna_auth.middleware.permission.BasePermissionMiddleware.{}'
 
     def setUp(self):
         self.middleware = self.middleware_class()
@@ -29,3 +32,31 @@ class TestBasePermissionMiddleware(RequestTestCase):
         """Assert that the default process_request implementation does nothing."""
         response = self.middleware.process_request(self.create_request())
         self.assertIsNone(response)
+
+    def test_process_request_default_protected(self):
+        """
+        Assert that the default process_request implementation does nothing even if the
+        resource is protected.
+        """
+        method = self.middleware_path.format('is_resource_protected')
+        with mock.patch(method, return_value=True):
+            response = self.middleware.process_request(self.create_request())
+            self.assertIsNone(response)
+
+    def test_process_request_denies_access(self):
+        """
+        Assert that the default process_request implementation denies access when both
+        is_resource_protected and deny_access_condition return True.
+        """
+        resource_method = self.middleware_path.format('is_resource_protected')
+        condition_method = self.middleware_path.format('deny_access_condition')
+        with mock.patch(resource_method, return_value=True):
+            with mock.patch(condition_method, return_value=True):
+                response = self.middleware.process_request(self.create_request())
+                self.assertEqual(response.status_code, 302)
+
+    def test_default_unauthorised_redirect_url(self):
+        self.assertEqual('/', self.middleware.get_unauthorised_redirect_url())
+
+    def test_default_access_denied_message(self):
+        self.assertEqual('', self.middleware.get_access_denied_message())
