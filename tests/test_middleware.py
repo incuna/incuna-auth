@@ -5,7 +5,12 @@ from unittest import TestCase
 import mock
 from django.test.utils import override_settings
 
-from incuna_auth.middleware import basic_auth, LoginRequiredMiddleware
+from incuna_auth.middleware import (
+    basic_auth,
+    FeinCMSLoginRequiredMiddleware,
+    LoginRequiredMiddleware,
+)
+from incuna_auth.models import AccessStateExtensionMixin as AccessState
 from .utils import RequestTestCase
 
 NO_URLS = []
@@ -74,6 +79,62 @@ class TestLoginRequiredMiddleware(RequestTestCase):
     @mock.patch(PROTECTED_URLS, ALL_URLS)
     def test_non_auth_post(self):
         request = self.make_request(False, 'post')
+        response = self.middleware.process_request(request)
+        self.assertEqual(response.status_code, 403)
+
+
+class TestFeinCMSLoginRequiredMiddleware(RequestTestCase):
+    middleware = FeinCMSLoginRequiredMiddleware()
+    AUTH_STATE = AccessState.STATE_AUTH_ONLY
+    OTHER_STATE = ('other', 'Other state')
+    SEND_MESSAGE = 'incuna_auth.middleware.FeinCMSLoginRequiredMiddleware.SEND_MESSAGE'
+
+    class DummyFeinCMSPage:
+        def __init__(self, access_state):
+            self.access_state = access_state
+
+    def make_request(self, auth, access_state, **kwargs):
+        """Create a request with a suitable feincms_page attribute."""
+        request = self.create_request(auth=auth, **kwargs)
+        request.feincms_page = self.DummyFeinCMSPage(access_state=access_state)
+        return request
+
+    def test_unprotected_url(self):
+        request = self.make_request(False, AccessState.STATE_ALL_ALLOWED)
+        response = self.middleware.process_request(request)
+        self.assertIsNone(response)
+
+    def test_other_state_url(self):
+        request = self.make_request(False, self.OTHER_STATE)
+        response = self.middleware.process_request(request)
+        self.assertIsNone(response)
+
+    def test_is_auth(self):
+        request = self.make_request(True, self.AUTH_STATE)
+        response = self.middleware.process_request(request)
+        self.assertIsNone(response)
+
+    @mock.patch(SEND_MESSAGE, False)
+    def test_non_auth_get_no_message(self):
+        request = self.make_request(False, self.AUTH_STATE)
+        response = self.middleware.process_request(request)
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response['location'], '/')
+        self.assertEqual(request._messages.store, [])
+
+    @mock.patch(SEND_MESSAGE, True)
+    def test_non_auth_get_message(self):
+        request = self.make_request(False, self.AUTH_STATE)
+        response = self.middleware.process_request(request)
+        message = 'You must be logged in to view this page.'
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response['location'], '/')
+        self.assertEqual(request._messages.store, [message])
+
+    def test_non_auth_post(self):
+        request = self.make_request(False, self.AUTH_STATE, method='post')
         response = self.middleware.process_request(request)
         self.assertEqual(response.status_code, 403)
 
