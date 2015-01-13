@@ -6,17 +6,10 @@ import mock
 from django.test.utils import override_settings
 
 from incuna_auth.middleware import basic_auth, LoginRequiredMiddleware
-from incuna_auth.models import AccessStateExtensionMixin as AccessState
 from .utils import RequestTestCase
 
 NO_URLS = []
 ALL_URLS = [re.compile(r'^')]
-
-
-class LoginPaths:
-    EXEMPT_URLS = 'incuna_auth.middleware.LoginRequiredMiddleware.EXEMPT_URLS'
-    PROTECTED_URLS = 'incuna_auth.middleware.LoginRequiredMiddleware.PROTECTED_URLS'
-    SEND_MESSAGE = 'incuna_auth.middleware.LoginRequiredMiddleware.SEND_MESSAGE'
 
 
 def base64_encode_for_py2or3(text):
@@ -26,59 +19,59 @@ def base64_encode_for_py2or3(text):
 
 class TestLoginRequiredMiddleware(RequestTestCase):
     middleware = LoginRequiredMiddleware()
-
-    class DummyFeinCMSPage:
-        access_state = AccessState.STATE_AUTH_ONLY
+    EXEMPT_URLS = 'incuna_auth.middleware.LoginRequiredMiddleware.EXEMPT_URLS'
+    PROTECTED_URLS = 'incuna_auth.middleware.LoginRequiredMiddleware.PROTECTED_URLS'
+    SEND_MESSAGE = 'incuna_auth.middleware.LoginRequiredMiddleware.SEND_MESSAGE'
 
     def make_request(self, auth, method='get', url='/fake-request/', **kwargs):
         request = self.create_request(method, auth=auth, url=url, **kwargs)
-        request.feincms_page = self.DummyFeinCMSPage()
         return request
 
-    def test_non_auth_url(self):
-        request = self.make_request(False)
-        request.feincms_page.access_state = AccessState.STATE_ALL_ALLOWED
-
-        response = self.middleware.process_request(request)
-        self.assertIsNone(response)
-
-    @mock.patch(LoginPaths.EXEMPT_URLS, ALL_URLS)
+    @mock.patch(EXEMPT_URLS, ALL_URLS)
     def test_exempt_url(self):
         request = self.make_request(False)
-        request.feincms_page = None
-
         response = self.middleware.process_request(request)
         self.assertIsNone(response)
 
-    @mock.patch(LoginPaths.EXEMPT_URLS, NO_URLS)
-    @mock.patch(LoginPaths.PROTECTED_URLS, NO_URLS)
+    @mock.patch(EXEMPT_URLS, NO_URLS)
+    @mock.patch(PROTECTED_URLS, NO_URLS)
     def test_unprotected_url(self):
         request = self.make_request(False)
-        request.feincms_page = None
-
         response = self.middleware.process_request(request)
         self.assertIsNone(response)
 
-    @mock.patch(LoginPaths.EXEMPT_URLS, NO_URLS)
-    @mock.patch(LoginPaths.PROTECTED_URLS, ALL_URLS)
+    @mock.patch(EXEMPT_URLS, NO_URLS)
+    @mock.patch(PROTECTED_URLS, ALL_URLS)
     def test_is_auth(self):
         request = self.make_request(True)
         response = self.middleware.process_request(request)
         self.assertIsNone(response)
 
-    @mock.patch(LoginPaths.EXEMPT_URLS, NO_URLS)
-    @mock.patch(LoginPaths.PROTECTED_URLS, ALL_URLS)
-    @mock.patch(LoginPaths.SEND_MESSAGE, True)
-    def test_non_auth_get(self):
+    @mock.patch(EXEMPT_URLS, NO_URLS)
+    @mock.patch(PROTECTED_URLS, ALL_URLS)
+    @mock.patch(SEND_MESSAGE, False)
+    def test_non_auth_get_no_message(self):
         request = self.make_request(False)
         response = self.middleware.process_request(request)
-        message_text = 'You must be logged in to view this page.'
+
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response['location'], '/')
-        self.assertEqual(request._messages.store, [message_text])
+        self.assertEqual(request._messages.store, [])
 
-    @mock.patch(LoginPaths.EXEMPT_URLS, NO_URLS)
-    @mock.patch(LoginPaths.PROTECTED_URLS, ALL_URLS)
+    @mock.patch(EXEMPT_URLS, NO_URLS)
+    @mock.patch(PROTECTED_URLS, ALL_URLS)
+    @mock.patch(SEND_MESSAGE, True)
+    def test_non_auth_get_message(self):
+        request = self.make_request(False)
+        response = self.middleware.process_request(request)
+        message = 'You must be logged in to view this page.'
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response['location'], '/')
+        self.assertEqual(request._messages.store, [message])
+
+    @mock.patch(EXEMPT_URLS, NO_URLS)
+    @mock.patch(PROTECTED_URLS, ALL_URLS)
     def test_non_auth_post(self):
         request = self.make_request(False, 'post')
         response = self.middleware.process_request(request)

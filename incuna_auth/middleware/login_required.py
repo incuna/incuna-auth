@@ -1,27 +1,10 @@
-import re
-
 from django.conf import settings
 
-from .utils import MiddlewareMixin
-from ..models import AccessStateExtensionMixin as AccessState
-
-# Python 2/3 compatibility hackery
-try:
-    unicode
-except NameError:
-    unicode = str
+from .permission import LoginPermissionMiddlewareMixin, UrlPermissionMiddleware
+from .utils import compile_urls
 
 
-def compile_url(url):
-    clean_url = unicode(url).lstrip('/')
-    return re.compile('^{}$'.format(clean_url))
-
-
-def compile_urls(urls):
-    return [compile_url(expr) for expr in urls]
-
-
-class LoginRequiredMiddleware(MiddlewareMixin):
+class LoginRequiredMiddleware(LoginPermissionMiddlewareMixin, UrlPermissionMiddleware):
     """
     Middleware that requires a user to be authenticated to view any page in
     LOGIN_PROTECTED_URLS other than LOGIN_URL. Exemptions to this requirement
@@ -39,32 +22,24 @@ class LoginRequiredMiddleware(MiddlewareMixin):
 
     This version has been modified to allow us to define areas of the site to
     password protect instead of protecting everything under /.
-    '''
     """
-    login_exempt_urls = getattr(settings, 'LOGIN_EXEMPT_URLS', [])
+    login_exempt_urls = [settings.LOGIN_URL, settings.LOGOUT_URL]
+    login_exempt_urls += getattr(settings, 'LOGIN_EXEMPT_URLS', [])
     login_protected_urls = getattr(settings, 'LOGIN_PROTECTED_URLS', [r'^'])
 
-    EXEMPT_URLS = [compile_url(settings.LOGIN_URL), compile_url(settings.LOGOUT_URL)]
-    EXEMPT_URLS += compile_urls(login_exempt_urls)
+    EXEMPT_URLS = compile_urls(login_exempt_urls)
     PROTECTED_URLS = compile_urls(login_protected_urls)
 
     SEND_MESSAGE = getattr(settings, 'LOGIN_REQUIRED_SEND_MESSAGE', True)
 
-    def process_request(self, request):
-        self.assert_request_has_user(request)
+    def get_exempt_url_patterns(self):
+        return self.EXEMPT_URLS
 
-        # Jump over this middleware if the page doesn't come under its jurisdiction.
-        if not self.is_url_protected(
-            request,
-            feincms_states=[AccessState.STATE_AUTH_ONLY],
-            exempt_urls=self.EXEMPT_URLS,
-            protected_urls=self.PROTECTED_URLS
-        ):
-            return
+    def get_protected_url_patterns(self):
+        return self.PROTECTED_URLS
 
-        # Deny access if the user is not logged in.
-        if request.user.is_anonymous():
-            error = ''
-            if self.SEND_MESSAGE:
-                error = 'You must be logged in to view this page.'
-            return self.deny_access(request, error)
+    def get_access_denied_message(self):
+        if not self.SEND_MESSAGE:
+            return ''
+
+        return super(LoginRequiredMiddleware, self).get_access_denied_message()
