@@ -5,9 +5,14 @@ Upcoming
 --------
 * Add `AccessStateExtensionMixin` to add an `access_state` field to FeinCMS objects,
   making it easier to control access to them with middleware.
-* Add `MiddlewareMixin` utility class that makes extending the `incuna_auth` middleware
-  functionality much easier. No more copying and pasting!
-* Update `LoginRequiredMiddleware` to be based on `MiddlewareMixin`.
+* Re-implement `LoginRequiredMiddleware` using a series of inherited classes for better
+  extensibility.  `BasePermissionMiddleware` is the base class, and
+  `UrlPermissionMiddleware` descends from that.  `LoginPermissionMiddlewareMixin` adds
+  an access condition and nice error output for authentication-related middlewares.
+* Add `FeinCMSLoginRequiredMiddleware`, an equivalent middleware for FeinCMS `Page`-based
+  sites.  This middleware descends from `FeinCMSPermissionMiddleware` and uses the same
+  mixin.
+* Add checks that verify that both of those middlewares are used with their dependencies.
 
 v2.2.0
 --------
