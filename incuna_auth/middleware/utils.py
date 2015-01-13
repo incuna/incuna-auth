@@ -1,8 +1,25 @@
+import re
+
 from django.contrib import messages
 from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
 
 from ..models import AccessStateExtensionMixin as AccessState
+
+# Python 2/3 compatibility hackery
+try:
+    unicode
+except NameError:
+    unicode = str
+
+
+def compile_url(url):
+    clean_url = unicode(url).lstrip('/')
+    return re.compile(clean_url)
+
+
+def compile_urls(urls):
+    return [compile_url(expr) for expr in urls]
 
 
 class MiddlewareMixin:

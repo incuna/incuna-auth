@@ -2,6 +2,11 @@ from django.contrib import messages
 from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
 
+from .utils import compile_urls
+
+
+ALL_URLS = compile_urls([r'^'])
+
 
 class BasePermissionMiddleware:
     """
@@ -73,12 +78,78 @@ class BasePermissionMiddleware:
         The actual middleware method, called on all incoming requests.
 
         This default implementation will ignore the middleware (return None) if the
-        conditions specified in is_resource_protected aren't met. If they are, it then tests
-        to see if the user should be denied access via the denied_access_condition method,
-        and calls deny_access (which implements failure behaviour) if so.
+        conditions specified in is_resource_protected aren't met. If they are, it then
+        tests to see if the user should be denied access via the denied_access_condition
+        method, and calls deny_access (which implements failure behaviour) if so.
         """
         if not self.is_resource_protected(request):
             return
 
         if self.deny_access_condition(request):
             return self.deny_access(request)
+
+
+class UrlPermissionMiddleware(BasePermissionMiddleware):
+    """
+    Middleware that allows or denies access based on the resource's URL.
+
+    The middleware is fed two lists of regular expressions intended to match URLs. One
+    list defines URLs that are protected by this middleware, and the other defines URLs
+    that are exempt from coverage. A URL that is both protected and not exempt will have
+    its access controlled by this middleware.
+
+    This class presents two hook methods - get_exempt_url_patterns (defaults to returning
+    []) and get_protected_url_patterns (defaults to returning [r'^'], i.e. a regex that
+    matches all URLs). Override these in order to supply your own URL lists to the
+    middleware.
+    """
+    def get_exempt_url_patterns(self):
+        """
+        Hook method. Returns a list of regex patterns representing exempt URLs.
+
+        The default implementation returns [] - no URLs are exempt.
+
+        The regexes will need to be compiled. (The utils.compile_urls method helps here.)
+        Override this method to supply your own list of exempt URLs (for instance, from
+        Django settings) to this middleware.
+        """
+        return []
+
+    def get_protected_url_patterns(self):
+        """
+        Hook method. Returns a list of regex patterns representing protected URLs.
+
+        The default implementation returns [r'^'] - all URLs are protected.
+
+        The regexes will need to be compiled. (The utils.compile_urls method helps here.)
+        Override this method to supply your own list of protected URLs (for instance, from
+        Django settings) to this middleware.
+        """
+        return ALL_URLS
+
+    def is_resource_protected(self, request, **kwargs):
+        """
+        Returns true if and only if the resource's URL is *not* exempt and *is* protected.
+        """
+        exempt_urls = self.get_exempt_url_patterns()
+        protected_urls = self.get_protected_url_patterns()
+        path = request.path_info.lstrip('/')
+
+        path_is_exempt = any(m.match(path) for m in exempt_urls)
+        if path_is_exempt:
+            return False
+
+        path_is_protected = any(m.match(path) for m in protected_urls)
+        if path_is_protected:
+            return True
+
+        return False
+
+    def deny_access_condition(self, request, **kwargs):
+        """
+        Returns true if and only if the user isn't authenticated.
+        """
+        return request.user.is_anonymous()
+
+    def get_access_denied_message(self):
+        return 'You must be logged in to view this page.'
