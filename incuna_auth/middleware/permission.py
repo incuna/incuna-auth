@@ -3,6 +3,7 @@ from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
 
 from .utils import compile_urls
+from ..models import AccessStateExtensionMixin as AccessState
 
 
 ALL_URLS = compile_urls([r'^'])
@@ -161,3 +162,54 @@ class UrlPermissionMiddleware(BasePermissionMiddleware):
         return False
 
 
+class FeinCMSPermissionMiddleware(BasePermissionMiddleware):
+    """
+    Middleware that allows or denies access based on the resource's access state (see
+    incuna_auth.models.AccessStateExtensionMixin).
+
+    todocs
+    """
+    def get_protected_states(self):
+        """
+        Returns a list of access states this middleware should apply to.
+
+        By default, returns STATE_AUTH_ONLY, which is the only non-custom access state
+        that implies any restriction.
+        """
+        return [AccessState.STATE_AUTH_ONLY]
+
+    def _get_resource_access_state(self, request):
+        """
+        Returns the FeinCMS resource's access_state, following any INHERITed values.
+
+        Will return None if the resource has an access state that should never be
+        protected. It should not be possible to protect a resource with an access_state
+        of STATE_ALL_ALLOWED, or an access_state of STATE_INHERIT and no parent.
+        """
+        feincms_page = getattr(request, 'feincms_page')
+
+        # Chase inherited values up the tree of inheritance.
+        INHERIT = AccessState.STATE_INHERIT
+        while (
+            feincms_page.access_state == INHERIT and
+            getattr(feincms_page, 'parent', None)
+        ):
+            feincms_page = feincms_page.parent
+
+        # Resources with STATE_ALL_ALLOWED or STATE_INHERIT and no parent should never be
+        # access-restricted. This code is here rather than in is_resource_protected to
+        # emphasise its importance and help avoid accidentally overriding it.
+        never_restricted = (INHERIT, AccessState.STATE_ALL_ALLOWED)
+        if feincms_page.access_state in never_restricted:
+            return None
+
+        # Return the found value.
+        return feincms_page.access_state
+
+    def is_resource_protected(self, request, **kwargs):
+        """
+        todocs
+        """
+        access_state = self._get_resource_access_state(request)
+        protected_states = self.get_protected_states()
+        return access_state in protected_states
