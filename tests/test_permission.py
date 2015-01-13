@@ -57,9 +57,15 @@ class TestBasePermissionMiddleware(RequestTestCase):
                 self.assertEqual(response.status_code, 302)
 
     def test_default_unauthorised_redirect_url(self):
+        """
+        Assert the default implementation of get_unauthorised_redirect_url returns '/'.
+        """
         self.assertEqual('/', self.middleware.get_unauthorised_redirect_url())
 
     def test_default_access_denied_message(self):
+        """
+        Assert the default implementation of get_access_denied_message returns ''.
+        """
         self.assertEqual('', self.middleware.get_access_denied_message())
 
 
