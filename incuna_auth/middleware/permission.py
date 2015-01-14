@@ -33,14 +33,18 @@ class BasePermissionMiddleware:
     """
     def is_resource_protected(self, request, **kwargs):
         """
-        Hook. Returns True if and only if the middleware should be protecting
+        Hook for determining if a resource should be protected.
+
+        Returns True if and only if the middleware should be protecting
         the page or endpoint the request is trying to access.
         """
         return False
 
     def deny_access_condition(self, request, **kwargs):
         """
-        Hook. Returns True if and only if the request should be disallowed
+        Hook for disallowing access to a protected resource.
+
+        Returns True if and only if the request should be disallowed
         from accessing the protected URL/page/endpoint.
         """
         return False
@@ -92,6 +96,8 @@ class BasePermissionMiddleware:
 
 class LoginPermissionMiddlewareMixin:
     """
+    A mixin for middlewares related to user authentication.
+
     Provides implementations of deny_access_condition and get_access_denied_message that
     enforce that a user is authenticated.
     """
@@ -162,10 +168,20 @@ class UrlPermissionMiddleware(BasePermissionMiddleware):
 
 class FeinCMSPermissionMiddleware(BasePermissionMiddleware):
     """
-    Middleware that allows or denies access based on the resource's access state (see
-    incuna_auth.models.AccessStateExtensionMixin).
+    Middleware that allows or denies access based on the resource's access state.
 
-    todocs
+    Access state is provided by incuna_auth.models.AccessStateExtensionMixin and is used
+    as a marker to determine how a FeinCMS resource should be access-controlled.
+
+    The reasoning behind this is twofold. FeinCMS resources have unpredictable URLs, so
+    protecting them with the URL-based middleware is risky. Additionally, a client might
+    want to add a variety of permissions on their Pages (or similar) that don't
+    necessarily correspond to their location within the site. Adding an access_state
+    and checking that through middleware allows maximum flexibility and puts permissions
+    on the page level fully within the user's control.
+
+    This class protects all pages with an access_state of STATE_AUTH_ONLY. To protect
+    a different state or list of states, override get_protected_states.
     """
     def get_protected_states(self):
         """
@@ -206,7 +222,10 @@ class FeinCMSPermissionMiddleware(BasePermissionMiddleware):
 
     def is_resource_protected(self, request, **kwargs):
         """
-        todocs
+        Determines if a resource should be protected.
+
+        Returns true if and only if the resource's access_state matches an entry in
+        the return value of get_protected_states().
         """
         access_state = self._get_resource_access_state(request)
         protected_states = self.get_protected_states()
