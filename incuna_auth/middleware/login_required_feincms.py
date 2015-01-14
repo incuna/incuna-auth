@@ -14,12 +14,12 @@ def check_feincms_page():
     if 'feincms.context_processors.add_page_if_missing' in processors:
         return
 
-    error_message = (
-        "TEMPLATE_CONTEXT_PROCESSORS does not contain add_page_if_missing."
-        "FeinCMSLoginRequiredMiddleware requires the FeinCMS page middleware"
-        "to be installed. Ensure your TEMPLATE_CONTEXT_PROCESSORS setting"
-        "includes 'feincms.context_processors.add_page_if_missing'."
-    )
+    error_message = ' '.join((
+        "TEMPLATE_CONTEXT_PROCESSORS does not contain add_page_if_missing.",
+        "FeinCMSLoginRequiredMiddleware requires the FeinCMS page middleware",
+        "to be installed. Ensure your TEMPLATE_CONTEXT_PROCESSORS setting",
+        "includes 'feincms.context_processors.add_page_if_missing'.",
+    ))
     raise ImproperlyConfigured(error_message)
 
 

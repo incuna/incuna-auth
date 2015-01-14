@@ -16,12 +16,12 @@ class TestCheckRequestHasUser(TestCase):
 
     @override_settings(MIDDLEWARE_CLASSES=[])
     def test_check_fails(self):
-        expected_error = (
-            "MIDDLEWARE_CLASSES does not contain AuthenticationMiddleware."
-            "LoginRequiredMiddleware requires authentication middleware to be"
-            "installed. Ensure that your MIDDLEWARE_CLASSES setting includes"
-            "'django.contrib.auth.middleware.AuthenticationMiddleware'."
-        )
+        expected_error = ' '.join((
+            "MIDDLEWARE_CLASSES does not contain AuthenticationMiddleware.",
+            "LoginRequiredMiddleware requires authentication middleware to be",
+            "installed. Ensure that your MIDDLEWARE_CLASSES setting includes",
+            "'django.contrib.auth.middleware.AuthenticationMiddleware'.",
+        ))
         with self.assertRaisesRegexp(ImproperlyConfigured, expected_error):
             self.middleware()
 
@@ -37,11 +37,11 @@ class TestCheckFeinCMSPage(TestCase):
 
     @override_settings(TEMPLATE_CONTEXT_PROCESSORS=[])
     def test_check_fails(self):
-        expected_error = (
-            "TEMPLATE_CONTEXT_PROCESSORS does not contain add_page_if_missing."
-            "FeinCMSLoginRequiredMiddleware requires the FeinCMS page middleware"
-            "to be installed. Ensure your TEMPLATE_CONTEXT_PROCESSORS setting"
-            "includes 'feincms.context_processors.add_page_if_missing'."
-        )
+        expected_error = ' '.join((
+            "TEMPLATE_CONTEXT_PROCESSORS does not contain add_page_if_missing.",
+            "FeinCMSLoginRequiredMiddleware requires the FeinCMS page middleware",
+            "to be installed. Ensure your TEMPLATE_CONTEXT_PROCESSORS setting",
+            "includes 'feincms.context_processors.add_page_if_missing'.",
+        ))
         with self.assertRaisesRegexp(ImproperlyConfigured, expected_error):
             self.middleware()

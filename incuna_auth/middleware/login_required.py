@@ -15,12 +15,12 @@ def check_request_has_user():
     if 'django.contrib.auth.middleware.AuthenticationMiddleware' in middlewares:
         return
 
-    error_message = (
-        "MIDDLEWARE_CLASSES does not contain AuthenticationMiddleware."
-        "LoginRequiredMiddleware requires authentication middleware to be"
-        "installed. Ensure that your MIDDLEWARE_CLASSES setting includes"
-        "'django.contrib.auth.middleware.AuthenticationMiddleware'."
-    )
+    error_message = ' '.join((
+        "MIDDLEWARE_CLASSES does not contain AuthenticationMiddleware.",
+        "LoginRequiredMiddleware requires authentication middleware to be",
+        "installed. Ensure that your MIDDLEWARE_CLASSES setting includes",
+        "'django.contrib.auth.middleware.AuthenticationMiddleware'.",
+    ))
     raise ImproperlyConfigured(error_message)
 
 
