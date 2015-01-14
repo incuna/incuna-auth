@@ -23,7 +23,7 @@ def base64_encode_for_py2or3(text):
 
 
 class TestLoginRequiredMiddleware(RequestTestCase):
-    middleware = LoginRequiredMiddleware()
+    middleware = LoginRequiredMiddleware(check=False)
     EXEMPT_URLS = 'incuna_auth.middleware.LoginRequiredMiddleware.EXEMPT_URLS'
     PROTECTED_URLS = 'incuna_auth.middleware.LoginRequiredMiddleware.PROTECTED_URLS'
     SEND_MESSAGE = 'incuna_auth.middleware.LoginRequiredMiddleware.SEND_MESSAGE'
@@ -84,7 +84,7 @@ class TestLoginRequiredMiddleware(RequestTestCase):
 
 
 class TestFeinCMSLoginRequiredMiddleware(RequestTestCase):
-    middleware = FeinCMSLoginRequiredMiddleware()
+    middleware = FeinCMSLoginRequiredMiddleware(check=False)
     AUTH_STATE = AccessState.STATE_AUTH_ONLY
     OTHER_STATE = ('other', 'Other state')
     SEND_MESSAGE = 'incuna_auth.middleware.FeinCMSLoginRequiredMiddleware.SEND_MESSAGE'
