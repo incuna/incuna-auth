@@ -67,4 +67,4 @@ class LoginRequiredMiddleware(LoginPermissionMiddlewareMixin, UrlPermissionMiddl
         if not self.SEND_MESSAGE:
             return ''
 
-        return super(LoginRequiredMiddleware, self).get_access_denied_message()
+        return LoginPermissionMiddlewareMixin.get_access_denied_message(self)

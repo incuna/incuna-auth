@@ -45,4 +45,4 @@ class FeinCMSLoginRequiredMiddleware(
         if not self.SEND_MESSAGE:
             return ''
 
-        return super(FeinCMSLoginRequiredMiddleware, self).get_access_denied_message()
+        return LoginPermissionMiddlewareMixin.get_access_denied_message(self)
