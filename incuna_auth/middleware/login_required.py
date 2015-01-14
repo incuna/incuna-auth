@@ -51,8 +51,6 @@ class LoginRequiredMiddleware(LoginPermissionMiddlewareMixin, UrlPermissionMiddl
     EXEMPT_URLS = compile_urls(login_exempt_urls)
     PROTECTED_URLS = compile_urls(login_protected_urls)
 
-    SEND_MESSAGE = getattr(settings, 'LOGIN_REQUIRED_SEND_MESSAGE', True)
-
     def __init__(self, check=True):
         if check:
             check_request_has_user()
@@ -62,9 +60,3 @@ class LoginRequiredMiddleware(LoginPermissionMiddlewareMixin, UrlPermissionMiddl
 
     def get_protected_url_patterns(self):
         return self.PROTECTED_URLS
-
-    def get_access_denied_message(self):
-        if not self.SEND_MESSAGE:
-            return ''
-
-        return LoginPermissionMiddlewareMixin.get_access_denied_message(self)

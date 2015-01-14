@@ -35,14 +35,6 @@ class FeinCMSLoginRequiredMiddleware(
     Requires authentication middleware, template context processors, and FeinCMS's
     add_page_if_missing middleware to be loaded. You'll get an error if they aren't.
     """
-    SEND_MESSAGE = getattr(settings, 'LOGIN_REQUIRED_SEND_MESSAGE', True)
-
     def __init__(self, check=True):
         if check:
             check_feincms_page()
-
-    def get_access_denied_message(self):
-        if not self.SEND_MESSAGE:
-            return ''
-
-        return LoginPermissionMiddlewareMixin.get_access_denied_message(self)
