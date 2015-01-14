@@ -8,7 +8,7 @@ except NameError:
 
 
 def compile_url(url):
-    clean_url = unicode(url).lstrip('/')
+    clean_url = unicode(url).lstrip(u'/')
     return re.compile(clean_url)
 
 

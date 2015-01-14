@@ -28,8 +28,7 @@ class TestLoginRequiredMiddleware(RequestTestCase):
     PROTECTED_URLS = 'incuna_auth.middleware.LoginRequiredMiddleware.PROTECTED_URLS'
 
     def make_request(self, auth, method='get', url='/fake-request/', **kwargs):
-        request = self.create_request(method, auth=auth, url=url, **kwargs)
-        return request
+        return self.create_request(method, auth=auth, url=url, **kwargs)
 
     @mock.patch(EXEMPT_URLS, ALL_URLS)
     def test_exempt_url(self):
