@@ -32,28 +32,28 @@ class TestLoginRequiredMiddleware(RequestTestCase):
 
     @mock.patch(EXEMPT_URLS, ALL_URLS)
     def test_exempt_url(self):
-        request = self.make_request(False)
+        request = self.make_request(auth=False)
         response = self.middleware.process_request(request)
         self.assertIsNone(response)
 
     @mock.patch(EXEMPT_URLS, NO_URLS)
     @mock.patch(PROTECTED_URLS, NO_URLS)
     def test_unprotected_url(self):
-        request = self.make_request(False)
+        request = self.make_request(auth=False)
         response = self.middleware.process_request(request)
         self.assertIsNone(response)
 
     @mock.patch(EXEMPT_URLS, NO_URLS)
     @mock.patch(PROTECTED_URLS, ALL_URLS)
     def test_is_auth(self):
-        request = self.make_request(True)
+        request = self.make_request(auth=True)
         response = self.middleware.process_request(request)
         self.assertIsNone(response)
 
     @mock.patch(EXEMPT_URLS, NO_URLS)
     @mock.patch(PROTECTED_URLS, ALL_URLS)
     def test_non_auth_get(self):
-        request = self.make_request(False)
+        request = self.make_request(auth=False)
         response = self.middleware.process_request(request)
         message = 'You must be logged in to view this page.'
 
@@ -64,7 +64,7 @@ class TestLoginRequiredMiddleware(RequestTestCase):
     @mock.patch(EXEMPT_URLS, NO_URLS)
     @mock.patch(PROTECTED_URLS, ALL_URLS)
     def test_non_auth_post(self):
-        request = self.make_request(False, 'post')
+        request = self.make_request(auth=False, method='post')
         response = self.middleware.process_request(request)
         self.assertEqual(response.status_code, 403)
 
@@ -85,22 +85,25 @@ class TestFeinCMSLoginRequiredMiddleware(RequestTestCase):
         return request
 
     def test_unprotected_url(self):
-        request = self.make_request(False, AccessState.STATE_ALL_ALLOWED)
+        request = self.make_request(
+            auth=False,
+            access_state=AccessState.STATE_ALL_ALLOWED
+        )
         response = self.middleware.process_request(request)
         self.assertIsNone(response)
 
     def test_other_state_url(self):
-        request = self.make_request(False, self.OTHER_STATE)
+        request = self.make_request(auth=False, access_state=self.OTHER_STATE)
         response = self.middleware.process_request(request)
         self.assertIsNone(response)
 
     def test_is_auth(self):
-        request = self.make_request(True, self.AUTH_STATE)
+        request = self.make_request(auth=True, access_state=self.AUTH_STATE)
         response = self.middleware.process_request(request)
         self.assertIsNone(response)
 
     def test_non_auth_get(self):
-        request = self.make_request(False, self.AUTH_STATE)
+        request = self.make_request(auth=False, access_state=self.AUTH_STATE)
         response = self.middleware.process_request(request)
         message = 'You must be logged in to view this page.'
 
@@ -109,7 +112,11 @@ class TestFeinCMSLoginRequiredMiddleware(RequestTestCase):
         self.assertEqual(request._messages.store, [message])
 
     def test_non_auth_post(self):
-        request = self.make_request(False, self.AUTH_STATE, method='post')
+        request = self.make_request(
+            auth=False,
+            access_state=self.AUTH_STATE,
+            method='post'
+        )
         response = self.middleware.process_request(request)
         self.assertEqual(response.status_code, 403)
 
