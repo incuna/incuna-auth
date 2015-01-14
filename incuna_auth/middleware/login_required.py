@@ -54,7 +54,6 @@ class LoginRequiredMiddleware(LoginPermissionMiddlewareMixin, UrlPermissionMiddl
     SEND_MESSAGE = getattr(settings, 'LOGIN_REQUIRED_SEND_MESSAGE', True)
 
     def __init__(self, check=True):
-        super(LoginRequiredMiddleware, self).__init__()
         if check:
             check_request_has_user()
 

@@ -38,7 +38,6 @@ class FeinCMSLoginRequiredMiddleware(
     SEND_MESSAGE = getattr(settings, 'LOGIN_REQUIRED_SEND_MESSAGE', True)
 
     def __init__(self, check=True):
-        super(FeinCMSLoginRequiredMiddleware, self).__init__()
         if check:
             check_feincms_page()
 
