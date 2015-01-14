@@ -75,8 +75,8 @@ class BasePermissionMiddleware:
             messages.info(request, _(message))
 
         # Return a HTTP 302 redirect.
-        redirect = self.get_unauthorised_redirect_url()
-        return HttpResponseRedirect(redirect)
+        redirect_url = self.get_unauthorised_redirect_url()
+        return HttpResponseRedirect(redirect_url)
 
     def process_request(self, request):
         """
