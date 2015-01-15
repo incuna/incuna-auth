@@ -15,7 +15,7 @@ class AccessStateSetterMeta(type):
         # BASE_ACCESS_STATES on it.
         if not base_states:
             get_base_states = lambda b: hasattr(b, base_attr_name)
-            base_states_source = next(filter(get_base_states, bases))
+            base_states_source = next(filter(get_base_states, list(bases)))
             base_states = getattr(base_states_source, base_attr_name)
 
         if base_states:
