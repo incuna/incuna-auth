@@ -1,7 +1,7 @@
 Changelog
 =========
 
-Upcoming
+v2.3.0
 --------
 * Add `AccessStateExtensionMixin` to add an `access_state` field to FeinCMS objects,
   making it easier to control access to them with middleware.
