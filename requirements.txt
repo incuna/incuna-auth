@@ -11,3 +11,4 @@ flake8-import-order==0.5.1
 incuna-test-utils==6.0.0
 mock==1.0.1
 psycopg2==2.5.4
+six==1.9.0
