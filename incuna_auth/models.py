@@ -1,6 +1,12 @@
 from django.db import models
 from django.utils.six import add_metaclass
 
+# Python 2/3 compatibility hackery
+try:
+    from itertools import ifilter as filter
+except ImportError:
+    pass
+
 
 class AccessStateSetterMeta(type):
     """Metaclass that adds (potentially overridden) CUSTOM_STATES to ACCESS_STATES."""
@@ -15,7 +21,7 @@ class AccessStateSetterMeta(type):
         # BASE_ACCESS_STATES on it.
         if not base_states:
             get_base_states = lambda b: hasattr(b, base_attr_name)
-            base_states_source = next(filter(get_base_states, list(bases)))
+            base_states_source = next(filter(get_base_states, bases))
             base_states = getattr(base_states_source, base_attr_name)
 
         if base_states:
