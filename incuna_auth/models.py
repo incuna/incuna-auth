@@ -21,7 +21,7 @@ class AccessStateSetterMeta(type):
         if base_states:
             attrs['ACCESS_STATES'] = custom_states + base_states
 
-        return super().__new__(cls, name, bases, attrs)
+        return super(AccessStateSetterMeta, cls).__new__(cls, name, bases, attrs)
 
 
 @add_metaclass(AccessStateSetterMeta)
