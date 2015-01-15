@@ -1,5 +1,5 @@
 from django.db import models
-from six import add_metaclass
+from django.utils.six import add_metaclass
 
 
 class AccessStateSetterMeta(type):
