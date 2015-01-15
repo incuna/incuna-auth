@@ -6,8 +6,9 @@ from .permission import FeinCMSPermissionMiddleware, LoginPermissionMiddlewareMi
 
 def check_feincms_page():
     """
-    Check that FeinCMSLoginRequiredMiddleware isn't being used without its dependency,
-    feincms.context_processors.add_page_if_missing.
+    Check that FeinCMSLoginRequiredMiddleware isn't being used without its dependency.
+
+    FeinCMSLoginRequiredMiddleware needs feincms.context_processors.add_page_if_missing.
     """
     processors = settings.TEMPLATE_CONTEXT_PROCESSORS
 

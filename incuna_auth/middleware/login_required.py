@@ -7,8 +7,9 @@ from .utils import compile_urls
 
 def check_request_has_user():
     """
-    Check that LoginRequiredMiddleware isn't being used without its dependency,
-    django.contrib.auth.middleware.AuthenticationMiddleware.
+    Check that LoginRequiredMiddleware isn't being used without its dependency.
+
+    LoginRequiredMiddleware needs django.contrib.auth.middleware.AuthenticationMiddleware.
     """
     middlewares = settings.MIDDLEWARE_CLASSES
 
@@ -26,6 +27,8 @@ def check_request_has_user():
 
 class LoginRequiredMiddleware(LoginPermissionMiddlewareMixin, UrlPermissionMiddleware):
     """
+    Middleware that requires a user to be authenticated.
+
     Middleware that requires a user to be authenticated to view any page in
     LOGIN_PROTECTED_URLS other than LOGIN_URL. Exemptions to this requirement
     can optionally be specified in settings via a list of regular expressions

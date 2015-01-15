@@ -3,6 +3,8 @@ from django.db import models
 
 class AccessStateExtensionMixin:
     """
+    A mixin for creating extensions that add access_state to FeinCMS resources.
+
     This class is intended to easily build extensions that can be applied to a FeinCMS
     model to add an 'access state', which defines that model's authentication parameters.
 
