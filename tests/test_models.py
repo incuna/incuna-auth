@@ -21,8 +21,15 @@ BASE_STATES = (
 class TestAccessStateExtensionMixin(TestCase):
     """Test that AccessStateExtensionMixin does what it's supposed to do."""
 
-    class AccessState(models.AccessStateExtensionMixin):
-        CUSTOM_STATES = (CUSTOM_STATE,)
+    def test_custom_states(self):
+        """Assert that setting the CUSTOM_STATE attribute works properly."""
+        class AccessState(models.AccessStateExtensionMixin):
+            CUSTOM_STATES = (CUSTOM_STATE,)
+
+        access = AccessState
+        expected_states = (CUSTOM_STATE,) + BASE_STATES
+
+        self.assertEqual(expected_states, access.ACCESS_STATES)
 
     def test_handle_model(self):
         """
@@ -32,7 +39,10 @@ class TestAccessStateExtensionMixin(TestCase):
         the AccessState instance we're using. We can then assert how add_to_class was
         called without needing to introspect the model.
         """
-        access = self.AccessState()
+        class AccessState(models.AccessStateExtensionMixin):
+            CUSTOM_STATES = (CUSTOM_STATE,)
+
+        access = AccessState()
         model = mock.MagicMock()
         access.model = model
 
@@ -62,7 +72,10 @@ class TestAccessStateExtensionMixin(TestCase):
         This is also done with mocking (see above). For this test, we can leave the
         model attribute on the AccessState instance as the default None.
         """
-        access = self.AccessState()
+        class AccessState(models.AccessStateExtensionMixin):
+            CUSTOM_STATES = (CUSTOM_STATE,)
+
+        access = AccessState()
         modeladmin = mock.MagicMock()
 
         access.handle_modeladmin(modeladmin)
