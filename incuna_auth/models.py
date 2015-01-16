@@ -24,9 +24,7 @@ class AccessStateSetterMeta(type):
             base_states_source = next(filter(get_base_states, bases))
             base_states = getattr(base_states_source, base_attr_name)
 
-        if base_states:
-            attrs['ACCESS_STATES'] = custom_states + base_states
-
+        attrs['ACCESS_STATES'] = custom_states + base_states
         return super(AccessStateSetterMeta, cls).__new__(cls, name, bases, attrs)
 
 
