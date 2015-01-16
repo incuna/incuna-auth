@@ -1,6 +1,34 @@
 from django.db import models
+from django.utils.six import add_metaclass
+
+# Python 2/3 compatibility hackery
+try:
+    from itertools import ifilter as filter
+except ImportError:
+    pass
 
 
+class AccessStateSetterMeta(type):
+    """Metaclass that adds (potentially overridden) CUSTOM_STATES to ACCESS_STATES."""
+    def __new__(cls, name, bases, attrs):
+        """Create the new class with a complete ACCESS_STATES."""
+        custom_states = attrs.get('CUSTOM_STATES', ())
+        base_attr_name = 'BASE_ACCESS_STATES'
+        base_states = attrs.get(base_attr_name)
+
+        # If `attrs` does not contain BASE_ACCESS_STATES, look up the inheritance tree
+        # by iterating over the elements in `bases` to find the first one that has
+        # BASE_ACCESS_STATES on it.
+        if not base_states:
+            get_base_states = lambda b: hasattr(b, base_attr_name)
+            base_states_source = next(filter(get_base_states, bases))
+            base_states = getattr(base_states_source, base_attr_name)
+
+        attrs['ACCESS_STATES'] = custom_states + base_states
+        return super(AccessStateSetterMeta, cls).__new__(cls, name, bases, attrs)
+
+
+@add_metaclass(AccessStateSetterMeta)
 class AccessStateExtensionMixin:
     """
     A mixin for creating extensions that add access_state to FeinCMS resources.
@@ -48,8 +76,6 @@ class AccessStateExtensionMixin:
         (STATE_AUTH_ONLY, 'Authenticated users only'),
         (STATE_INHERIT, 'Inherit from parent (allow all users if no parent exists)'),
     )
-
-    ACCESS_STATES = CUSTOM_STATES + BASE_ACCESS_STATES
 
     def handle_model(self):
         """Add the ACCESS_STATES choices and the field using them to the model."""

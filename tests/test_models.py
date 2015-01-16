@@ -24,6 +24,11 @@ class TestAccessStateExtensionMixin(TestCase):
     class AccessState(models.AccessStateExtensionMixin):
         CUSTOM_STATES = (CUSTOM_STATE,)
 
+    def test_custom_states(self):
+        """Assert that setting the CUSTOM_STATE attribute works properly."""
+        expected_states = (CUSTOM_STATE,) + BASE_STATES
+        self.assertEqual(expected_states, self.AccessState.ACCESS_STATES)
+
     def test_handle_model(self):
         """
         Assert that add_to_class is called twice on the model, with correct parameters.

@@ -1,6 +1,10 @@
 Changelog
 =========
 
+Upcoming
+--------
+* Bugfix: Make `CUSTOM_STATES` work as intended via a metaclass.
+
 v2.3.0
 --------
 * Add `AccessStateExtensionMixin` to add an `access_state` field to FeinCMS objects,
