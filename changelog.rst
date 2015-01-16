@@ -1,7 +1,7 @@
 Changelog
 =========
 
-Upcoming
+v2.3.1
 --------
 * Bugfix: Make `CUSTOM_STATES` work as intended via a metaclass.
 
