@@ -70,9 +70,14 @@ class TestLoginRequiredMiddleware(RequestTestCase):
 
 
 class TestFeinCMSLoginRequiredMiddleware(RequestTestCase):
-    middleware = FeinCMSLoginRequiredMiddleware(check=False)
+    middleware = FeinCMSLoginRequiredMiddleware()
     AUTH_STATE = AccessState.STATE_AUTH_ONLY
     OTHER_STATE = ('other', 'Other state')
+
+    get_page_method = (
+        'incuna_auth.middleware.permission_feincms.' +
+        'FeinCMSPermissionMiddleware._get_page_from_path'
+    )
 
     class DummyFeinCMSPage:
         def __init__(self, access_state):
@@ -89,22 +94,26 @@ class TestFeinCMSLoginRequiredMiddleware(RequestTestCase):
             auth=False,
             access_state=AccessState.STATE_ALL_ALLOWED
         )
-        response = self.middleware.process_request(request)
+        with mock.patch(self.get_page_method, return_value=request.feincms_page):
+            response = self.middleware.process_request(request)
         self.assertIsNone(response)
 
     def test_other_state_url(self):
         request = self.make_request(auth=False, access_state=self.OTHER_STATE)
-        response = self.middleware.process_request(request)
+        with mock.patch(self.get_page_method, return_value=request.feincms_page):
+            response = self.middleware.process_request(request)
         self.assertIsNone(response)
 
     def test_is_auth(self):
         request = self.make_request(auth=True, access_state=self.AUTH_STATE)
-        response = self.middleware.process_request(request)
+        with mock.patch(self.get_page_method, return_value=request.feincms_page):
+            response = self.middleware.process_request(request)
         self.assertIsNone(response)
 
     def test_non_auth_get(self):
         request = self.make_request(auth=False, access_state=self.AUTH_STATE)
-        response = self.middleware.process_request(request)
+        with mock.patch(self.get_page_method, return_value=request.feincms_page):
+            response = self.middleware.process_request(request)
         message = 'You must be logged in to view this page.'
 
         self.assertEqual(response.status_code, 302)
@@ -117,7 +126,8 @@ class TestFeinCMSLoginRequiredMiddleware(RequestTestCase):
             access_state=self.AUTH_STATE,
             method='post'
         )
-        response = self.middleware.process_request(request)
+        with mock.patch(self.get_page_method, return_value=request.feincms_page):
+            response = self.middleware.process_request(request)
         self.assertEqual(response.status_code, 403)
 
 
