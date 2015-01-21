@@ -1,6 +1,10 @@
 Changelog
 =========
 
+Upcoming
+--------
+* Bugfix: Don't fail when the FeinCMS Page object has a parent, but that parent is None.
+
 v2.3.3
 --------
 * Bugfix: Don't fail when the FeinCMS Page object doesn't exist at the named URL.
