@@ -77,6 +77,18 @@ class TestFeinCMSPermissionMiddleware(RequestTestCase):
         expected_state = self.CUSTOM_STATE
         self.assertEqual(expected_state, access_state)
 
+    def test_get_resource_access_state_null_parent(self):
+        """
+        Assert that the method doesn't explode when the Page has a parent which is None.
+        """
+        request = self.make_request(access_state=AccessState.STATE_INHERIT)
+        request.feincms_page.parent = None
+
+        with mock.patch(self.get_page_method, return_value=request.feincms_page):
+            access_state = self.middleware._get_resource_access_state(request)
+
+        self.assertIsNone(access_state)
+
     def test_resource_protected(self):
         """
         Assert that the URL is protected when the value of get_protected_states contains
