@@ -1,7 +1,7 @@
 Changelog
 =========
 
-Upcoming
+v2.3.5
 --------
 * Enhancement: Add a request parameter to get_unauthorised_redirect_url.
 
