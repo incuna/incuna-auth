@@ -42,6 +42,14 @@ class TestFeinCMSPermissionMiddleware(RequestTestCase):
         expected_state = self.CUSTOM_STATE
         self.assertEqual(expected_state, access_state)
 
+    def test_get_resource_access_state_no_page(self):
+        """Assert that the access_state is None when feincms_page is None."""
+        request = self.make_request()
+        with mock.patch(self.get_page_method, return_value=None):
+            access_state = self.middleware._get_resource_access_state(request)
+
+        self.assertIsNone(access_state)
+
     def test_get_resource_access_state_unrestricted(self):
         """
         Assert that the certain access_state values are never restricted.

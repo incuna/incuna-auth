@@ -44,8 +44,12 @@ class FeinCMSPermissionMiddleware(BasePermissionMiddleware):
         Will return None if the resource has an access state that should never be
         protected. It should not be possible to protect a resource with an access_state
         of STATE_ALL_ALLOWED, or an access_state of STATE_INHERIT and no parent.
+
+        Will also return None if the accessed URL doesn't contain a Page.
         """
         feincms_page = self._get_page_from_path(request.path_info.lstrip('/'))
+        if not feincms_page:
+            return None
 
         # Chase inherited values up the tree of inheritance.
         INHERIT = AccessState.STATE_INHERIT
