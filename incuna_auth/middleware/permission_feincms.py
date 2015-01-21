@@ -53,10 +53,7 @@ class FeinCMSPermissionMiddleware(BasePermissionMiddleware):
 
         # Chase inherited values up the tree of inheritance.
         INHERIT = AccessState.STATE_INHERIT
-        while (
-            feincms_page.access_state == INHERIT and
-            getattr(feincms_page, 'parent', None)
-        ):
+        while feincms_page.access_state == INHERIT and feincms_page.parent:
             feincms_page = feincms_page.parent
 
         # Resources with STATE_ALL_ALLOWED or STATE_INHERIT and no parent should never be

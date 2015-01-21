@@ -63,6 +63,7 @@ class TestFeinCMSPermissionMiddleware(RequestTestCase):
         with mock.patch(self.get_page_method, return_value=request.feincms_page):
             for state in unrestricted_states:
                 request.feincms_page.access_state = state
+                request.feincms_page.parent = None
                 self.assertIsNone(self.middleware._get_resource_access_state(request))
 
     def test_get_resource_access_state_inherited(self):
