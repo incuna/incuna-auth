@@ -1,7 +1,7 @@
 Changelog
 =========
 
-Upcoming
+v2.3.4
 --------
 * Bugfix: Don't fail when the FeinCMS Page object has a parent, but that parent is None.
 
