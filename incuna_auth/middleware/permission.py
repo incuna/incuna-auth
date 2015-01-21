@@ -48,7 +48,7 @@ class BasePermissionMiddleware:
         """
         return False
 
-    def get_unauthorised_redirect_url(self):
+    def get_unauthorised_redirect_url(self, request):
         return '/'
 
     def get_access_denied_message(self):
@@ -74,7 +74,7 @@ class BasePermissionMiddleware:
             messages.info(request, _(message))
 
         # Return a HTTP 302 redirect.
-        redirect_url = self.get_unauthorised_redirect_url()
+        redirect_url = self.get_unauthorised_redirect_url(request)
         return HttpResponseRedirect(redirect_url)
 
     def process_request(self, request):
