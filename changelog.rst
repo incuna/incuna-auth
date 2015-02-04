@@ -1,7 +1,7 @@
 Changelog
 =========
 
-Upcoming
+v2.3.6
 --------
 * Bugfix: Actually don't fail when the FeinCMS Page object doesn't exist at the named URL.
 
