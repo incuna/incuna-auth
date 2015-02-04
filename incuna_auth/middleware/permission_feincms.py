@@ -35,7 +35,10 @@ class FeinCMSPermissionMiddleware(BasePermissionMiddleware):
         Override this to deal with different types of object from Page.
         """
         from feincms.module.page.models import Page
-        return Page.objects.best_match_for_path(path)
+        try:
+            return Page.objects.best_match_for_path(path)
+        except Page.DoesNotExist:
+            return None
 
     def _get_resource_access_state(self, request):
         """
