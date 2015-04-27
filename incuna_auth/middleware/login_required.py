@@ -57,6 +57,9 @@ class LoginRequiredMiddleware(LoginPermissionMiddlewareMixin, UrlPermissionMiddl
         if check:
             check_request_has_user()
 
+    def get_unauthorised_redirect_url(self, request):
+        return settings.LOGIN_REDIRECT_URL
+
     def get_exempt_url_patterns(self):
         return self.EXEMPT_URLS
 

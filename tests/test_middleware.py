@@ -52,13 +52,14 @@ class TestLoginRequiredMiddleware(RequestTestCase):
 
     @mock.patch(EXEMPT_URLS, NO_URLS)
     @mock.patch(PROTECTED_URLS, ALL_URLS)
+    @override_settings(LOGIN_REDIRECT_URL='/redirect/')
     def test_non_auth_get(self):
         request = self.make_request(auth=False)
         response = self.middleware.process_request(request)
         message = 'You must be logged in to view this page.'
 
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response['location'], '/')
+        self.assertEqual(response['location'], '/redirect/')
         self.assertEqual(request._messages.store, [message])
 
     @mock.patch(EXEMPT_URLS, NO_URLS)
