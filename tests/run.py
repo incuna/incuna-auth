@@ -23,7 +23,7 @@ settings.configure(
         'django.contrib.sessions',
         'django.contrib.admin',
     ),
-    PASSWORD_HASHERS = ('django.contrib.auth.hashers.MD5PasswordHasher',),
+    PASSWORD_HASHERS=('django.contrib.auth.hashers.MD5PasswordHasher',),
     ROOT_URLCONF='incuna_auth.urls',
     MIDDLEWARE_CLASSES=(),
     REST_FRAMEWORK={
@@ -35,9 +35,9 @@ settings.configure(
     LOGIN_REQUIRED_SEND_MESSAGE=False,
 
     # BasicAuthenticationMiddleware data
-    BASIC_WWW_AUTHENTICATION_USERNAME = 'user',
-    BASIC_WWW_AUTHENTICATION_PASSWORD = 'pass',
-    BASIC_WWW_AUTHENTICATION = True,
+    BASIC_WWW_AUTHENTICATION_USERNAME='user',
+    BASIC_WWW_AUTHENTICATION_PASSWORD='pass',
+    BASIC_WWW_AUTHENTICATION=True,
 )
 
 
