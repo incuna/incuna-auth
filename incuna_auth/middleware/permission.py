@@ -26,10 +26,16 @@ class BasePermissionMiddleware:
     - deny_access_condition: Returns True if and only if the request should be disallowed
       from accessing the protected resource.
     - get_unauthorised_redirect_url: Returns the URL to redirect a denied GET request to
-      (default implementation returns /).
+      (default implementation returns self.base_unauthorised_redirect_url).
     - get_access_denied_message: Returns the message to display when that happens
       (default implementation returns '').
+
+    Contains the following attributes:
+    - base_unauthorised_redirect_url: the URL to redirect a denied GET request to if
+      get_unauthorised_redirect_url() hasn't been overridden (defaults to /).
     """
+    base_unauthorised_redirect_url = '/'
+
     def is_resource_protected(self, request, **kwargs):
         """
         Hook for determining if a resource should be protected.
@@ -49,7 +55,7 @@ class BasePermissionMiddleware:
         return False
 
     def get_unauthorised_redirect_url(self, request):
-        return '/'
+        return self.base_unauthorised_redirect_url
 
     def get_access_denied_message(self):
         return ''
