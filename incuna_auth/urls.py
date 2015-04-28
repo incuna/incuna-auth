@@ -75,9 +75,9 @@ if django.VERSION >= (1, 6):
         'django.contrib.auth.views',
         url(
             _(
-                r'^password/reset/confirm/'
-                + r'(?P<uidb64>[0-9A-Za-z_\-]+)/'
-                + r'(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$'
+                r'^password/reset/confirm/' +
+                r'(?P<uidb64>[0-9A-Za-z_\-]+)/' +
+                r'(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$'
             ),
             'password_reset_confirm',
             name='password_reset_confirm',
@@ -89,9 +89,9 @@ if django.VERSION < (1, 7):
         'django.contrib.auth.views',
         url(
             _(
-                r'^password/reset/confirm/'
-                + r'(?P<uidb36>[0-9A-Za-z]{1,13})'
-                + r'-(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$'
+                r'^password/reset/confirm/' +
+                r'(?P<uidb36>[0-9A-Za-z]{1,13})' +
+                r'-(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$'
             ),
             'password_reset_confirm',
             name='password_reset_confirm',

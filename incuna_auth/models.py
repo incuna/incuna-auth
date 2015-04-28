@@ -20,8 +20,9 @@ class AccessStateSetterMeta(type):
         # by iterating over the elements in `bases` to find the first one that has
         # BASE_ACCESS_STATES on it.
         if not base_states:
-            get_base_states = lambda b: hasattr(b, base_attr_name)
-            base_states_source = next(filter(get_base_states, bases))
+            def has_base_states(base):
+                return hasattr(base, base_attr_name)
+            base_states_source = next(filter(has_base_states, bases))
             base_states = getattr(base_states_source, base_attr_name)
 
         attrs['ACCESS_STATES'] = custom_states + base_states
