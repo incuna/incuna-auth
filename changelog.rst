@@ -5,7 +5,7 @@ Upcoming
 --------
 * Redirect to `settings.LOGIN_URL` instead of `settings.LOGIN_REDIRECT_URL`.
 
-v2.4.0
+v2.4.0 (Brown bag release)
 --------
 * `LoginRequiredMiddleware` and `FeinCMSLoginRequiredMiddleware` now respect
   `settings.LOGIN_REDIRECT_URL` by default.
