@@ -1,7 +1,7 @@
 Changelog
 =========
 
-Upcoming
+v2.5.0
 --------
 * Redirect to `settings.LOGIN_URL` instead of `settings.LOGIN_REDIRECT_URL`.
 
