@@ -59,7 +59,7 @@ class TestLoginRequiredMiddleware(RequestTestCase):
         message = 'You must be logged in to view this page.'
 
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response['location'], settings.LOGIN_REDIRECT_URL)
+        self.assertEqual(response['location'], settings.LOGIN_URL)
         self.assertEqual(request._messages.store, [message])
 
     @mock.patch(EXEMPT_URLS, NO_URLS)
@@ -118,7 +118,7 @@ class TestFeinCMSLoginRequiredMiddleware(RequestTestCase):
         message = 'You must be logged in to view this page.'
 
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response['location'], settings.LOGIN_REDIRECT_URL)
+        self.assertEqual(response['location'], settings.LOGIN_URL)
         self.assertEqual(request._messages.store, [message])
 
     def test_non_auth_post(self):
