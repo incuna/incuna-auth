@@ -46,7 +46,7 @@ class LoginRequiredMiddleware(LoginPermissionMiddlewareMixin, UrlPermissionMiddl
     This version has been modified to allow us to define areas of the site to
     password protect instead of protecting everything under /.
     """
-    base_unauthorised_redirect_url = settings.LOGIN_REDIRECT_URL
+    base_unauthorised_redirect_url = settings.LOGIN_URL
 
     login_exempt_urls = [settings.LOGIN_URL, settings.LOGOUT_URL]
     login_exempt_urls += getattr(settings, 'LOGIN_EXEMPT_URLS', [])

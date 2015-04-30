@@ -1,6 +1,10 @@
 Changelog
 =========
 
+Upcoming
+--------
+* Redirect to `settings.LOGIN_URL` instead of `settings.LOGIN_REDIRECT_URL`.
+
 v2.4.0
 --------
 * `LoginRequiredMiddleware` and `FeinCMSLoginRequiredMiddleware` now respect

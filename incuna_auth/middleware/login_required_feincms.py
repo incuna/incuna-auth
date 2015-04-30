@@ -15,4 +15,4 @@ class FeinCMSLoginRequiredMiddleware(
     Requires authentication middleware, template context processors, and FeinCMS's
     add_page_if_missing middleware to be loaded. You'll get an error if they aren't.
     """
-    base_unauthorised_redirect_url = settings.LOGIN_REDIRECT_URL
+    base_unauthorised_redirect_url = settings.LOGIN_URL
