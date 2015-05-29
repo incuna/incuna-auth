@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.utils.translation import ugettext as _
 
 
-def basic_challenge(realm=None):
+def challenge(realm=None):
     if realm is None:
         realm = getattr(settings, 'WWW_AUTHENTICATION_REALM', _('Restricted Access'))
 
@@ -14,7 +14,7 @@ def basic_challenge(realm=None):
     return response
 
 
-def basic_authenticate(authentication):
+def is_authenticated(authentication):
     method, auth = authentication.split(' ', 1)
     if method.lower() != 'basic':
         return None
@@ -46,9 +46,9 @@ class BasicAuthenticationMiddleware(object):
             return
 
         if 'HTTP_AUTHORIZATION' not in request.META:
-            return basic_challenge()
+            return challenge()
 
-        if basic_authenticate(request.META['HTTP_AUTHORIZATION']):
+        if is_authenticated(request.META['HTTP_AUTHORIZATION']):
             return
 
-        return basic_challenge()
+        return challenge()

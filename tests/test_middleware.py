@@ -148,24 +148,24 @@ class TestBasicAuthMiddleware(TestCase):
     def setUp(self):
         self.middleware = basic_auth.BasicAuthenticationMiddleware()
 
-    def test_basic_challenge(self):
-        response = basic_auth.basic_challenge()
+    def test_challenge(self):
+        response = basic_auth.challenge()
         self.assertEqual(response.status_code, 401)
         self.assertEqual(response['WWW-Authenticate'], 'Basic realm="Restricted Access"')
 
-    def test_basic_authenticate_success(self):
+    def test_is_authenticated_success(self):
         request = self.DummyRequest('basic', 'user', 'pass')
-        result = basic_auth.basic_authenticate(request.META['HTTP_AUTHORIZATION'])
+        result = basic_auth.is_authenticated(request.META['HTTP_AUTHORIZATION'])
         self.assertTrue(result)
 
-    def test_basic_authenticate_failure_wrong_type(self):
+    def test_authenticate_failure_wrong_type(self):
         request = self.DummyRequest('non_basic', 'user', 'pass')
-        result = basic_auth.basic_authenticate(request.META['HTTP_AUTHORIZATION'])
+        result = basic_auth.is_authenticated(request.META['HTTP_AUTHORIZATION'])
         self.assertEqual(result, None)
 
-    def test_basic_authenticate_failure_wrong_credentials(self):
+    def test_is_authenticated_failure_wrong_credentials(self):
         request = self.DummyRequest('basic', 'other_user', 'other_pass')
-        result = basic_auth.basic_authenticate(request.META['HTTP_AUTHORIZATION'])
+        result = basic_auth.is_authenticated(request.META['HTTP_AUTHORIZATION'])
         self.assertFalse(result)
 
     @override_settings(BASIC_WWW_AUTHENTICATION=False)
@@ -177,14 +177,14 @@ class TestBasicAuthMiddleware(TestCase):
     def test_no_http_auth_in_meta(self):
         request = self.DummyRequest(None)
         result = self.middleware.process_request(request)
-        self.assertEqual(result.status_code, basic_auth.basic_challenge().status_code)
+        self.assertEqual(result.status_code, basic_auth.challenge().status_code)
 
-    def test_passes_basic_authentication(self):
+    def test_passes_authentication(self):
         request = self.DummyRequest('basic', 'user', 'pass')
         result = self.middleware.process_request(request)
         self.assertEqual(result, None)
 
-    def test_falls_through_to_basic_challenge(self):
+    def test_falls_through_to_challenge(self):
         request = self.DummyRequest('basic', 'other_user', 'other_pass')
         result = self.middleware.process_request(request)
-        self.assertEqual(result.status_code, basic_auth.basic_challenge().status_code)
+        self.assertEqual(result.status_code, basic_auth.challenge().status_code)
