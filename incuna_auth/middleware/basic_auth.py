@@ -17,7 +17,7 @@ def basic_challenge(realm=None):
 
 def basic_authenticate(authentication):
     authmeth, auth = authentication.split(' ', 1)
-    if 'basic' != authmeth.lower():
+    if authmeth.lower() != 'basic':
         return None
     auth = b64decode(auth.strip()).decode('utf-8')
     username, password = auth.split(':', 1)
