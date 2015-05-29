@@ -5,11 +5,6 @@ from django.http import HttpResponse
 from django.utils.translation import ugettext as _
 
 
-def base64_decode_for_py2or3(text):
-    """Decode a base-64 string in a way that works in Python 2 or 3."""
-    return b64decode(text).decode('utf-8')
-
-
 def basic_challenge(realm=None):
     if realm is None:
         realm = getattr(settings, 'WWW_AUTHENTICATION_REALM', _('Restricted Access'))
@@ -24,7 +19,7 @@ def basic_authenticate(authentication):
     authmeth, auth = authentication.split(' ', 1)
     if 'basic' != authmeth.lower():
         return None
-    auth = base64_decode_for_py2or3(auth.strip())
+    auth = b64decode(auth.strip()).decode('utf-8')
     username, password = auth.split(':', 1)
     AUTHENTICATION_USERNAME = settings.BASIC_WWW_AUTHENTICATION_USERNAME
     AUTHENTICATION_PASSWORD = settings.BASIC_WWW_AUTHENTICATION_PASSWORD
