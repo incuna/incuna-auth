@@ -1,6 +1,14 @@
 Changelog
 =========
 
+v3.0.0
+------
+* Removed base64_decode_for_py2or3 function
+* Removed realm parameter from basic_challenge function
+* Renamed basic_challenge to challenge
+* Renamed basic_authenticate to is_authenticated
+* General code tidy up
+
 v2.5.0
 --------
 * Redirect to `settings.LOGIN_URL` instead of `settings.LOGIN_REDIRECT_URL`.
