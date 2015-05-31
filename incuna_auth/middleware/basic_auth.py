@@ -5,9 +5,8 @@ from django.http import HttpResponse
 from django.utils.translation import ugettext as _
 
 
-def challenge(realm=None):
-    if realm is None:
-        realm = getattr(settings, 'WWW_AUTHENTICATION_REALM', _('Restricted Access'))
+def challenge():
+    realm = getattr(settings, 'WWW_AUTHENTICATION_REALM', _('Restricted Access'))
 
     response = HttpResponse(content_type='text/plain', status=401)
     response['WWW-Authenticate'] = 'Basic realm="{0}"'.format(realm)
