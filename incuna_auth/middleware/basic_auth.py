@@ -5,26 +5,19 @@ from django.http import HttpResponse
 from django.utils.translation import ugettext as _
 
 
-def base64_decode_for_py2or3(text):
-    """Decode a base-64 string in a way that works in Python 2 or 3."""
-    return b64decode(text).decode('utf-8')
+def challenge():
+    realm = getattr(settings, 'WWW_AUTHENTICATION_REALM', _('Restricted Access'))
 
-
-def basic_challenge(realm=None):
-    if realm is None:
-        realm = getattr(settings, 'WWW_AUTHENTICATION_REALM', _('Restricted Access'))
-
-    response = HttpResponse(content_type='text/plain')
+    response = HttpResponse(content_type='text/plain', status=401)
     response['WWW-Authenticate'] = 'Basic realm="{0}"'.format(realm)
-    response.status_code = 401
     return response
 
 
-def basic_authenticate(authentication):
-    authmeth, auth = authentication.split(' ', 1)
-    if 'basic' != authmeth.lower():
+def is_authenticated(authentication):
+    method, auth = authentication.split(' ', 1)
+    if method.lower() != 'basic':
         return None
-    auth = base64_decode_for_py2or3(auth.strip())
+    auth = b64decode(auth.strip()).decode('utf-8')
     username, password = auth.split(':', 1)
     AUTHENTICATION_USERNAME = settings.BASIC_WWW_AUTHENTICATION_USERNAME
     AUTHENTICATION_PASSWORD = settings.BASIC_WWW_AUTHENTICATION_PASSWORD
@@ -52,9 +45,9 @@ class BasicAuthenticationMiddleware(object):
             return
 
         if 'HTTP_AUTHORIZATION' not in request.META:
-            return basic_challenge()
+            return challenge()
 
-        if basic_authenticate(request.META['HTTP_AUTHORIZATION']):
+        if is_authenticated(request.META['HTTP_AUTHORIZATION']):
             return
 
-        return basic_challenge()
+        return challenge()
