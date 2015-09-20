@@ -1,6 +1,10 @@
 Changelog
 =========
 
+Upcoming
+--------
+* Removed use of deprecated `patterns` function from `urls.py`.
+
 v3.0.0
 ------
 * Removed base64_decode_for_py2or3 function
