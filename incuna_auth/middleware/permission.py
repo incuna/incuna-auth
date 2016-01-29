@@ -1,5 +1,6 @@
 from django.contrib import messages
-from django.http import HttpResponseForbidden, HttpResponseRedirect
+from django.contrib.auth.views import redirect_to_login
+from django.http import HttpResponseForbidden
 from django.utils.translation import ugettext_lazy as _
 
 from .utils import compile_urls
@@ -81,7 +82,7 @@ class BasePermissionMiddleware:
 
         # Return a HTTP 302 redirect.
         redirect_url = self.get_unauthorised_redirect_url(request)
-        return HttpResponseRedirect(redirect_url)
+        return redirect_to_login(request.path_info, login_url=redirect_url)
 
     def process_request(self, request):
         """

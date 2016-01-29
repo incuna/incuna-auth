@@ -13,10 +13,10 @@ class TestBasePermissionMiddleware(RequestTestCase):
         self.middleware = self.middleware_class()
 
     def test_deny_access(self):
-        """Assert that a typical (GET) redirect defaults to /."""
+        """Assert that a typical (GET) redirect defaults to /?next=/."""
         response = self.middleware.deny_access(self.create_request())
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response['location'], '/')
+        self.assertEqual(response['location'], '/?next=/')
 
     def test_deny_access_post(self):
         """Assert that a POST request results in a HTTP 403 (Forbidden) error."""

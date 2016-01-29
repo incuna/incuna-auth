@@ -57,9 +57,10 @@ class TestLoginRequiredMiddleware(RequestTestCase):
         request = self.make_request(auth=False)
         response = self.middleware.process_request(request)
         message = 'You must be logged in to view this page.'
+        redirect_url = settings.LOGIN_URL + '?next=/fake-request/'
 
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response['location'], settings.LOGIN_URL)
+        self.assertEqual(response['location'], redirect_url)
         self.assertEqual(request._messages.store, [message])
 
     @mock.patch(EXEMPT_URLS, NO_URLS)
@@ -116,9 +117,10 @@ class TestFeinCMSLoginRequiredMiddleware(RequestTestCase):
         with mock.patch(self.get_page_method, return_value=request.feincms_page):
             response = self.middleware.process_request(request)
         message = 'You must be logged in to view this page.'
+        redirect_url = settings.LOGIN_URL + '?next=/'
 
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response['location'], settings.LOGIN_URL)
+        self.assertEqual(response['location'], redirect_url)
         self.assertEqual(request._messages.store, [message])
 
     def test_non_auth_post(self):
