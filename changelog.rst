@@ -5,6 +5,10 @@ Upcoming
 --------
 * Removed use of deprecated `patterns` function from `urls.py`.
 
+v3.0.2
+------
+* Enhancement: `LoginRequiredMiddleware` nolonger displays access denied message if the request came from `/`.
+
 v3.0.1
 ------
 * Regression fix:  After Login `LoginRequiredMiddleware` redirects to the original page.

@@ -58,7 +58,9 @@ class BasePermissionMiddleware:
     def get_unauthorised_redirect_url(self, request):
         return self.base_unauthorised_redirect_url
 
-    def get_access_denied_message(self):
+    def get_access_denied_message(self, request):
+        if request.path_info == '/':
+            return None
         return ''
 
     def deny_access(self, request, **kwargs):
@@ -76,7 +78,7 @@ class BasePermissionMiddleware:
             return HttpResponseForbidden()
 
         # Add a message, if one has been defined.
-        message = self.get_access_denied_message()
+        message = self.get_access_denied_message(request)
         if message:
             messages.info(request, _(message))
 
@@ -111,7 +113,9 @@ class LoginPermissionMiddlewareMixin:
         """Returns true if and only if the user isn't authenticated."""
         return request.user.is_anonymous()
 
-    def get_access_denied_message(self):
+    def get_access_denied_message(self, request):
+        if request.path_info == '/':
+            return None
         return 'You must be logged in to view this page.'
 
 

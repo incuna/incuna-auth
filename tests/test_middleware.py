@@ -113,11 +113,15 @@ class TestFeinCMSLoginRequiredMiddleware(RequestTestCase):
         self.assertIsNone(response)
 
     def test_non_auth_get(self):
-        request = self.make_request(auth=False, access_state=self.AUTH_STATE)
+        request = self.make_request(
+            access_state=self.AUTH_STATE,
+            auth=False,
+            url='/test/'
+        )
         with mock.patch(self.get_page_method, return_value=request.feincms_page):
             response = self.middleware.process_request(request)
         message = 'You must be logged in to view this page.'
-        redirect_url = settings.LOGIN_URL + '?next=/'
+        redirect_url = settings.LOGIN_URL + '?next=/test/'
 
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response['location'], redirect_url)
