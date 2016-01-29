@@ -81,11 +81,11 @@ class TestBasePermissionMiddleware(RequestTestCase):
         self.middleware.base_unauthorised_redirect_url = url
         self.assertEqual(url, self.middleware.get_unauthorised_redirect_url(request))
 
-    def test_default_access_denied_message(self):
+    def test_access_denied_message(self):
         """
         Assert the default implementation of get_access_denied_message returns ''.
         """
-        self.assertEqual('', self.middleware.get_access_denied_message())
+        self.assertEqual('', self.middleware.get_access_denied_message(request=None))
 
 
 class TestLoginMiddlewareMixin(RequestTestCase):
@@ -109,7 +109,10 @@ class TestLoginMiddlewareMixin(RequestTestCase):
     def test_access_denied_message(self):
         """Assert the message returned by get_access_denied_message."""
         expected_message = 'You must be logged in to view this page.'
-        self.assertEqual(expected_message, self.middleware.get_access_denied_message())
+        self.assertEqual(
+            expected_message,
+            self.middleware.get_access_denied_message(request=None)
+        )
 
 
 class TestUrlPermissionMiddleware(RequestTestCase):

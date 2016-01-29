@@ -5,6 +5,10 @@ Upcoming
 --------
 * Removed use of deprecated `patterns` function from `urls.py`.
 
+v4.0.0
+------
+* Enhancement: `BasePermissionMiddleware.get_access_denied_message` & `LoginPermissionMiddlewareMixin.get_access_denied_message` now take `request` arg.
+
 v3.0.1
 ------
 * Regression fix:  After Login `LoginRequiredMiddleware` redirects to the original page.
