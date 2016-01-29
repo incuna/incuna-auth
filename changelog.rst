@@ -7,7 +7,7 @@ Upcoming
 
 v3.0.1
 ------
-* Enhancement:  After Login `LoginRequiredMiddleware` redirects to the original page.
+* Regression fix:  After Login `LoginRequiredMiddleware` redirects to the original page.
 
 v3.0.0
 ------
