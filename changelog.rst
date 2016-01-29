@@ -7,7 +7,7 @@ Upcoming
 
 v3.0.2
 ------
-* Enhancement: `LoginRequiredMiddleware` nolonger displays access denied message if the request came from `/`.
+* Enhancement: `BasePermissionMiddleware.get_access_denied_message` & `LoginPermissionMiddlewareMixin.get_access_denied_message` now take `request` arg.
 
 v3.0.1
 ------

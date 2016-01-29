@@ -83,17 +83,10 @@ class TestBasePermissionMiddleware(RequestTestCase):
 
     def test_access_denied_message(self):
         """
-        Assert get_access_denied_message returns '' when request.path_info in not /.
-        """
-        request = self.create_request(url='/test/')
-        self.assertEqual('', self.middleware.get_access_denied_message(request))
-
-    def test_silient_access_denied(self):
-        """
-        Assert get_access_denied_message retuns None when request.path_info is /.
+        Assert the default implementation of get_access_denied_message returns ''.
         """
         request = self.create_request()
-        self.assertFalse(self.middleware.get_access_denied_message(request))
+        self.assertEqual('', self.middleware.get_access_denied_message(request))
 
 
 class TestLoginMiddlewareMixin(RequestTestCase):
@@ -122,11 +115,6 @@ class TestLoginMiddlewareMixin(RequestTestCase):
             expected_message,
             self.middleware.get_access_denied_message(request)
         )
-
-    def test_silient_access_denied_message(self):
-        """Assert no message is returned when request.path_info is /."""
-        request = self.create_request()
-        self.assertFalse(self.middleware.get_access_denied_message(request))
 
 
 class TestUrlPermissionMiddleware(RequestTestCase):

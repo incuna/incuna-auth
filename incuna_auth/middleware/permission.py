@@ -59,8 +59,6 @@ class BasePermissionMiddleware:
         return self.base_unauthorised_redirect_url
 
     def get_access_denied_message(self, request):
-        if request.path_info == '/':
-            return None
         return ''
 
     def deny_access(self, request, **kwargs):
@@ -114,8 +112,6 @@ class LoginPermissionMiddlewareMixin:
         return request.user.is_anonymous()
 
     def get_access_denied_message(self, request):
-        if request.path_info == '/':
-            return None
         return 'You must be logged in to view this page.'
 
 
