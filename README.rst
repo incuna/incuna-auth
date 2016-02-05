@@ -39,13 +39,11 @@ Add the tables to the db::
 
 **Warning**: An initial data fixture is included that creates an admin_sso.Assignment to assign any user with an incuna.com email to the Admin user.
 
-If django-rewrite-external-links_ is being used, make sure to allow anonymous access to the external link redirect page by adding the following in ``settings.py``::
+To allow anonymous access to urls inaccessible by default when using ``LoginRequiredMiddleware``, add ``LOGIN_EXEMPT_URLS`` in ``settings.py``::
 
     LOGIN_EXEMPT_URLS = [
-        r'^external-link/',
+        r'^about/',
     ]
-
-.. _django-rewrite-external-links: https://github.com/incuna/django-rewrite-external-links
 
 Backend
 ~~~~~~~
