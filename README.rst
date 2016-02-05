@@ -39,6 +39,12 @@ Add the tables to the db::
 
 **Warning**: An initial data fixture is included that creates an admin_sso.Assignment to assign any user with an incuna.com email to the Admin user.
 
+To allow anonymous access to urls inaccessible by default when using ``LoginRequiredMiddleware``, add ``LOGIN_EXEMPT_URLS`` in ``settings.py``::
+
+    LOGIN_EXEMPT_URLS = [
+        r'^about/',
+    ]
+
 Backend
 ~~~~~~~
 TODO: Add a run down of the Backend.
