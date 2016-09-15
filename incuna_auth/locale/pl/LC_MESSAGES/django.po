@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-15 11:06-0500\n"
+"POT-Creation-Date: 2016-09-15 12:21-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,7 +26,7 @@ msgstr ""
 #: incuna_auth/templates/registration/base/login_base.html:6
 #: incuna_auth/templates/registration/base/login_base.html:8
 msgid "Log In"
-msgstr ""
+msgstr "Zaloguj się"
 
 #: incuna_auth/templates/registration/base/login_form_base.html:7
 msgid "Please log in using your email and password."
@@ -34,11 +34,11 @@ msgstr ""
 
 #: incuna_auth/templates/registration/base/login_form_base.html:16
 msgid "Forgotten password?"
-msgstr ""
+msgstr "Nie pamiętasz hasła?"
 
 #: incuna_auth/templates/registration/base/login_form_base.html:22
 msgid "Log in"
-msgstr ""
+msgstr "Zaloguj się"
 
 #: incuna_auth/templates/registration/base/logout_base.html:6
 #: incuna_auth/templates/registration/base/logout_base.html:8
@@ -52,7 +52,7 @@ msgstr ""
 #: incuna_auth/templates/registration/base/password_change_done_base.html:7
 #: incuna_auth/templates/registration/base/password_change_done_base.html:9
 msgid "Password Change Successful"
-msgstr ""
+msgstr "Hasło zostało zmienione"
 
 #: incuna_auth/templates/registration/base/password_change_done_base.html:12
 msgid "Your password was changed."
@@ -121,7 +121,7 @@ msgstr ""
 #: incuna_auth/templates/registration/base/password_reset_done_base.html:6
 #: incuna_auth/templates/registration/base/password_reset_done_base.html:8
 msgid "Password Reset Successful"
-msgstr ""
+msgstr "Hasło zostało zresetowane"
 
 #: incuna_auth/templates/registration/base/password_reset_done_base.html:11
 msgid ""
@@ -158,7 +158,7 @@ msgstr ""
 #: incuna_auth/templates/registration/base/password_reset_form_base.html:7
 #: incuna_auth/templates/registration/base/password_reset_form_base.html:9
 msgid "Password Reset"
-msgstr ""
+msgstr "Zresetuj hasło"
 
 #: incuna_auth/templates/registration/base/password_reset_form_base.html:12
 msgid ""

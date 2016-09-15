@@ -5,6 +5,7 @@ UPCOMING
 --------
 
 * Add test_project.
+* Add translations.
 
 v4.1.0
 --------
