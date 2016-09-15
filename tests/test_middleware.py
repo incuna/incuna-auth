@@ -63,6 +63,17 @@ class TestLoginRequiredMiddleware(RequestTestCase):
         self.assertEqual(response['location'], redirect_url)
         self.assertEqual(request._messages.store, [message])
 
+    @override_settings(FORCE_SCRIPT_NAME='/base/script/path')
+    @mock.patch(EXEMPT_URLS, NO_URLS)
+    @mock.patch(PROTECTED_URLS, ALL_URLS)
+    def test_non_auth_get_script_name(self):
+        request = self.make_request(auth=False)
+        response = self.middleware.process_request(request)
+        redirect_url = settings.LOGIN_URL + '?next=/base/script/path/fake-request/'
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response['location'], redirect_url)
+
     @mock.patch(EXEMPT_URLS, NO_URLS)
     @mock.patch(PROTECTED_URLS, ALL_URLS)
     def test_non_auth_post(self):
