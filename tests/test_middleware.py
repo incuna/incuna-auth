@@ -63,7 +63,7 @@ class TestLoginRequiredMiddleware(RequestTestCase):
         self.assertEqual(response['location'], redirect_url)
         self.assertEqual(request._messages.store, [message])
 
-    @override_settings(FORCE_SCRIPT_NAME='/base/script/path/')
+    @override_settings(FORCE_SCRIPT_NAME='/base/script/path')
     @mock.patch(EXEMPT_URLS, NO_URLS)
     @mock.patch(PROTECTED_URLS, ALL_URLS)
     def test_non_auth_get_script_name(self):
