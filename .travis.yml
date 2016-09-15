@@ -10,8 +10,6 @@ env:
   global:
     - DATABASE_URL='postgres://postgres@localhost/incuna_auth'
   matrix:
-    - DJANGO='django>=1.4,<1.5'
-    - DJANGO='django>=1.5,<1.6'
     - DJANGO='django>=1.6,<1.7'
     - DJANGO='django>=1.7,<1.8'
 matrix:

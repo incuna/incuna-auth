@@ -1,6 +1,11 @@
 Changelog
 =========
 
+UPCOMING
+--------
+
+* Add test_project.
+
 v4.1.0
 --------
 * Removed use of deprecated `patterns` function from `urls.py`.
