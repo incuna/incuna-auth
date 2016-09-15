@@ -4,6 +4,7 @@ Changelog
 Upcoming
 --------
 * Removed use of deprecated `patterns` function from `urls.py`.
+* Fix `next` redirect path when `SCRIPT_NAME` is used.
 
 v4.0.0
 ------

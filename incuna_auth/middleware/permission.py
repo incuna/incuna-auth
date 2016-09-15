@@ -82,7 +82,7 @@ class BasePermissionMiddleware:
 
         # Return a HTTP 302 redirect.
         redirect_url = self.get_unauthorised_redirect_url(request)
-        return redirect_to_login(request.path_info, login_url=redirect_url)
+        return redirect_to_login(request.get_full_path(), login_url=redirect_url)
 
     def process_request(self, request):
         """
