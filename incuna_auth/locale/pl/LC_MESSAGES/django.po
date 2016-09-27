@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-15 12:21-0500\n"
+"POT-Creation-Date: 2016-09-27 10:36-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,197 +19,258 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
+#: build/lib/incuna_auth/middleware/basic_auth.py:15
 #: incuna_auth/middleware/basic_auth.py:9
 msgid "Restricted Access"
-msgstr ""
+msgstr "Dostęp zastrzeżony"
 
+#: build/lib/incuna_auth/templates/registration/base/login_base.html:6
+#: build/lib/incuna_auth/templates/registration/base/login_base.html:8
 #: incuna_auth/templates/registration/base/login_base.html:6
 #: incuna_auth/templates/registration/base/login_base.html:8
 msgid "Log In"
 msgstr "Zaloguj się"
 
+#: build/lib/incuna_auth/templates/registration/base/login_form_base.html:7
 #: incuna_auth/templates/registration/base/login_form_base.html:7
 msgid "Please log in using your email and password."
-msgstr ""
+msgstr "Proszę zalogować się przy pomocy swojego adresu e-mail i hasła."
 
+#: build/lib/incuna_auth/templates/registration/base/login_form_base.html:16
 #: incuna_auth/templates/registration/base/login_form_base.html:16
 msgid "Forgotten password?"
 msgstr "Nie pamiętasz hasła?"
 
+#: build/lib/incuna_auth/templates/registration/base/login_form_base.html:22
 #: incuna_auth/templates/registration/base/login_form_base.html:22
 msgid "Log in"
 msgstr "Zaloguj się"
 
+#: build/lib/incuna_auth/templates/registration/base/logout_base.html:6
+#: build/lib/incuna_auth/templates/registration/base/logout_base.html:8
 #: incuna_auth/templates/registration/base/logout_base.html:6
 #: incuna_auth/templates/registration/base/logout_base.html:8
 msgid "Logged Out"
-msgstr ""
+msgstr "Wylogowano"
 
+#: build/lib/incuna_auth/templates/registration/base/logout_base.html:11
 #: incuna_auth/templates/registration/base/logout_base.html:11
 msgid "You have logged out."
-msgstr ""
+msgstr "Wylogowano pomyślnie."
 
+#: build/lib/incuna_auth/templates/registration/base/password_change_done_base.html:7
+#: build/lib/incuna_auth/templates/registration/base/password_change_done_base.html:9
 #: incuna_auth/templates/registration/base/password_change_done_base.html:7
 #: incuna_auth/templates/registration/base/password_change_done_base.html:9
 msgid "Password Change Successful"
 msgstr "Hasło zostało zmienione"
 
+#: build/lib/incuna_auth/templates/registration/base/password_change_done_base.html:12
 #: incuna_auth/templates/registration/base/password_change_done_base.html:12
 msgid "Your password was changed."
-msgstr ""
+msgstr "Hasło zostało zmienione."
 
+#: build/lib/incuna_auth/templates/registration/base/password_change_form_base.html:8
+#: build/lib/incuna_auth/templates/registration/base/password_change_form_base.html:10
 #: incuna_auth/templates/registration/base/password_change_form_base.html:8
 #: incuna_auth/templates/registration/base/password_change_form_base.html:10
 msgid "Password Change"
-msgstr ""
+msgstr "Zmiana hasła"
 
+#: build/lib/incuna_auth/templates/registration/base/password_change_form_base.html:13
 #: incuna_auth/templates/registration/base/password_change_form_base.html:13
 msgid ""
 "Please enter your old password, for security's sake, and then enter your new "
 "password twice so we can verify you typed it in correctly."
 msgstr ""
+"Dla bezpieczeństwa proszę wprowadzić swoje stare hasło, a następnie "
+"dwukrotnie wprowadzić nowe hasło, abyśmy mogli zweryfikować, czy zostało ono "
+"prawidłowo wpisane."
 
+#: build/lib/incuna_auth/templates/registration/base/password_change_form_base.html:26
+#: build/lib/incuna_auth/templates/registration/base/password_reset_confirm_base.html:39
 #: incuna_auth/templates/registration/base/password_change_form_base.html:26
 #: incuna_auth/templates/registration/base/password_reset_confirm_base.html:39
 msgid "Change my password"
-msgstr ""
+msgstr "Zmień moje hasło"
 
+#: build/lib/incuna_auth/templates/registration/base/password_reset_complete_base.html:6
+#: build/lib/incuna_auth/templates/registration/base/password_reset_complete_base.html:8
 #: incuna_auth/templates/registration/base/password_reset_complete_base.html:6
 #: incuna_auth/templates/registration/base/password_reset_complete_base.html:8
 msgid "Password Reset Complete"
-msgstr ""
+msgstr "Resetowanie hasła zakończone"
 
+#: build/lib/incuna_auth/templates/registration/base/password_reset_complete_base.html:11
 #: incuna_auth/templates/registration/base/password_reset_complete_base.html:11
 #, python-format
 msgid ""
 "Your password has been set. You may go ahead and <a href=\"%(login_url)s"
 "\">log in</a> now."
 msgstr ""
+"Hasło zostało ustawione. Można teraz przejść do <a href=\"%(login_url)s"
+"\">logowania</a>."
 
+#: build/lib/incuna_auth/templates/registration/base/password_reset_confirm_base.html:10
+#: build/lib/incuna_auth/templates/registration/base/password_reset_confirm_base.html:18
 #: incuna_auth/templates/registration/base/password_reset_confirm_base.html:10
 #: incuna_auth/templates/registration/base/password_reset_confirm_base.html:18
 msgid "Enter New Password"
-msgstr ""
+msgstr "Wprowadź nowe hasło"
 
+#: build/lib/incuna_auth/templates/registration/base/password_reset_confirm_base.html:12
+#: build/lib/incuna_auth/templates/registration/base/password_reset_confirm_base.html:20
 #: incuna_auth/templates/registration/base/password_reset_confirm_base.html:12
 #: incuna_auth/templates/registration/base/password_reset_confirm_base.html:20
 msgid "Password Reset Unsuccessful"
-msgstr ""
+msgstr "Hasło nie zostało zresetowane pomyślnie"
 
+#: build/lib/incuna_auth/templates/registration/base/password_reset_confirm_base.html:26
 #: incuna_auth/templates/registration/base/password_reset_confirm_base.html:26
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
 msgstr ""
+"Proszę dwukrotnie wprowadzić nowe hasło, abyśmy mogli zweryfikować, czy "
+"zostało ono prawidłowo wpisane."
 
+#: build/lib/incuna_auth/templates/registration/base/password_reset_confirm_base.html:46
 #: incuna_auth/templates/registration/base/password_reset_confirm_base.html:46
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used."
 msgstr ""
+"Łącze do resetowania hasła było nieważne, prawdopodobnie dlatego, że zostało "
+"już wcześniej użyte."
 
+#: build/lib/incuna_auth/templates/registration/base/password_reset_confirm_base.html:50
 #: incuna_auth/templates/registration/base/password_reset_confirm_base.html:50
 #, python-format
 msgid ""
 "Please <a href=\"%(password_reset_url)s\">request a new password</a> reset."
 msgstr ""
+"Proszę <a href=\"%(password_reset_url)s\">zażądać ponownego zresetowania "
+"hasła</a>."
 
+#: build/lib/incuna_auth/templates/registration/base/password_reset_confirm_base.html:52
 #: incuna_auth/templates/registration/base/password_reset_confirm_base.html:52
 msgid "Please request a new password reset."
-msgstr ""
+msgstr "Proszę zażądać ponownego zresetowania hasła."
 
+#: build/lib/incuna_auth/templates/registration/base/password_reset_done_base.html:6
+#: build/lib/incuna_auth/templates/registration/base/password_reset_done_base.html:8
 #: incuna_auth/templates/registration/base/password_reset_done_base.html:6
 #: incuna_auth/templates/registration/base/password_reset_done_base.html:8
 msgid "Password Reset Successful"
 msgstr "Hasło zostało zresetowane"
 
+#: build/lib/incuna_auth/templates/registration/base/password_reset_done_base.html:11
 #: incuna_auth/templates/registration/base/password_reset_done_base.html:11
 msgid ""
 "We've e-mailed you instructions for setting your password to the e-mail "
 "address you submitted. You should be receiving it shortly."
 msgstr ""
+"Na przekazany nam adres e-mail wysłaliśmy wiadomość zawierającą instrukcje "
+"dotyczące ustawiania hasła. Powinna ona wkrótce dotrzeć."
 
+#: build/lib/incuna_auth/templates/registration/base/password_reset_email_base.html:8
 #: incuna_auth/templates/registration/base/password_reset_email_base.html:8
 msgid "You're receiving this e-mail because you requested a password reset"
 msgstr ""
+"Niniejszą wiadomość e-mail otrzymano w związku z prośbą o zresetowanie hasła"
 
+#: build/lib/incuna_auth/templates/registration/base/password_reset_email_base.html:9
 #: incuna_auth/templates/registration/base/password_reset_email_base.html:9
 #, python-format
 msgid "for your user account at %(site_name)s"
-msgstr ""
+msgstr "do konta użytkownika w witrynie %(site_name)s"
 
+#: build/lib/incuna_auth/templates/registration/base/password_reset_email_base.html:11
 #: incuna_auth/templates/registration/base/password_reset_email_base.html:11
 msgid "Please go to the following page and choose a new password:"
-msgstr ""
+msgstr "Proszę przejść na następującą stronę i wybrać nowe hasło:"
 
+#: build/lib/incuna_auth/templates/registration/base/password_reset_email_base.html:15
 #: incuna_auth/templates/registration/base/password_reset_email_base.html:15
 msgid "Your username, in case you've forgotten:"
-msgstr ""
+msgstr "W ramach przypomnienia, oto Twoja nazwa użytkownika:"
 
+#: build/lib/incuna_auth/templates/registration/base/password_reset_email_base.html:17
 #: incuna_auth/templates/registration/base/password_reset_email_base.html:17
 msgid "Thanks for using our site!"
-msgstr ""
+msgstr "Dziękujemy za korzystanie z naszej witryny!"
 
+#: build/lib/incuna_auth/templates/registration/base/password_reset_email_base.html:19
 #: incuna_auth/templates/registration/base/password_reset_email_base.html:19
 #, python-format
 msgid "The %(site_name)s team"
-msgstr ""
+msgstr "Zespół %(site_name)s"
 
+#: build/lib/incuna_auth/templates/registration/base/password_reset_form_base.html:7
+#: build/lib/incuna_auth/templates/registration/base/password_reset_form_base.html:9
 #: incuna_auth/templates/registration/base/password_reset_form_base.html:7
 #: incuna_auth/templates/registration/base/password_reset_form_base.html:9
 msgid "Password Reset"
 msgstr "Zresetuj hasło"
 
+#: build/lib/incuna_auth/templates/registration/base/password_reset_form_base.html:12
 #: incuna_auth/templates/registration/base/password_reset_form_base.html:12
 msgid ""
 "Forgotten your password? Enter your e-mail address below, and we'll e-mail "
 "instructions for setting a new one."
 msgstr ""
+"Nie pamiętasz hasła? Wprowadź swój adres e-mail, abyśmy mogli wysłać "
+"instrukcje dotyczące ustawiania nowego."
 
+#: build/lib/incuna_auth/templates/registration/base/password_reset_form_base.html:25
 #: incuna_auth/templates/registration/base/password_reset_form_base.html:25
 msgid "Reset"
-msgstr ""
+msgstr "Zresetuj"
 
-#: incuna_auth/urls.py:36
+#: build/lib/incuna_auth/urls.py:27 incuna_auth/urls.py:36
 msgid "^login/$"
-msgstr ""
+msgstr "^login/$"
 
-#: incuna_auth/urls.py:42
+#: build/lib/incuna_auth/urls.py:33 incuna_auth/urls.py:42
 msgid "^logout/$"
-msgstr ""
+msgstr "^logout/$"
 
-#: incuna_auth/urls.py:49
+#: build/lib/incuna_auth/urls.py:40 incuna_auth/urls.py:49
 msgid "^password/change/$"
-msgstr ""
+msgstr "^password/change/$"
 
-#: incuna_auth/urls.py:54
+#: build/lib/incuna_auth/urls.py:45 incuna_auth/urls.py:54
 msgid "^password/change/done/$"
-msgstr ""
+msgstr "^password/change/done/$"
 
-#: incuna_auth/urls.py:60
+#: build/lib/incuna_auth/urls.py:51 incuna_auth/urls.py:60
 msgid "^password/reset/$"
-msgstr ""
+msgstr "^password/reset/$"
 
-#: incuna_auth/urls.py:66
+#: build/lib/incuna_auth/urls.py:57 incuna_auth/urls.py:66
 msgid "^password/reset/done/$"
-msgstr ""
+msgstr "^password/reset/done/$"
 
-#: incuna_auth/urls.py:71
+#: build/lib/incuna_auth/urls.py:62 incuna_auth/urls.py:71
 msgid "^password/reset/complete/$"
-msgstr ""
+msgstr "^password/reset/complete/$"
 
-#: incuna_auth/urls.py:76
+#: build/lib/incuna_auth/urls.py:67 incuna_auth/urls.py:76
 msgid "^sso/$"
-msgstr ""
+msgstr "^sso/$"
 
-#: incuna_auth/urls.py:86
+#: build/lib/incuna_auth/urls.py:78 incuna_auth/urls.py:86
 msgid ""
 "^password/reset/confirm/(?P<uidb64>[0-9A-Za-z_\\-]+)/(?P<token>[0-9A-Za-z]"
 "{1,13}-[0-9A-Za-z]{1,20})/$"
 msgstr ""
+"^password/reset/confirm/(?P<uidb64>[0-9A-Za-z_\\-]+)/(?P<token>[0-9A-Za-z]"
+"{1,13}-[0-9A-Za-z]{1,20})/$"
 
-#: incuna_auth/urls.py:99
+#: build/lib/incuna_auth/urls.py:92 incuna_auth/urls.py:99
 msgid ""
 "^password/reset/confirm/(?P<uidb36>[0-9A-Za-z]{1,13})-(?P<token>[0-9A-Za-z]"
 "{1,13}-[0-9A-Za-z]{1,20})/$"
 msgstr ""
+"^password/reset/confirm/(?P<uidb36>[0-9A-Za-z]{1,13})-(?P<token>[0-9A-Za-z]"
+"{1,13}-[0-9A-Za-z]{1,20})/$"
