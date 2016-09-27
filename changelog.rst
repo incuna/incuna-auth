@@ -1,9 +1,9 @@
 Changelog
 =========
 
-UPCOMING
---------
 
+v4.2.0
+------
 * Add test_project.
 * Add translations.
 
