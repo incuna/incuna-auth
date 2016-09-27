@@ -50,6 +50,10 @@ BASIC_WWW_AUTHENTICATION_USERNAME = 'user'
 BASIC_WWW_AUTHENTICATION_PASSWORD = 'pass'
 BASIC_WWW_AUTHENTICATION = True
 
+# Additional translation folders.
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'incuna_auth', 'locale'),
+)
 
 TEMPLATES = [
     {

@@ -1,4 +1,3 @@
 include README.rst
 include changelog.rst
-recursive-include * *.html
-recursive-include * *.json
+recursive-include * *.html *.json *.mo *.po
