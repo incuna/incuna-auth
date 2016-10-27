@@ -27,3 +27,4 @@ translations-all:
 	@make translations locale=fr_BE
 	@make translations locale=nl_BE
 	@make translations locale=pl
+	@make translations locale=it
