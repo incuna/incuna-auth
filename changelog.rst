@@ -2,6 +2,11 @@ Changelog
 =========
 
 
+4.3.0
+-----
+
+* Add Italian translations.
+
 v4.2.0
 ------
 * Add test_project.
