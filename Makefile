@@ -18,7 +18,7 @@ test:
 
 translations:
 	@test_project/manage.py makemessages --locale $(locale)
-	@test_project/manage.py compilemessages
+	@test_project/manage.py compilemessages --locale $(locale)
 
 translations-all:
 	@make translations locale=en_IE
