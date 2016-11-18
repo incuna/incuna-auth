@@ -1,6 +1,10 @@
 Changelog
 =========
 
+4.4.0
+-----
+
+* Add German Austrian translations.
 
 4.3.0
 -----
