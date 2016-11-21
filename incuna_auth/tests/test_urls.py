@@ -1,8 +1,10 @@
 from unittest import skipIf, skipUnless, TestCase
 
 import django
+from django.conf import settings
 from django.contrib.auth import views
 from django.core.urlresolvers import resolve, reverse
+from django.utils import translation
 from django.views.generic import RedirectView
 
 
@@ -39,6 +41,24 @@ class TestURLs(URLsMixin, TestCase):
             '/login/',
             'login',
         )
+
+    @skipUnless(settings.TRANSLATE_URLS, 'Only run if TRANSLATE_URLS=True')
+    def test_login_translate_enabled(self):
+        with translation.override('de_AT'):
+            self.check_url(
+                views.login,
+                '/Anmeldung/',
+                'login',
+            )
+
+    @skipIf(settings.TRANSLATE_URLS, 'Only run if TRANSLATE_URLS=False')
+    def test_login_translate_disabeled(self):
+        with translation.override('de_AT'):
+            self.check_url(
+                views.login,
+                '/login/',
+                'login',
+            )
 
     def test_logout(self):
         self.check_url(

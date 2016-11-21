@@ -1,6 +1,12 @@
 Changelog
 =========
 
+Upcoming
+--------
+
+* Add `TRANSLATE_URLS` setting and disable url translations by default.
+
+
 4.4.0
 -----
 

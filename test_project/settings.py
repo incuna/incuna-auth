@@ -75,3 +75,5 @@ TEMPLATES = [
 ]
 
 TEST_RUNNER = 'test_project.test_runner.Runner'
+
+TRANSLATE_URLS = bool(os.environ.get('TRANSLATE_URLS', False))
