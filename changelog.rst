@@ -1,6 +1,11 @@
 Changelog
 =========
 
+4.5.0
+-----
+
+* Add French Luxembourgian translations.
+
 4.4.0
 -----
 
