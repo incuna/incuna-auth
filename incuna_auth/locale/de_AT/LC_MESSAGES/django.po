@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-18 07:08-0600\n"
+"POT-Creation-Date: 2016-11-21 11:59-0600\n"
 "PO-Revision-Date: 2016-11-18 13:27+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -187,31 +187,31 @@ msgstr "Neueinstellung"
 
 #: incuna_auth/urls.py:36
 msgid "^login/$"
-msgstr "^Anmeldung/$"
+msgstr "^anmeldung/$"
 
 #: incuna_auth/urls.py:42
 msgid "^logout/$"
-msgstr "^Abmeldung/$"
+msgstr "^abmeldung/$"
 
 #: incuna_auth/urls.py:49
 msgid "^password/change/$"
-msgstr "^Passwort/Änderung/$"
+msgstr "^passwort/anderung/$"
 
 #: incuna_auth/urls.py:54
 msgid "^password/change/done/$"
-msgstr "^Passwort/Änderung/fertig/$"
+msgstr "^passwort/anderung/fertig/$"
 
 #: incuna_auth/urls.py:60
 msgid "^password/reset/$"
-msgstr "^Passwort/Erneuerung/$"
+msgstr "^passwort/erneuerung/$"
 
 #: incuna_auth/urls.py:66
 msgid "^password/reset/done/$"
-msgstr "^Passwort/Erneuerung/fertig/$"
+msgstr "^passwort/erneuerung/fertig/$"
 
 #: incuna_auth/urls.py:71
 msgid "^password/reset/complete/$"
-msgstr "^Passwort/Erneuerung/vollständig/$"
+msgstr "^passwort/erneuerung/vollstandig/$"
 
 #: incuna_auth/urls.py:76
 msgid "^sso/$"
@@ -222,7 +222,7 @@ msgid ""
 "^password/reset/confirm/(?P<uidb64>[0-9A-Za-z_\\-]+)/(?P<token>[0-9A-Za-z]"
 "{1,13}-[0-9A-Za-z]{1,20})/$"
 msgstr ""
-"^Passwort/Erneuerung/bestätigen/(?P<uidb64>[0-9A-Za-z_\\-]+)/(?P<token>[0-9A-"
+"^passwort/erneuerung/bestatigen/(?P<uidb64>[0-9A-Za-z_\\-]+)/(?P<token>[0-9A-"
 "Za-z]{1,13}-[0-9A-Za-z]{1,20})/$"
 
 #: incuna_auth/urls.py:99
@@ -230,5 +230,5 @@ msgid ""
 "^password/reset/confirm/(?P<uidb36>[0-9A-Za-z]{1,13})-(?P<token>[0-9A-Za-z]"
 "{1,13}-[0-9A-Za-z]{1,20})/$"
 msgstr ""
-"^Passwort/Erneuerung/bestätigen/(?P<uidb36>[0-9A-Za-z]{1,13})-(?"
+"^passwort/erneuerung/bestatigen/(?P<uidb36>[0-9A-Za-z]{1,13})-(?"
 "P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$"

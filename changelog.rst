@@ -5,7 +5,12 @@ Upcoming
 --------
 
 * Add `TRANSLATE_URLS` setting and disable url translations by default.
+* Fix German Austrian url translations to be lowercase ascii characters.
 
+4.5.0
+-----
+
+* Add French Luxembourgian translations.
 
 4.4.0
 -----
