@@ -6,6 +6,11 @@ UPCOMING
 
 * Fix German Austrian url translations to be lowercase ascii characters.
 
+4.5.0
+-----
+
+* Add French Luxembourgian translations.
+
 4.4.0
 -----
 
