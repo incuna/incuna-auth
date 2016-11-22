@@ -16,6 +16,7 @@ from django.utils.translation import ugettext_lazy
 from django.views.generic import RedirectView
 
 
+# Only translate the urls if `TRANSLATE_URLS` is `True`.
 if getattr(settings, 'TRANSLATE_URLS', False):
     _ = ugettext_lazy
 else:
