@@ -1,6 +1,11 @@
 Changelog
 =========
 
+UPCOMING
+--------
+
+* Fix German Austrian url translations to be lowercase ascii characters.
+
 4.5.0
 -----
 
