@@ -73,3 +73,7 @@ The middleware system is easily extensible, and there's a small framework of par
 
 Any middleware class has a core method called ``process_request``, which is called by Django for any request that passes through this middleware. The ``permission`` module middleware implements this by first checking if the requested resource should be protected via a method named ``is_resource_protected``, then checking if the request should be allowed to access a protected resource using ``deny_access_condition``.  If the request should be disallowed, the middleware executes a method called ``deny_access`` which returns an error response (403 or 302 depending on the nature of the request); if the resource is unprotected or the request is allowed, ``process_request`` just returns ``None`` in order to do nothing. This is standard middleware behaviour.
 
+Translate urls
+~~~~~~~~~~~~~~
+
+By default the url translations are disabled. To enabled url translations set `TRANSLATE_URLS=True` in your protect settings file. See https://docs.djangoproject.com/en/dev/topics/i18n/translation/#url-internationalization for more info on translating urls in django.

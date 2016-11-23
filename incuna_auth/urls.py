@@ -12,8 +12,16 @@ from django.contrib.auth.views import (
     password_reset_done,
 )
 from django.core.urlresolvers import get_callable, reverse_lazy
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy
 from django.views.generic import RedirectView
+
+
+# Only translate the urls if `TRANSLATE_URLS` is `True`.
+if getattr(settings, 'TRANSLATE_URLS', False):
+    _ = ugettext_lazy
+else:
+    def _(s):
+        return s
 
 
 auth_login_form = getattr(
