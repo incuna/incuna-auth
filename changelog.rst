@@ -1,8 +1,8 @@
 Changelog
 =========
 
-Upcoming
---------
+5.0.0
+-----
 
 * Add `TRANSLATE_URLS` setting and disable url translations by default.
 * Fix German Austrian url translations to be lowercase ascii characters.
