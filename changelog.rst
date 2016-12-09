@@ -1,6 +1,11 @@
 Changelog
 =========
 
+6.0.0
+-----
+
+* Rename de_AT translation to de.
+
 5.0.0
 -----
 
