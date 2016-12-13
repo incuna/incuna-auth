@@ -21,7 +21,7 @@ translations:
 	@test_project/manage.py compilemessages --locale $(locale)
 
 translations-all:
-	@make translations locale=de_AT
+	@make translations locale=de
 	@make translations locale=en_IE
 	@make translations locale=fi
 	@make translations locale=fr
