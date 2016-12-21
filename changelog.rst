@@ -1,6 +1,12 @@
 Changelog
 =========
 
+7.0.0 (Upcoming)
+-----
+
+Remove fr_LU and fr_BE.
+
+
 6.0.0
 -----
 
