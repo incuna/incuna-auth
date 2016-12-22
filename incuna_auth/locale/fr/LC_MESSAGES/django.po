@@ -1,14 +1,8 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-21 11:59-0600\n"
+"POT-Creation-Date: 2016-12-22 08:15-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,63 +14,65 @@ msgstr ""
 
 #: incuna_auth/middleware/basic_auth.py:9
 msgid "Restricted Access"
-msgstr ""
+msgstr "Accès restreint"
 
 #: incuna_auth/templates/registration/base/login_base.html:6
 #: incuna_auth/templates/registration/base/login_base.html:8
 msgid "Log In"
-msgstr ""
+msgstr "Connexion"
 
 #: incuna_auth/templates/registration/base/login_form_base.html:7
 msgid "Please log in using your email and password."
-msgstr ""
+msgstr "Veuillez vous identifier avec votre e-mail et votre mot de passe."
 
 #: incuna_auth/templates/registration/base/login_form_base.html:16
 msgid "Forgotten password?"
-msgstr ""
+msgstr "Mot de passe oublié?"
 
 #: incuna_auth/templates/registration/base/login_form_base.html:22
 msgid "Log in"
-msgstr ""
+msgstr "Connexion"
 
 #: incuna_auth/templates/registration/base/logout_base.html:6
 #: incuna_auth/templates/registration/base/logout_base.html:8
 msgid "Logged Out"
-msgstr ""
+msgstr "Déconnecté"
 
 #: incuna_auth/templates/registration/base/logout_base.html:11
 msgid "You have logged out."
-msgstr ""
+msgstr "Vous avez été deconnecté."
 
 #: incuna_auth/templates/registration/base/password_change_done_base.html:7
 #: incuna_auth/templates/registration/base/password_change_done_base.html:9
 msgid "Password Change Successful"
-msgstr ""
+msgstr "Changement du mot de passe réussie"
 
 #: incuna_auth/templates/registration/base/password_change_done_base.html:12
 msgid "Your password was changed."
-msgstr ""
+msgstr "Votre mot de passe a été changé"
 
 #: incuna_auth/templates/registration/base/password_change_form_base.html:8
 #: incuna_auth/templates/registration/base/password_change_form_base.html:10
 msgid "Password Change"
-msgstr ""
+msgstr "Changez votre mot de passe"
 
 #: incuna_auth/templates/registration/base/password_change_form_base.html:13
 msgid ""
 "Please enter your old password, for security's sake, and then enter your new "
 "password twice so we can verify you typed it in correctly."
 msgstr ""
+"Veuillez entrer votre ancien mot de passe par mesure de sécurité et veuillez "
+"entrer votre nouveau mot de passe deux fois pour que nous le vérifions."
 
 #: incuna_auth/templates/registration/base/password_change_form_base.html:26
 #: incuna_auth/templates/registration/base/password_reset_confirm_base.html:39
 msgid "Change my password"
-msgstr ""
+msgstr "Changer mon mot de passe"
 
 #: incuna_auth/templates/registration/base/password_reset_complete_base.html:6
 #: incuna_auth/templates/registration/base/password_reset_complete_base.html:8
 msgid "Password Reset Complete"
-msgstr ""
+msgstr "Réinitialisation complète du mot de passe"
 
 #: incuna_auth/templates/registration/base/password_reset_complete_base.html:11
 #, python-format
@@ -84,130 +80,145 @@ msgid ""
 "Your password has been set. You may go ahead and <a href=\"%(login_url)s"
 "\">log in</a> now."
 msgstr ""
+"Votre mot de passe a été changé. Vous pouvez vous rendre sur <a href="
+"\"%(login_url)s\">la page de connexion</a> maintenant."
 
 #: incuna_auth/templates/registration/base/password_reset_confirm_base.html:10
 #: incuna_auth/templates/registration/base/password_reset_confirm_base.html:18
 msgid "Enter New Password"
-msgstr ""
+msgstr "Entrez un nouveau mot de passe"
 
 #: incuna_auth/templates/registration/base/password_reset_confirm_base.html:12
 #: incuna_auth/templates/registration/base/password_reset_confirm_base.html:20
 msgid "Password Reset Unsuccessful"
-msgstr ""
+msgstr "Mot de passe non réinitialisé."
 
 #: incuna_auth/templates/registration/base/password_reset_confirm_base.html:26
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
 msgstr ""
+"Veuillez entrer votre mot de passe deux fois pour que nous puissions vérfier "
+"qu'il soit correct."
 
 #: incuna_auth/templates/registration/base/password_reset_confirm_base.html:46
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used."
 msgstr ""
+"Le lien pour changer votre mot de passe n'est pas valide, il est possible "
+"qu'il ait déjà pu être utilisé."
 
 #: incuna_auth/templates/registration/base/password_reset_confirm_base.html:50
 #, python-format
 msgid ""
 "Please <a href=\"%(password_reset_url)s\">request a new password</a> reset."
 msgstr ""
+"Veuillez <a href=\"%(password_reset_url)s\">créer une nouvelle requête pour "
+"changer votre mote de passe</a>."
 
 #: incuna_auth/templates/registration/base/password_reset_confirm_base.html:52
 msgid "Please request a new password reset."
-msgstr ""
+msgstr "Veuillez demander un nouveau mot de passe."
 
 #: incuna_auth/templates/registration/base/password_reset_done_base.html:6
 #: incuna_auth/templates/registration/base/password_reset_done_base.html:8
 msgid "Password Reset Successful"
-msgstr ""
+msgstr "Réinitialisation du mot de passe réussie"
 
 #: incuna_auth/templates/registration/base/password_reset_done_base.html:11
 msgid ""
 "We've e-mailed you instructions for setting your password to the e-mail "
 "address you submitted. You should be receiving it shortly."
 msgstr ""
+"Nous vous avons envoyé des instructions pour changer votre mot de passe à "
+"l'addresse e-mail que vous nous avez donné. Vous allez le recevoir sous peu."
 
 #: incuna_auth/templates/registration/base/password_reset_email_base.html:8
 msgid "You're receiving this e-mail because you requested a password reset"
 msgstr ""
+"Vous recevez cet e-mail car vous avez demandé à changer votre mot de passe"
 
 #: incuna_auth/templates/registration/base/password_reset_email_base.html:9
 #, python-format
 msgid "for your user account at %(site_name)s"
-msgstr ""
+msgstr "pour votre compte sur %(site_name)s"
 
 #: incuna_auth/templates/registration/base/password_reset_email_base.html:11
 msgid "Please go to the following page and choose a new password:"
 msgstr ""
+"Veuillez vous rendre sur la page suivante pour choisir un nouveau mot de "
+"passe :"
 
 #: incuna_auth/templates/registration/base/password_reset_email_base.html:15
 msgid "Your username, in case you've forgotten:"
-msgstr ""
+msgstr "Votre identifiant si vous l'avez oublié :"
 
 #: incuna_auth/templates/registration/base/password_reset_email_base.html:17
 msgid "Thanks for using our site!"
-msgstr ""
+msgstr "Merci d'avoir consulté ce site !"
 
 #: incuna_auth/templates/registration/base/password_reset_email_base.html:19
 #, python-format
 msgid "The %(site_name)s team"
-msgstr ""
+msgstr "L'équipe %(site_name)s"
 
 #: incuna_auth/templates/registration/base/password_reset_form_base.html:7
 #: incuna_auth/templates/registration/base/password_reset_form_base.html:9
 msgid "Password Reset"
-msgstr ""
+msgstr "Réinitialisation du mot de passe"
 
 #: incuna_auth/templates/registration/base/password_reset_form_base.html:12
 msgid ""
 "Forgotten your password? Enter your e-mail address below, and we'll e-mail "
 "instructions for setting a new one."
 msgstr ""
+"Vous avez oublié votre mot de passe? Entrez votre e-mail ci-dessous et nous "
+"vous enverrons des instructions pour en créer un nouveau."
 
 #: incuna_auth/templates/registration/base/password_reset_form_base.html:25
 msgid "Reset"
-msgstr ""
+msgstr "Réinitialiser"
 
-#: incuna_auth/urls.py:36
+#: incuna_auth/urls.py:44
 msgid "^login/$"
 msgstr ""
 
-#: incuna_auth/urls.py:42
+#: incuna_auth/urls.py:50
 msgid "^logout/$"
 msgstr ""
 
-#: incuna_auth/urls.py:49
+#: incuna_auth/urls.py:57
 msgid "^password/change/$"
 msgstr ""
 
-#: incuna_auth/urls.py:54
+#: incuna_auth/urls.py:62
 msgid "^password/change/done/$"
 msgstr ""
 
-#: incuna_auth/urls.py:60
+#: incuna_auth/urls.py:68
 msgid "^password/reset/$"
 msgstr ""
 
-#: incuna_auth/urls.py:66
+#: incuna_auth/urls.py:74
 msgid "^password/reset/done/$"
 msgstr ""
 
-#: incuna_auth/urls.py:71
+#: incuna_auth/urls.py:79
 msgid "^password/reset/complete/$"
 msgstr ""
 
-#: incuna_auth/urls.py:76
+#: incuna_auth/urls.py:84
 msgid "^sso/$"
 msgstr ""
 
-#: incuna_auth/urls.py:86
+#: incuna_auth/urls.py:94
 msgid ""
 "^password/reset/confirm/(?P<uidb64>[0-9A-Za-z_\\-]+)/(?P<token>[0-9A-Za-z]"
 "{1,13}-[0-9A-Za-z]{1,20})/$"
 msgstr ""
 
-#: incuna_auth/urls.py:99
+#: incuna_auth/urls.py:107
 msgid ""
 "^password/reset/confirm/(?P<uidb36>[0-9A-Za-z]{1,13})-(?P<token>[0-9A-Za-z]"
 "{1,13}-[0-9A-Za-z]{1,20})/$"
