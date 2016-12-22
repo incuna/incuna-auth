@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-21 06:54-0600\n"
+"POT-Creation-Date: 2016-12-22 08:15-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,8 +61,8 @@ msgid ""
 "Please enter your old password, for security's sake, and then enter your new "
 "password twice so we can verify you typed it in correctly."
 msgstr ""
-"Veuillez entrer votre ancien mot de passe par mesure de sécurité et "
-"veuillez entrer votre nouveau mot de passe deux fois pour que nous le vérifions."
+"Veuillez entrer votre ancien mot de passe par mesure de sécurité et veuillez "
+"entrer votre nouveau mot de passe deux fois pour que nous le vérifions."
 
 #: incuna_auth/templates/registration/base/password_change_form_base.html:26
 #: incuna_auth/templates/registration/base/password_reset_confirm_base.html:39
@@ -98,8 +98,8 @@ msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
 msgstr ""
-"Veuillez entrer votre mot de passe deux fois pour que nous puissions "
-"vérfier qu'il soit correct."
+"Veuillez entrer votre mot de passe deux fois pour que nous puissions vérfier "
+"qu'il soit correct."
 
 #: incuna_auth/templates/registration/base/password_reset_confirm_base.html:46
 msgid ""
@@ -114,7 +114,8 @@ msgstr ""
 msgid ""
 "Please <a href=\"%(password_reset_url)s\">request a new password</a> reset."
 msgstr ""
-"Veuillez <a href=\"%(password_reset_url)s\">créer une nouvelle requête pour changer votre mote de passe</a>."
+"Veuillez <a href=\"%(password_reset_url)s\">créer une nouvelle requête pour "
+"changer votre mote de passe</a>."
 
 #: incuna_auth/templates/registration/base/password_reset_confirm_base.html:52
 msgid "Please request a new password reset."
@@ -130,8 +131,8 @@ msgid ""
 "We've e-mailed you instructions for setting your password to the e-mail "
 "address you submitted. You should be receiving it shortly."
 msgstr ""
-"Nous vous avons envoyé des instructions pour changer votre mot de passe "
-"à l'addresse e-mail que vous nous avez donné. Vous allez le recevoir sous peu."
+"Nous vous avons envoyé des instructions pour changer votre mot de passe à "
+"l'addresse e-mail que vous nous avez donné. Vous allez le recevoir sous peu."
 
 #: incuna_auth/templates/registration/base/password_reset_email_base.html:8
 msgid "You're receiving this e-mail because you requested a password reset"
@@ -145,7 +146,9 @@ msgstr "pour votre compte sur %(site_name)s"
 
 #: incuna_auth/templates/registration/base/password_reset_email_base.html:11
 msgid "Please go to the following page and choose a new password:"
-msgstr "Veuillez vous rendre sur la page suivante pour choisir un nouveau mot de passe :"
+msgstr ""
+"Veuillez vous rendre sur la page suivante pour choisir un nouveau mot de "
+"passe :"
 
 #: incuna_auth/templates/registration/base/password_reset_email_base.html:15
 msgid "Your username, in case you've forgotten:"
@@ -170,8 +173,8 @@ msgid ""
 "Forgotten your password? Enter your e-mail address below, and we'll e-mail "
 "instructions for setting a new one."
 msgstr ""
-msgstr "Vous avez oublié votre mot de passe? Entrez votre e-mail ci-dessous et nous vous enverrons "
-"des instructions pour en créer un nouveau."
+"Vous avez oublié votre mot de passe? Entrez votre e-mail ci-dessous et nous "
+"vous enverrons des instructions pour en créer un nouveau."
 
 #: incuna_auth/templates/registration/base/password_reset_form_base.html:25
 msgid "Reset"
