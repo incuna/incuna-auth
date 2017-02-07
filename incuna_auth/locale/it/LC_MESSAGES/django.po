@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-21 11:59-0600\n"
+"POT-Creation-Date: 2017-02-02 11:04-0600\n"
 "PO-Revision-Date: 2016-10-28 11:25+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -21,6 +21,10 @@ msgstr ""
 #: incuna_auth/middleware/basic_auth.py:9
 msgid "Restricted Access"
 msgstr "Accesso limitato"
+
+#: incuna_auth/middleware/permission.py:115
+msgid "You must be logged in to view this page."
+msgstr ""
 
 #: incuna_auth/templates/registration/base/login_base.html:6
 #: incuna_auth/templates/registration/base/login_base.html:8
@@ -185,39 +189,39 @@ msgstr ""
 msgid "Reset"
 msgstr "Reimposta"
 
-#: incuna_auth/urls.py:36
+#: incuna_auth/urls.py:44
 msgid "^login/$"
 msgstr "^login/$"
 
-#: incuna_auth/urls.py:42
+#: incuna_auth/urls.py:50
 msgid "^logout/$"
 msgstr "^logout/$"
 
-#: incuna_auth/urls.py:49
+#: incuna_auth/urls.py:57
 msgid "^password/change/$"
 msgstr "^password/change/$"
 
-#: incuna_auth/urls.py:54
+#: incuna_auth/urls.py:62
 msgid "^password/change/done/$"
 msgstr "^password/change/done/$"
 
-#: incuna_auth/urls.py:60
+#: incuna_auth/urls.py:68
 msgid "^password/reset/$"
 msgstr "^password/reset/$"
 
-#: incuna_auth/urls.py:66
+#: incuna_auth/urls.py:74
 msgid "^password/reset/done/$"
 msgstr "^password/reset/done/$"
 
-#: incuna_auth/urls.py:71
+#: incuna_auth/urls.py:79
 msgid "^password/reset/complete/$"
 msgstr "^password/reset/complete/$"
 
-#: incuna_auth/urls.py:76
+#: incuna_auth/urls.py:84
 msgid "^sso/$"
 msgstr "^sso/$"
 
-#: incuna_auth/urls.py:86
+#: incuna_auth/urls.py:94
 msgid ""
 "^password/reset/confirm/(?P<uidb64>[0-9A-Za-z_\\-]+)/(?P<token>[0-9A-Za-z]"
 "{1,13}-[0-9A-Za-z]{1,20})/$"
@@ -225,7 +229,7 @@ msgstr ""
 "^password/reset/confirm/(?P<uidb64>[0-9A-Za-z_\\-]+)/(?P<token>[0-9A-Za-z]"
 "{1,13}-[0-9A-Za-z]{1,20})/$"
 
-#: incuna_auth/urls.py:99
+#: incuna_auth/urls.py:107
 msgid ""
 "^password/reset/confirm/(?P<uidb36>[0-9A-Za-z]{1,13})-(?P<token>[0-9A-Za-z]"
 "{1,13}-[0-9A-Za-z]{1,20})/$"

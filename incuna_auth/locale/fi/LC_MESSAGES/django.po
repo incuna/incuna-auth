@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-21 11:59-0600\n"
+"POT-Creation-Date: 2017-02-02 11:04-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,6 +20,10 @@ msgstr ""
 
 #: incuna_auth/middleware/basic_auth.py:9
 msgid "Restricted Access"
+msgstr ""
+
+#: incuna_auth/middleware/permission.py:115
+msgid "You must be logged in to view this page."
 msgstr ""
 
 #: incuna_auth/templates/registration/base/login_base.html:6
@@ -169,45 +173,45 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
-#: incuna_auth/urls.py:36
+#: incuna_auth/urls.py:44
 msgid "^login/$"
 msgstr ""
 
-#: incuna_auth/urls.py:42
+#: incuna_auth/urls.py:50
 msgid "^logout/$"
 msgstr ""
 
-#: incuna_auth/urls.py:49
+#: incuna_auth/urls.py:57
 msgid "^password/change/$"
 msgstr ""
 
-#: incuna_auth/urls.py:54
+#: incuna_auth/urls.py:62
 msgid "^password/change/done/$"
 msgstr ""
 
-#: incuna_auth/urls.py:60
+#: incuna_auth/urls.py:68
 msgid "^password/reset/$"
 msgstr ""
 
-#: incuna_auth/urls.py:66
+#: incuna_auth/urls.py:74
 msgid "^password/reset/done/$"
 msgstr ""
 
-#: incuna_auth/urls.py:71
+#: incuna_auth/urls.py:79
 msgid "^password/reset/complete/$"
 msgstr ""
 
-#: incuna_auth/urls.py:76
+#: incuna_auth/urls.py:84
 msgid "^sso/$"
 msgstr ""
 
-#: incuna_auth/urls.py:86
+#: incuna_auth/urls.py:94
 msgid ""
 "^password/reset/confirm/(?P<uidb64>[0-9A-Za-z_\\-]+)/(?P<token>[0-9A-Za-z]"
 "{1,13}-[0-9A-Za-z]{1,20})/$"
 msgstr ""
 
-#: incuna_auth/urls.py:99
+#: incuna_auth/urls.py:107
 msgid ""
 "^password/reset/confirm/(?P<uidb36>[0-9A-Za-z]{1,13})-(?P<token>[0-9A-Za-z]"
 "{1,13}-[0-9A-Za-z]{1,20})/$"

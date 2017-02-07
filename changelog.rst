@@ -1,6 +1,11 @@
 Changelog
 =========
 
+Upcoming
+
+* Mark string `You must be logged in to view this page.` as translatable.
+* Remove fr_BE and fr_LU from the translations command in the makefile.
+
 7.0.0
 -----
 

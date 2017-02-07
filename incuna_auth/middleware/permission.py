@@ -112,7 +112,7 @@ class LoginPermissionMiddlewareMixin:
         return request.user.is_anonymous()
 
     def get_access_denied_message(self, request):
-        return 'You must be logged in to view this page.'
+        return _('You must be logged in to view this page.')
 
 
 class UrlPermissionMiddleware(BasePermissionMiddleware):
