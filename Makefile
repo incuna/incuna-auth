@@ -29,3 +29,13 @@ translations-all:
 	@make translations locale=pl
 	@make translations locale=it
 	@make translations locale=nl
+	@make translations locale=hu
+	@make translations locale=se
+	@make translations locale=lv
+	@make translations locale=lt
+	@make translations locale=cz
+	@make translations locale=es
+	@make translations locale=sl
+	@make translations locale=ee
+	@make translations locale=hr
+	@make translations locale=ro
