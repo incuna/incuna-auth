@@ -1,11 +1,15 @@
 Changelog
 =========
 
+7.3.0
+-----
+
+* Add all the langauges (cz, ee, es, hr, hu, lt, lv, ro, se, sl)
+
 7.2.1
 -----
 
 * Add the missing nl_BE translations
-
 
 7.2.0
 -----
