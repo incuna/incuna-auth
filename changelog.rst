@@ -1,6 +1,11 @@
 Changelog
 =========
 
+7.2.0
+-----
+
+* Add nl_BE to be include new NL translations
+
 7.1.0
 -----
 
