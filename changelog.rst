@@ -1,6 +1,11 @@
 Changelog
 =========
 
+7.4.0
+-----
+
+* Add translations for Hu
+
 7.3.0
 -----
 
