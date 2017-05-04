@@ -1,6 +1,12 @@
 Changelog
 =========
 
+8.0.0
+-----
+
+* Support up to Django 1.11.
+* Drop support for Django 1.4 and earlier.
+
 7.4.0
 -----
 
