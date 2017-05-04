@@ -4,8 +4,8 @@ from unittest import TestCase
 
 import mock
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.test.utils import override_settings
-from django.urls import reverse
 
 from incuna_auth.middleware import (
     basic_auth,
