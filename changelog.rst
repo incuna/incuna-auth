@@ -1,6 +1,14 @@
 Changelog
 =========
 
+8.0.0
+-----
+
+* Support up to Django 1.11.
+* Drop support for Django 1.4 and earlier.
+* Drop support for Python 3.3 and 3.4. The library will probably continue to work, but
+  we're no longer actively checking the functionality.
+
 7.4.0
 -----
 

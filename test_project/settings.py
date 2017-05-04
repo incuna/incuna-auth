@@ -18,6 +18,10 @@ DATABASES = {
 }
 DEFAULT_FILE_STORAGE = 'inmemorystorage.InMemoryStorage'
 
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'logout'
+
 INSTALLED_APPS = (
     'incuna_auth',
     'incuna_auth.tests',

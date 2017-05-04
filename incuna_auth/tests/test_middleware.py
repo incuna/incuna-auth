@@ -4,6 +4,7 @@ from unittest import TestCase
 
 import mock
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.test.utils import override_settings
 
 from incuna_auth.middleware import (
@@ -27,6 +28,7 @@ class TestLoginRequiredMiddleware(RequestTestCase):
     middleware = LoginRequiredMiddleware(check=False)
     EXEMPT_URLS = 'incuna_auth.middleware.LoginRequiredMiddleware.EXEMPT_URLS'
     PROTECTED_URLS = 'incuna_auth.middleware.LoginRequiredMiddleware.PROTECTED_URLS'
+    login = reverse(settings.LOGIN_URL)
 
     def make_request(self, auth, method='get', url='/fake-request/', **kwargs):
         return self.create_request(method, auth=auth, url=url, **kwargs)
@@ -57,7 +59,7 @@ class TestLoginRequiredMiddleware(RequestTestCase):
         request = self.make_request(auth=False)
         response = self.middleware.process_request(request)
         message = 'You must be logged in to view this page.'
-        redirect_url = settings.LOGIN_URL + '?next=/fake-request/'
+        redirect_url = self.login + '?next=/fake-request/'
 
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response['location'], redirect_url)
@@ -69,7 +71,7 @@ class TestLoginRequiredMiddleware(RequestTestCase):
     def test_non_auth_get_script_name(self):
         request = self.make_request(auth=False)
         response = self.middleware.process_request(request)
-        redirect_url = settings.LOGIN_URL + '?next=/base/script/path/fake-request/'
+        redirect_url = self.login + '?next=/base/script/path/fake-request/'
 
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response['location'], redirect_url)
@@ -86,6 +88,7 @@ class TestFeinCMSLoginRequiredMiddleware(RequestTestCase):
     middleware = FeinCMSLoginRequiredMiddleware()
     AUTH_STATE = AccessState.STATE_AUTH_ONLY
     OTHER_STATE = ('other', 'Other state')
+    login = reverse(settings.LOGIN_URL)
 
     get_page_method = (
         'incuna_auth.middleware.permission_feincms.' +
@@ -128,7 +131,7 @@ class TestFeinCMSLoginRequiredMiddleware(RequestTestCase):
         with mock.patch(self.get_page_method, return_value=request.feincms_page):
             response = self.middleware.process_request(request)
         message = 'You must be logged in to view this page.'
-        redirect_url = settings.LOGIN_URL + '?next=/'
+        redirect_url = self.login + '?next=/'
 
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response['location'], redirect_url)
