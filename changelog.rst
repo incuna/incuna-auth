@@ -1,6 +1,11 @@
 Changelog
 =========
 
+Upcoming
+--------
+
+* Add translations for Lt
+
 8.0.0
 -----
 
