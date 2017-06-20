@@ -1,6 +1,11 @@
 Changelog
 =========
 
+Upcoming
+--------
+
+* Add translations for Lt
+
 7.4.0
 -----
 
