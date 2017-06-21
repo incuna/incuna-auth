@@ -1,7 +1,7 @@
 Changelog
 =========
 
-Upcoming
+8.1.0
 --------
 
 * Add translations for Lt
