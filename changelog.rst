@@ -1,8 +1,8 @@
 Changelog
 =========
 
-UPCOMING
---------
+8.1.1
+-----
 
 * Update password reset email to use `get_username` to accommodate user models that do not use the `username` field.
 
