@@ -36,7 +36,7 @@ class TestURLs(URLsMixin, TestCase):
 
     def test_login(self):
         self.check_url(
-            views.login,
+            views.LoginView.as_view(),
             '/login/',
             'login',
         )
@@ -45,7 +45,7 @@ class TestURLs(URLsMixin, TestCase):
     def test_login_translate_enabled(self):
         with translation.override('de_AT'):
             self.check_url(
-                views.login,
+                views.LoginView.as_view(),
                 '/Anmeldung/',
                 'login',
             )
@@ -54,49 +54,49 @@ class TestURLs(URLsMixin, TestCase):
     def test_login_translate_disabeled(self):
         with translation.override('de_AT'):
             self.check_url(
-                views.login,
+                views.LoginView.as_view(),
                 '/login/',
                 'login',
             )
 
     def test_logout(self):
         self.check_url(
-            views.logout,
+            views.LogoutView.as_view(),
             '/logout/',
             'logout',
         )
 
     def test_password_change(self):
         self.check_url(
-            views.password_change,
+            views.PasswordChangeView.as_view(),
             '/password/change/',
             'password_change',
         )
 
     def test_password_change_done(self):
         self.check_url(
-            views.password_change_done,
+            views.PasswordChangeDoneView.as_view(),
             '/password/change/done/',
             'password_change_done',
         )
 
     def test_password_reset(self):
         self.check_url(
-            views.password_reset,
+            views.PasswordResetView.as_view(),
             '/password/reset/',
             'password_reset',
         )
 
     def test_password_reset_done(self):
         self.check_url(
-            views.password_reset_done,
+            views.PasswordResetDoneView.as_view(),
             '/password/reset/done/',
             'password_reset_done',
         )
 
     def test_password_reset_complete(self):
         self.check_url(
-            views.password_reset_complete,
+            views.PasswordResetCompleteView.as_view(),
             '/password/reset/complete/',
             'password_reset_complete',
         )
@@ -112,7 +112,7 @@ class TestURLs(URLsMixin, TestCase):
         uidb64 = '09_AZ-az'
         token = '09AZaz-09AZaz'
         self.check_url(
-            views.password_reset_confirm,
+            views.PasswordResetConfirmView.as_view(),
             '/password/reset/confirm/{0}/{1}/'.format(uidb64, token),
             'password_reset_confirm',
             url_kwargs={'uidb64': uidb64, 'token': token},
