@@ -27,8 +27,12 @@ matrix:
       python: 3.6
     - env: DJANGO='django>=1.7,<1.8'
       python: 3.6
-
-install:
+services:
+  - postgresql
+addons:
+  postgresql: "9.4"
+before_script:
   - psql -c 'CREATE DATABASE incuna_auth' -U postgres;
+install:
   - pip install $DJANGO
   - pip install -r requirements.txt
