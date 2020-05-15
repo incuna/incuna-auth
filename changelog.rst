@@ -1,6 +1,12 @@
 Changelog
 =========
 
+9.0.0
+-----
+
+* Drop support for Django < 1.10
+* Add support for Django 2.0
+
 8.1.1
 -----
 
