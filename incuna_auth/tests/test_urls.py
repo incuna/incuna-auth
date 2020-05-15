@@ -1,9 +1,8 @@
 from unittest import skipIf, skipUnless, TestCase
 
-import django
 from django.conf import settings
 from django.contrib.auth import views
-from django.core.urlresolvers import resolve, reverse
+from django.urls import resolve, reverse
 from django.utils import translation
 from django.views.generic import RedirectView
 
@@ -109,41 +108,12 @@ class TestURLs(URLsMixin, TestCase):
             'sso_login',
         )
 
-    @skipIf(django.VERSION < (1, 6), 'This test is for a different Django version')
-    def test_password_reset_confirm_uidb64(self):
+    def test_password_reset_confirm(self):
         uidb64 = '09_AZ-az'
         token = '09AZaz-09AZaz'
         self.check_url(
             views.password_reset_confirm,
             '/password/reset/confirm/{0}/{1}/'.format(uidb64, token),
             'password_reset_confirm',
-            url_kwargs={'uidb64': uidb64,
-                        'token': token, },
-        )
-
-    @skipUnless(
-        (1, 6) >= django.VERSION > (1, 7),
-        'This test is for a different Django version',
-    )
-    def test_password_reset_confirm_uidb36(self):
-        uidb36 = '09AZaz'
-        token = '09AZaz-09AZaz'
-        self.check_url(
-            views.password_reset_confirm_uidb36,
-            '/password/reset/confirm/{0}-{1}/'.format(uidb36, token),
-            'password_reset_confirm',
-            url_kwargs={'uidb36': uidb36,
-                        'token': token, },
-        )
-
-    @skipIf(django.VERSION >= (1, 6), 'This test is for a different Django version')
-    def test_password_reset_confirm_dj1_5(self):
-        uidb36 = '09AZaz'
-        token = '09AZaz-09AZaz'
-        self.check_url(
-            views.password_reset_confirm,
-            '/password/reset/confirm/{0}-{1}/'.format(uidb36, token),
-            'password_reset_confirm',
-            url_kwargs={'uidb36': uidb36,
-                        'token': token, },
+            url_kwargs={'uidb64': uidb64, 'token': token},
         )

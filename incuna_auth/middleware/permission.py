@@ -109,7 +109,7 @@ class LoginPermissionMiddlewareMixin:
     """
     def deny_access_condition(self, request, **kwargs):
         """Returns true if and only if the user isn't authenticated."""
-        return request.user.is_anonymous()
+        return request.user.is_anonymous
 
     def get_access_denied_message(self, request):
         return _('You must be logged in to view this page.')

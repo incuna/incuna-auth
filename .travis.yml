@@ -10,24 +10,19 @@ env:
   global:
     - DATABASE_URL='postgres://postgres@localhost/incuna_auth'
   matrix:
-    - DJANGO='django>=1.6,<1.7'
-    - DJANGO='django>=1.7,<1.8'
-    - DJANGO='django>=1.8,<1.9'
-    - DJANGO='django>=1.9,<1.10'
     - DJANGO='django>=1.10,<1.11'
-    - DJANGO='django>=1.11,<1.12'
+    - DJANGO='django>=1.11,<2.0'
+    - DJANGO='django>=2.0,<2.1'
 matrix:
   exclude:
-    - env: DJANGO='django>=1.6,<1.7'
-      python: 3.5
-    - env: DJANGO='django>=1.7,<1.8'
-      python: 3.5
-    - env: DJANGO='django>=1.6,<1.7'
-      python: 3.6
-    - env: DJANGO='django>=1.7,<1.8'
-      python: 3.6
-
-install:
+    - env: DJANGO='django>=2.0,<2.1'
+      python: 2.7
+services:
+  - postgresql
+addons:
+  postgresql: "9.4"
+before_script:
   - psql -c 'CREATE DATABASE incuna_auth' -U postgres;
+install:
   - pip install $DJANGO
   - pip install -r requirements.txt

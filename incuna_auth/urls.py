@@ -1,4 +1,3 @@
-import django
 from django.conf import settings
 from django.conf.urls import url
 from django.contrib.auth.views import (
@@ -11,7 +10,7 @@ from django.contrib.auth.views import (
     password_reset_confirm,
     password_reset_done,
 )
-from django.core.urlresolvers import get_callable, reverse_lazy
+from django.urls import get_callable, reverse_lazy
 from django.utils.translation import ugettext_lazy
 from django.views.generic import RedirectView
 
@@ -85,30 +84,13 @@ urlpatterns = [
         RedirectView.as_view(url=reverse_lazy('admin:admin_sso_openiduser_start')),
         name='sso_login',
     ),
+    url(
+        _(
+            r'^password/reset/confirm/' +
+            r'(?P<uidb64>[0-9A-Za-z_\-]+)/' +
+            r'(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$'
+        ),
+        password_reset_confirm,
+        name='password_reset_confirm',
+    ),
 ]
-
-if django.VERSION >= (1, 6):
-    urlpatterns += [
-        url(
-            _(
-                r'^password/reset/confirm/' +
-                r'(?P<uidb64>[0-9A-Za-z_\-]+)/' +
-                r'(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$'
-            ),
-            password_reset_confirm,
-            name='password_reset_confirm',
-        ),
-    ]
-
-if django.VERSION < (1, 7):
-    urlpatterns += [
-        url(
-            _(
-                r'^password/reset/confirm/' +
-                r'(?P<uidb36>[0-9A-Za-z]{1,13})' +
-                r'-(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$'
-            ),
-            password_reset_confirm,
-            name='password_reset_confirm',
-        ),
-    ]
