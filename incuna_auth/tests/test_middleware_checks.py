@@ -22,5 +22,5 @@ class TestCheckRequestHasUser(TestCase):
             "installed. Ensure that your MIDDLEWARE_CLASSES setting includes",
             "'django.contrib.auth.middleware.AuthenticationMiddleware'.",
         ))
-        with self.assertRaisesRegexp(ImproperlyConfigured, expected_error):
+        with self.assertRaisesRegex(ImproperlyConfigured, expected_error):
             self.middleware()

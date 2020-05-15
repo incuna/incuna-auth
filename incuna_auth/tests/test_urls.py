@@ -3,7 +3,7 @@ from unittest import skipIf, skipUnless, TestCase
 import django
 from django.conf import settings
 from django.contrib.auth import views
-from django.core.urlresolvers import resolve, reverse
+from django.urls import resolve, reverse
 from django.utils import translation
 from django.views.generic import RedirectView
 

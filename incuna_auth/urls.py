@@ -11,7 +11,7 @@ from django.contrib.auth.views import (
     password_reset_confirm,
     password_reset_done,
 )
-from django.core.urlresolvers import get_callable, reverse_lazy
+from django.urls import get_callable, reverse_lazy
 from django.utils.translation import ugettext_lazy
 from django.views.generic import RedirectView
 
