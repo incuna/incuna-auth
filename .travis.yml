@@ -10,12 +10,14 @@ env:
   global:
     - DATABASE_URL='postgres://postgres@localhost/incuna_auth'
   matrix:
-    - DJANGO='django>=1.10,<1.11'
     - DJANGO='django>=1.11,<2.0'
     - DJANGO='django>=2.0,<2.1'
+    - DJANGO='django>=2.1,<2.2'
 matrix:
   exclude:
     - env: DJANGO='django>=2.0,<2.1'
+      python: 2.7
+    - env: DJANGO='django>=2.1,<2.2'
       python: 2.7
 services:
   - postgresql
